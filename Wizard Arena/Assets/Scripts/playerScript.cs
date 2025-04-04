@@ -33,5 +33,13 @@ public class PlayerScript : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
         }
+
+        // build new camera position (X and Y changes only)
+        Vector3 cameraPos = Camera.main.transform.position;
+        cameraPos.x = transform.position.x;
+        cameraPos.y = transform.position.y;
+
+        // update camera position
+        Camera.main.transform.position = cameraPos;
     }
 }
