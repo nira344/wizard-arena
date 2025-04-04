@@ -23,7 +23,7 @@ public class playerScript : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D otherObject)
     {
-        // if we have hit the hidden pletform
+        // if we have hit the hidden platform
         if (otherObject.gameObject.name.Equals("Black"))
         {
             // if user has pressed the Space jump
