@@ -24,11 +24,11 @@ public class enemyScript : MonoBehaviour
             // change the vector to have a magnitude of 1.0 
             direction.Normalize();
 
-            // scale the vector to our desired speed 
-            direction = direction * speed * Time.deltaTime;
-
             // restrict to horizontal movement
             direction.y = 0;
+
+            // scale the vector to our desired speed 
+            direction = direction * speed * Time.deltaTime;
 
             // move in the direction we have calculated
             transform.Translate(direction);
