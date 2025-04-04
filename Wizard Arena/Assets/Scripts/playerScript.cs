@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public class playerScript : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
-    public float speed;
-
-    public float jump = 300.0f;
-
+    public float speed = 5f;
+    public float jumpSpeed = 8f;
+    private float direction = 0f;
     private Rigidbody2D rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,23 +16,22 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
+        direction = Input.GetAxis("Horizontal");
 
-    }
-    void OnCollisionEnter2D(Collision2D otherObject)
-    {
-        // if we have hit the hidden platform
-        if (otherObject.gameObject.name.Equals("Black"))
+        // Handle horizontal movement
+        if (direction != 0f)
         {
-            // if user has pressed the Space jump
-            if (Input.GetKeyDown("space"))
-            {
-                // add upwards force
-                rb.AddForce(new Vector2(rb.linearVelocityX, jump));
+            rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
 
-            }
-
+        // Handle jumping
+        if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.linearVelocity.y) < 0.001f) // Check if the player is grounded
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
         }
     }
 }
