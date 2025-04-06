@@ -5,15 +5,15 @@ public class PlayerScript : MonoBehaviour
     // Gravity parameters
     public float fallGravityMult = 2.0f; // Fall gravity multiplier
     public float maxFallSpeed = -10.0f; // Maximum fall speed
-    public float gravityScale = 1.0f; // Declare gravityScale variable
+    public float gravityScale = 1.0f; // Gravity scale
 
     // Speed parameters
-    public float speed = 5f; // Declare speed variable
+    public float speed = 5f; // Horizontal movement speed
 
     // Jump parameters
     public float jumpForce = 10f; // Base jump force
-    public float jumpSpeed = 8f; // Declare jumpSpeed variable
-    public float maxJumpForce = 15f; // Maximum jump force (clamp to this value)
+    public float jumpSpeed = 8f; // Jump speed (initial upward velocity)
+    public float maxJumpForce = 15f; // Maximum jump force (cap this value)
 
     // Wall sliding parameters
     public float wallSlideSpeed = 2f;  // Speed at which the player slides down the wall
@@ -26,13 +26,13 @@ public class PlayerScript : MonoBehaviour
     private bool isTouchingWall = false; // Is the player touching a wall
     private bool canWallJump = false;  // Can the player wall jump
     private Rigidbody2D rb; // Rigidbody2D component
-    private float wallJumpTimeCounter = 0f;
-    private bool jumpReleased = false; // Declare jumpReleased variable
+    private float wallJumpTimeCounter = 0f; // Timer for wall jump time
+    private bool jumpReleased = false; // Tracks when the jump button is released
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); // Get Rigidbody 
+        rb = GetComponent<Rigidbody2D>(); // Get Rigidbody
     }
 
     // Update is called once per frame
@@ -40,22 +40,12 @@ public class PlayerScript : MonoBehaviour
     {
         HandleWallSliding();
         HandleWallJumping();
-        HandleMovement();
+        HandleMovement();  // Calling the newly created HandleMovement method
 
         direction = Input.GetAxis("Horizontal"); // Sets the direction variable to A and D keys
 
         // Apply gravity logic for falling
         HandleFall();
-
-        // Handle horizontal movement
-        if (direction != 0f)
-        {
-            rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y); // Corrected to 'velocity'
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // Corrected to 'velocity'
-        }
 
         // Handle jumping
         if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.linearVelocity.y) < 0.001f) // Check if the player is grounded
@@ -92,12 +82,20 @@ public class PlayerScript : MonoBehaviour
     // Wall sliding logic
     private void HandleWallSliding()
     {
-        // Raycast to detect the wall (both left and right based on the player’s facing direction)
-        float rayLength = 0.5f; // Length of the ray (adjust as needed)
-        Vector2 rayDirection = Vector2.right * Mathf.Sign(transform.localScale.x); // Direction of the raycast based on player's facing direction
+        float rayLength = 1.5f; // Increased the ray length a bit
 
-        // Use Physics2D.Raycast to check for collision
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, rayLength, LayerMask.GetMask("Ground"));
+        Vector2 rayDirection = Vector2.zero;
+        if (transform.localScale.x > 0)
+        {
+            rayDirection = Vector2.right; // Player is facing right, shoot ray to the right
+        }
+        else
+        {
+            rayDirection = Vector2.left; // Player is facing left, shoot ray to the left
+        }
+
+        // Use Physics2D.Raycast to check for wall collision
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, rayLength, LayerMask.GetMask("Wall"));
 
         // Debug the ray to see where it's casting
         Debug.DrawRay(transform.position, rayDirection * rayLength, Color.red, 0.1f);
@@ -108,7 +106,7 @@ public class PlayerScript : MonoBehaviour
         // Debugging: Log if the wall is being detected
         if (isTouchingWall)
         {
-            Debug.Log("Touching wall on side: " + (Mathf.Sign(transform.localScale.x) > 0 ? "Right" : "Left"));
+            Debug.Log("Touching wall on side: " + (rayDirection == Vector2.right ? "Right" : "Left"));
         }
         else
         {
@@ -127,6 +125,7 @@ public class PlayerScript : MonoBehaviour
             isWallSliding = false;
         }
     }
+
 
     // Wall jumping logic
     private void HandleWallJumping()
@@ -151,21 +150,6 @@ public class PlayerScript : MonoBehaviour
         if (wallJumpTimeCounter > 0)
         {
             wallJumpTimeCounter -= Time.deltaTime;
-        }
-    }
-
-    private void HandleMovement()
-    {
-        direction = Input.GetAxis("Horizontal");  // Get horizontal input
-
-        // Handle horizontal movement
-        if (direction != 0f && !isWallSliding)
-        {
-            rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);  // Move player left/right
-        }
-        else if (!isWallSliding)
-        {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);  // Stop horizontal movement if not pressing keys
         }
     }
 
@@ -196,9 +180,26 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    // Handle horizontal movement
+    private void HandleMovement()
+    {
+        direction = Input.GetAxis("Horizontal");  // Get horizontal input
+
+        // Handle horizontal movement
+        if (direction != 0f && !isWallSliding)
+        {
+            rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);  // Move player left/right
+        }
+        else if (!isWallSliding)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);  // Stop horizontal movement if not pressing keys
+        }
+    }
+
     private bool IsGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         return hit.collider != null;
     }
 }
+
