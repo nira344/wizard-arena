@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour
 
     // Jump parameters
     public float jumpForce = 10f; // Base jump force
-    public float jumpSpeed = 8f; // Jump speed (initial upward velocity)
+    public float jumpSpeed = 10f; // Jump speed (initial upward velocity)
     public float maxJumpForce = 15f; // Maximum jump force (cap this value)
 
     // Wall sliding parameters
@@ -38,14 +38,20 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Update called");
+        if (IsGrounded())
+        {
+            // Do something when grounded
+        }
+
         HandleWallSliding();
         HandleWallJumping();
         HandleMovement();  // Calling the newly created HandleMovement method
 
         direction = Input.GetAxis("Horizontal"); // Sets the direction variable to A and D keys
 
-        // Apply gravity logic for falling
-        HandleFall();
+        HandleFall();   // Handle character falling
+        HandleFlip();   // Handle character flipping
 
         // Handle jumping
         if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.linearVelocity.y) < 0.001f) // Check if the player is grounded
@@ -79,74 +85,68 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    // Wall sliding logic
-    private void HandleWallSliding()
+private void HandleWallSliding()
+{
+    float rayLength = 1.5f; // Ray length
+
+    Vector2 rayDirection = transform.right; // This gives us the right direction of the character (relative to its rotation)
+
+    // Use Physics2D.Raycast to check for wall collision
+    RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, rayLength, LayerMask.GetMask("Wall"));
+
+    // Debug the ray to see where it's casting
+    Debug.DrawRay(transform.position, rayDirection * rayLength, Color.red, 0.1f);
+
+    // Detect if the player is touching a wall (left or right)
+    isTouchingWall = hit.collider != null;
+
+    // Debugging: Log if the wall is being detected
+    if (isTouchingWall)
     {
-        float rayLength = 1.5f; // Increased the ray length a bit
-
-        Vector2 rayDirection = Vector2.zero;
-        if (transform.localScale.x > 0)
-        {
-            rayDirection = Vector2.right; // Player is facing right, shoot ray to the right
-        }
-        else
-        {
-            rayDirection = Vector2.left; // Player is facing left, shoot ray to the left
-        }
-
-        // Use Physics2D.Raycast to check for wall collision
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, rayLength, LayerMask.GetMask("Wall"));
-
-        // Debug the ray to see where it's casting
-        Debug.DrawRay(transform.position, rayDirection * rayLength, Color.red, 0.1f);
-
-        // Detect if the player is touching a wall (left or right)
-        isTouchingWall = hit.collider != null;
-
-        // Debugging: Log if the wall is being detected
-        if (isTouchingWall)
-        {
-            Debug.Log("Touching wall on side: " + (rayDirection == Vector2.right ? "Right" : "Left"));
-        }
-        else
-        {
-            Debug.Log("Not touching wall.");
-        }
-
-        // If the player is touching a wall and not grounded
-        if (isTouchingWall && Mathf.Abs(rb.linearVelocity.y) < 0.1f && !IsGrounded())
-        {
-            isWallSliding = true;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);  // Apply wall sliding speed (downwards)
-            Debug.Log("Wall sliding started.");
-        }
-        else
-        {
-            isWallSliding = false;
-        }
+        Debug.Log("Touching wall on side: " + (rayDirection == Vector2.right ? "Right" : "Left"));
+    }
+    else
+    {
+        Debug.Log("Not touching wall.");
     }
 
+    // If the player is touching a wall and not grounded, allow wall sliding
+    if (isTouchingWall && !IsGrounded())
+    {
+        isWallSliding = true;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);  // Apply wall sliding speed (downwards)
+        Debug.Log("Wall sliding started.");
+    }
+    else
+    {
+        // If the player is grounded or not touching the wall, stop wall sliding
+        isWallSliding = false;
+        Debug.Log("Wall sliding stopped.");
+    }
+}
 
-    // Wall jumping logic
+
     private void HandleWallJumping()
     {
-        // Check if player is in wall sliding state and press jump
+        // Check if player is in wall sliding state and presses jump
         if (isWallSliding && Input.GetButtonDown("Jump"))
         {
-            canWallJump = true;
-            wallJumpTimeCounter = wallJumpTime;  // Allow wall jump for a short period
+            canWallJump = true; // Allow wall jump for a short time
+            wallJumpTimeCounter = wallJumpTime; // Start the wall jump time counter
             Debug.Log("Wall jump initiated");
         }
 
         if (canWallJump)
         {
-            // Apply force to jump off the wall (in the opposite direction)
             float wallJumpDirection = Mathf.Sign(transform.localScale.x); // Right if on left wall, left if on right wall
+
             rb.linearVelocity = new Vector2(-wallJumpDirection * wallJumpForce, jumpSpeed); // Jump in the opposite direction
+
             canWallJump = false;  // Disable wall jump after it's performed
             Debug.Log("Wall jump performed");
         }
 
+        // Reduce the wall jump time counter
         if (wallJumpTimeCounter > 0)
         {
             wallJumpTimeCounter -= Time.deltaTime;
@@ -196,9 +196,36 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    // Flip the character based on movement direction
+    private void HandleFlip()
+    {
+        if (direction != 0f && !isWallSliding)
+        {
+            // Rotate the character on the Y-axis to flip it
+            float rotationY = direction > 0 ? 0f : 180f; // Flip 180 degrees when moving left
+            transform.rotation = Quaternion.Euler(0f, rotationY, 0f); // Apply the rotation
+        }
+    }
+
     private bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        // Cast a ray downwards to check if the player is grounded with a ray length of 1
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 2.5f, LayerMask.GetMask("Ground"));
+
+        // Debug the ray to visualize the ground check with a length of 1
+        Debug.DrawRay(transform.position, Vector2.down * 2.25f, Color.green, 0.2f);  // Green ray with length 1 for 0.2 seconds
+
+        // Log the result of the raycast check
+        if (hit.collider != null)
+        {
+            Debug.Log("Grounded: Raycast hit something.");
+        }
+        else
+        {
+            Debug.Log("Grounded: Raycast hit nothing.");
+        }
+
+        // Return true if the ray hits something (i.e., the player is grounded)
         return hit.collider != null;
     }
 }
