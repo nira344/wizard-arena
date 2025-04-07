@@ -15,8 +15,19 @@ public class shoot : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            // Corrected the typo here
-            var fireball = Instantiate(fireballPrefab, transform.position, transform.rotation);  // Instantiate the fireball
+            HealthAndMana statScript = GetComponent<HealthAndMana>();
+            if (statScript != null)
+            {
+                if (statScript.currentMana > 0)
+                {
+                    statScript.currentMana--;
+                    var fireball = Instantiate(fireballPrefab, transform.position, transform.rotation);  // Instantiate the fireball
+                }
+            }
+            else
+            {
+                var fireball = Instantiate(fireballPrefab, transform.position, transform.rotation);  // Instantiate the fireball
+            }
         }
     }
 }
