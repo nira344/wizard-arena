@@ -22,7 +22,7 @@ public class fireball : MonoBehaviour
     {
 
         // Fixing the typo "collison" to "collision"
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Solid")
         {
             Debug.Log("Fireball hit non-enemy " + collision.gameObject);
             Destroy(gameObject);  // Destroy the fireball object
