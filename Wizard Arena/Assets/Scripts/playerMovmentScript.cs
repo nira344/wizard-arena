@@ -32,9 +32,7 @@ public class PlayerScript : MonoBehaviour
     private float direction = 0f;   // Horizontal direction
     private bool isWallSliding = false; // Is the player sliding on the wall
     private bool isTouchingWall = false; // Is the player touching a wall
-    private bool canWallJump = false;  // Can the player wall jump
     private Rigidbody2D rb; // Rigidbody2D component
-    private float wallJumpTimeCounter = 0f; // Timer for wall jump time
     private bool jumpReleased = false; // Tracks when the jump button is released
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

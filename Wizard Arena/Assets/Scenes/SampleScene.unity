@@ -253,6 +253,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &68973007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7926215330551728535, guid: 5e4d16f17eb964e69b73b00cd7b0ac10, type: 3}
+  m_PrefabInstance: {fileID: 1704649804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &68973013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68973007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee959b08fef5415bb717a0d98376ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
 --- !u!1 &98637518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1215,8 @@ GameObject:
   - component: {fileID: 1597933067}
   - component: {fileID: 1597933065}
   - component: {fileID: 1597933070}
+  - component: {fileID: 1597933072}
+  - component: {fileID: 1597933071}
   m_Layer: 0
   m_Name: Sorcerer
   m_TagString: Player
@@ -1226,6 +1246,12 @@ MonoBehaviour:
   wallSlideSpeed: 2
   wallJumpForce: 10
   wallJumpTime: 0.2
+  isWallJumping: 0
+  wallJumpingDirection: 0
+  wallJumpingTime: 0.2
+  wallJumpingCounter: 0
+  wallJumpingDuration: 0.4
+  wallJumpingPower: {x: 8, y: 16}
 --- !u!50 &1597933067
 Rigidbody2D:
   serializedVersion: 5
@@ -1369,6 +1395,34 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.8, y: 11.32}
   m_EdgeRadius: 0
+--- !u!114 &1597933071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597933064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020945cd4256d4ac2979994720b16dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 8258303840590375760, guid: 5e86fc4469d2a41e380c189e7375cf62, type: 3}
+--- !u!114 &1597933072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597933064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4492b62439a084cf9867e1f7c884fe64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  currentHealth: 0
+  anim: {fileID: 0}
 --- !u!1001 &1704649804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1437,10 +1491,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jimmmathy
       objectReference: {fileID: 0}
+    - target: {fileID: 7926215330551728535, guid: 5e4d16f17eb964e69b73b00cd7b0ac10, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7926215330551728535, guid: 5e4d16f17eb964e69b73b00cd7b0ac10, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 68973013}
   m_SourcePrefab: {fileID: 100100000, guid: 5e4d16f17eb964e69b73b00cd7b0ac10, type: 3}
 --- !u!1 &1731728252
 GameObject:
@@ -1838,7 +1899,7 @@ Transform:
   m_GameObject: {fileID: 1823205825}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13, y: 2, z: 0}
+  m_LocalPosition: {x: 20, y: 3, z: 0}
   m_LocalScale: {x: 2, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
