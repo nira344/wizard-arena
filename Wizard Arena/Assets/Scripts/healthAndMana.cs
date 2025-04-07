@@ -28,24 +28,17 @@ public class HealthAndMana : MonoBehaviour
     public void TakeDamage(float amount)
     {
         // If there's mana, damage the mana first (with 1.5x damage)
-        if (currentMana > 0)
+        if (currentMana > currentHealth)
         {
             // Apply damage to mana (1.5x multiplier)
             float manaDamage = Mathf.Min(amount * 1.5f, currentMana);
             currentMana -= Mathf.FloorToInt(manaDamage);
-
-            // If mana is depleted, continue applying damage to health
-            if (currentMana < 0)
-            {
-                float remainingDamage = Mathf.Abs(currentMana);
-                currentMana = 0;
-                currentHealth -= Mathf.FloorToInt(remainingDamage);
-            }
         }
         else
         {
-            // If no mana, apply damage directly to health
+            // If mana and hp equal, apply damage to health and mana
             currentHealth -= Mathf.FloorToInt(amount);
+            currentMana -= Mathf.FloorToInt(amount);
         }
 
         // Prevent health from going below zero
