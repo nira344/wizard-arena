@@ -15,10 +15,18 @@ public class PlayerScript : MonoBehaviour
     public float jumpSpeed = 10f; // Jump speed (initial upward velocity)
     public float maxJumpForce = 15f; // Maximum jump force (cap this value)
 
-    // Wall sliding parameters
+    // Wallsliding parameters
     public float wallSlideSpeed = 2f;  // Speed at which the player slides down the wall
     public float wallJumpForce = 10f;  // Force applied when jumping off the wall
     public float wallJumpTime = 0.2f; // Time to allow jumping off the wall after pressing jump
+
+    // Walljumping parameters
+    public bool isWallJumping;
+    public float wallJumpingDirection;
+    public float wallJumpingTime = 0.2f;
+    public float wallJumpingCounter;
+    public float wallJumpingDuration = 0.4f;
+    public Vector2 wallJumpingPower = new Vector2(8f, 16f);
 
     // Other variables
     private float direction = 0f;   // Horizontal direction
@@ -39,13 +47,15 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         Debug.Log("Update called");
-        if (IsGrounded())
-        {
-            // Do something when grounded
-        }
 
         HandleWallSliding();
         HandleWallJumping();
+
+        if (!isWallJumping)
+        {
+            HandleFlip();   // Handle character flipping
+        }
+
         HandleMovement();  // Calling the newly created HandleMovement method
 
         direction = Input.GetAxis("Horizontal"); // Sets the direction variable to A and D keys
@@ -85,72 +95,93 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-private void HandleWallSliding()
-{
-    float rayLength = 1.5f; // Ray length
-
-    Vector2 rayDirection = transform.right; // This gives us the right direction of the character (relative to its rotation)
-
-    // Use Physics2D.Raycast to check for wall collision
-    RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, rayLength, LayerMask.GetMask("Wall"));
-
-    // Debug the ray to see where it's casting
-    Debug.DrawRay(transform.position, rayDirection * rayLength, Color.red, 0.1f);
-
-    // Detect if the player is touching a wall (left or right)
-    isTouchingWall = hit.collider != null;
-
-    // Debugging: Log if the wall is being detected
-    if (isTouchingWall)
+    private void FixedUpdate()
     {
-        Debug.Log("Touching wall on side: " + (rayDirection == Vector2.right ? "Right" : "Left"));
-    }
-    else
-    {
-        Debug.Log("Not touching wall.");
+        if (!isWallJumping)
+        {
+            rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
+        }
     }
 
-    // If the player is touching a wall and not grounded, allow wall sliding
-    if (isTouchingWall && !IsGrounded())
+    private void HandleWallSliding()
     {
-        isWallSliding = true;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);  // Apply wall sliding speed (downwards)
-        Debug.Log("Wall sliding started.");
-    }
-    else
-    {
-        // If the player is grounded or not touching the wall, stop wall sliding
-        isWallSliding = false;
-        Debug.Log("Wall sliding stopped.");
-    }
-}
+        float rayLength = 1.5f; // Ray length
 
+        Vector2 rayDirection = transform.right; // This gives us the right direction of the character (relative to its rotation)
+
+        // Use Physics2D.Raycast to check for wall collision
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, rayLength, LayerMask.GetMask("Wall"));
+
+        // Debug the ray to see where it's casting
+        Debug.DrawRay(transform.position, rayDirection * rayLength, Color.red, 0.1f);
+
+        // Detect if the player is touching a wall (left or right)
+        isTouchingWall = hit.collider != null;
+
+        // Debugging: Log if the wall is being detected
+        if (isTouchingWall)
+        {
+            Debug.Log("Touching wall on side: " + (rayDirection == Vector2.right ? "Right" : "Left"));
+        }
+        else
+        {
+            Debug.Log("Not touching wall.");
+        }
+
+        // If the player is touching a wall and not grounded, allow wall sliding
+        if (isTouchingWall && !IsGrounded())
+        {
+            isWallSliding = true;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);  // Apply wall sliding speed (downwards)
+            Debug.Log("Wall sliding started.");
+        }
+        else
+        {
+            // If the player is grounded or not touching the wall, stop wall sliding
+            isWallSliding = false;
+            Debug.Log("Wall sliding stopped.");
+        }
+    }
 
     private void HandleWallJumping()
     {
-        // Check if player is in wall sliding state and presses jump
-        if (isWallSliding && Input.GetButtonDown("Jump"))
+        // If the player is wall sliding, prepare for the wall jump
+        if (isWallSliding)
         {
-            canWallJump = true; // Allow wall jump for a short time
-            wallJumpTimeCounter = wallJumpTime; // Start the wall jump time counter
-            Debug.Log("Wall jump initiated");
+            wallJumpingDirection = -Mathf.Sign(transform.position.x); // Get direction from wall
+            wallJumpingCounter = wallJumpingTime;
+
+            CancelInvoke(nameof(StopWallJumping)); // Cancel any ongoing wall jump timeout
+        }
+        else
+        {
+            wallJumpingCounter -= Time.deltaTime; // Reduce counter for wall jumping time
         }
 
-        if (canWallJump)
+        // Wall jump activation when the player presses the jump button and we're in the wall jump window
+        if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
         {
-            float wallJumpDirection = Mathf.Sign(transform.localScale.x); // Right if on left wall, left if on right wall
+            isWallJumping = true;
+            
+            // Apply a force in the direction of the wall jump
+            rb.linearVelocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
 
-            rb.linearVelocity = new Vector2(-wallJumpDirection * wallJumpForce, jumpSpeed); // Jump in the opposite direction
+            // Reset the wall jump time counter
+            wallJumpingCounter = 0f;
 
-            canWallJump = false;  // Disable wall jump after it's performed
-            Debug.Log("Wall jump performed");
+            // Rotate the character to face the opposite direction after the jump
+            float targetRotation = wallJumpingDirection > 0 ? 0f : 180f; // Flip based on direction of jump
+            transform.rotation = Quaternion.Euler(0f, targetRotation, 0f); // Apply rotation
+
+            // Invoke the stop of the wall jump after a short delay
+            Invoke(nameof(StopWallJumping), wallJumpingDuration);
         }
+    }
 
-        // Reduce the wall jump time counter
-        if (wallJumpTimeCounter > 0)
-        {
-            wallJumpTimeCounter -= Time.deltaTime;
-        }
+    // Stops wall jumping after a certain duration
+    private void StopWallJumping()
+    {
+        isWallJumping = false;
     }
 
     // Handle normal jumping logic
@@ -202,15 +233,15 @@ private void HandleWallSliding()
         if (direction != 0f && !isWallSliding)
         {
             // Rotate the character on the Y-axis to flip it
-            float rotationY = direction > 0 ? 0f : 180f; // Flip 180 degrees when moving left
-            transform.rotation = Quaternion.Euler(0f, rotationY, 0f); // Apply the rotation
+            float targetRotation = direction > 0 ? 0f : 180f; // Flip 180 degrees when moving left
+            transform.rotation = Quaternion.Euler(0f, targetRotation, 0f); // Apply the rotation
         }
     }
 
     private bool IsGrounded()
     {
         // Cast a ray downwards to check if the player is grounded with a ray length of 1
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 2.5f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 2.25f, LayerMask.GetMask("Ground"));
 
         // Debug the ray to visualize the ground check with a length of 1
         Debug.DrawRay(transform.position, Vector2.down * 2.25f, Color.green, 0.2f);  // Green ray with length 1 for 0.2 seconds
@@ -229,4 +260,3 @@ private void HandleWallSliding()
         return hit.collider != null;
     }
 }
-
