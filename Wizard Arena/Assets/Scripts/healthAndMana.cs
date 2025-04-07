@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class HealthAndMana : MonoBehaviour
 {
@@ -6,6 +7,10 @@ public class HealthAndMana : MonoBehaviour
     public int maxMana = 20;    // Starting Mana (shield)
     public int currentHealth;
     public int currentMana;
+
+    // Text
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI manaText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +27,8 @@ public class HealthAndMana : MonoBehaviour
     {
         // Ensure that mana is always equal to or greater than health
         BalanceHealthAndMana();
+        healthText.text = "HP: " + currentHealth + "/" + maxHealth;
+        manaText.text = "MP: " + currentMana + "/" + maxMana;
     }
 
     // Method to take damage
