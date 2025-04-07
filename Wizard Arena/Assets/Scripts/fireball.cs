@@ -22,11 +22,11 @@ public class fireball : MonoBehaviour
     {
 
         // Fixing the typo "collison" to "collision"
-        if (collision.gameObject.tag != "Projectile" && collision.gameObject.tag != "Player")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
         {
             Debug.Log("Fireball hit non-enemy " + collision.gameObject);
-            GetComponent<CircleCollider2D>().enabled = false;  // Disable the collider
             Destroy(gameObject);  // Destroy the fireball object
+            GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
         }
 
         // Check if the collision is with an object tagged "Enemy"
@@ -37,10 +37,9 @@ public class fireball : MonoBehaviour
 
             if (healthComponent != null)
             {
-                Debug.Log("Enemy damage sending...");
                 healthComponent.TakeDamage(5);  // Call TakeDamage method correctly
-                Debug.Log("Enemy damage sent!");
-
+                Destroy(gameObject);  // Destroy the fireball object
+                GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
             }
         }
     }
