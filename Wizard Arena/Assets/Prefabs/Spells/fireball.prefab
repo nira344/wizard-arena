@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5264081125334435160}
   - component: {fileID: 129342223422834643}
   - component: {fileID: 438543373849026175}
+  - component: {fileID: 3924779624751137345}
   - component: {fileID: 6123886088637049269}
   m_Layer: 0
   m_Name: fireball
@@ -28,9 +29,9 @@ Transform:
   m_GameObject: {fileID: 8258303840590375760}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.235276, y: 3.3971531, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 2049740433184511156, guid: 72638377da719407d9d9e540fd7a656d, type: 3}
+  m_Color: {r: 0.9103774, g: 1, b: 0.99445647, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -116,8 +117,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!58 &6767143846103699528
-CircleCollider2D:
+--- !u!60 &3924779624751137345
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -151,7 +152,60 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.4, y: 2.02}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.03, y: -0.71999997}
+      - {x: 0.26999998, y: -0.59999996}
+      - {x: 0.56, y: -0.47}
+      - {x: 0.68, y: -0.44}
+      - {x: 0.81, y: -0.37}
+      - {x: 0.90999997, y: -0.34}
+      - {x: 1.11, y: -0.25}
+      - {x: 1.37, y: -0.14}
+      - {x: 1.51, y: -0.07}
+      - {x: 1.63, y: -0.04}
+      - {x: 1.6899999, y: 0.02}
+      - {x: 1.6899999, y: 0.049999997}
+      - {x: 1.63, y: 0.11}
+      - {x: 1.52, y: 0.16}
+      - {x: 1.3199999, y: 0.24}
+      - {x: 1.1, y: 0.32}
+      - {x: 0.79999995, y: 0.41}
+      - {x: 0.64, y: 0.48}
+      - {x: 0.59, y: 0.5}
+      - {x: 0.42, y: 0.57}
+      - {x: 0.29999998, y: 0.61}
+      - {x: -0.14999999, y: 0.78999996}
+      - {x: -0.29, y: 0.84999996}
+      - {x: -0.63, y: 1}
+      - {x: -0.71999997, y: 1}
+      - {x: -0.75, y: 0.98999995}
+      - {x: -1.09, y: 0.65}
+      - {x: -1.13, y: 0.63}
+      - {x: -1.4, y: 0.35999998}
+      - {x: -1.5799999, y: 0.16}
+      - {x: -1.68, y: 0.03}
+      - {x: -1.6899999, y: 0.01}
+      - {x: -1.6899999, y: -0.02}
+      - {x: -1.62, y: -0.12}
+      - {x: -1.4399999, y: -0.32}
+      - {x: -1.27, y: -0.48999998}
+      - {x: -1.23, y: -0.51}
+      - {x: -0.93, y: -0.81}
+      - {x: -0.72999996, y: -1}
+      - {x: -0.59999996, y: -1}
+      - {x: -0.35, y: -0.87}
+      - {x: -0.13, y: -0.77}
+  m_UseDelaunayMesh: 0
 --- !u!114 &6123886088637049269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,3 +218,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3cb9be683464b9e9ac3d035b0b4098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileSpeed: 15
