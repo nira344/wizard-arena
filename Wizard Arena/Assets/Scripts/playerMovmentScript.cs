@@ -44,7 +44,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Update called");
+        //Debug.Log("Update called");
 
         HandleWallSliding();
         HandleWallJumping();
@@ -123,7 +123,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not touching wall.");
+            //Debug.Log("Not touching wall.");
         }
 
         // If the player is touching a wall and not grounded, allow wall sliding
@@ -131,13 +131,13 @@ public class PlayerScript : MonoBehaviour
         {
             isWallSliding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);  // Apply wall sliding speed (downwards)
-            Debug.Log("Wall sliding started.");
+            //Debug.Log("Wall sliding started.");
         }
         else
         {
             // If the player is grounded or not touching the wall, stop wall sliding
             isWallSliding = false;
-            Debug.Log("Wall sliding stopped.");
+            //Debug.Log("Wall sliding stopped.");
         }
     }
 
@@ -247,11 +247,11 @@ public class PlayerScript : MonoBehaviour
         // Log the result of the raycast check
         if (hit.collider != null)
         {
-            Debug.Log("Grounded: Raycast hit something.");
+            //Debug.Log("Grounded: Raycast hit something.");
         }
         else
         {
-            Debug.Log("Grounded: Raycast hit nothing.");
+            //Debug.Log("Grounded: Raycast hit nothing.");
         }
 
         // Return true if the ray hits something (i.e., the player is grounded)

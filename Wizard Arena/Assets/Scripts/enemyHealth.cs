@@ -20,10 +20,12 @@ public class enemyHealth : MonoBehaviour
     public void TakeDamage(float amount)  // Fixed method name to match the call
     {
         health -= amount;
+        Debug.Log("Enemy damage applied");
 
         // If health drops to zero or below, destroy the enemy
         if (health <= 0f)
         {
+            Debug.Log("Enemy slain");
             Destroy(gameObject);  // Destroy the enemy object
         }
     }

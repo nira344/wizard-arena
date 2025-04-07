@@ -18,22 +18,29 @@ public class fireball : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+
         // Fixing the typo "collison" to "collision"
-        if (collision.tag != "Projectile")
+        if (collision.gameObject.tag != "Projectile" && collision.gameObject.tag != "Player")
         {
-            Destroy(gameObject);  // Destroy the fireball object
+            Debug.Log("Fireball hit non-enemy " + collision.gameObject);
             GetComponent<CircleCollider2D>().enabled = false;  // Disable the collider
+            Destroy(gameObject);  // Destroy the fireball object
         }
 
         // Check if the collision is with an object tagged "Enemy"
-        if (collision.tag == "Enemy")
+        if (collision.gameObject.tag.Equals("Enemy"))
         {
-            var healthComponent = collision.GetComponent<enemyHealth>();
+            Debug.Log("Fireball hit enemy " + collision.gameObject);
+            var healthComponent = collision.gameObject.GetComponent<enemyHealth>();
+
             if (healthComponent != null)
             {
+                Debug.Log("Enemy damage sending...");
                 healthComponent.TakeDamage(5);  // Call TakeDamage method correctly
+                Debug.Log("Enemy damage sent!");
+
             }
         }
     }

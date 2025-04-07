@@ -1213,8 +1213,8 @@ GameObject:
   - component: {fileID: 1597933069}
   - component: {fileID: 1597933068}
   - component: {fileID: 1597933067}
+  - component: {fileID: 1597933073}
   - component: {fileID: 1597933065}
-  - component: {fileID: 1597933070}
   - component: {fileID: 1597933072}
   - component: {fileID: 1597933071}
   m_Layer: 0
@@ -1323,12 +1323,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7632562098868737224, guid: 127e6783b8d074bdabb60f90b7a8da51, type: 3}
+  m_Sprite: {fileID: -6464869995595449900, guid: d2312978aa9bf47819d532440df77927, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.8, y: 11.32}
+  m_Size: {x: 2.07, y: 3.47}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1343,13 +1343,42 @@ Transform:
   m_GameObject: {fileID: 1597933064}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: -1, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -5.6102, y: -1.6534, z: 0}
+  m_LocalScale: {x: 0.67659, y: 0.67659, z: 0.67659}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1597933070
+--- !u!114 &1597933071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597933064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020945cd4256d4ac2979994720b16dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 8258303840590375760, guid: 5e86fc4469d2a41e380c189e7375cf62, type: 3}
+--- !u!114 &1597933072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597933064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4492b62439a084cf9867e1f7c884fe64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  maxMana: 20
+  currentHealth: 0
+  currentMana: 0
+--- !u!61 &1597933073
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1387,42 +1416,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.8, y: 11.32}
-    newSize: {x: 6.8, y: 11.32}
+    oldSize: {x: 2.07, y: 3.47}
+    newSize: {x: 2.07, y: 3.47}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 6.8, y: 11.32}
+  m_Size: {x: 2.07, y: 3.47}
   m_EdgeRadius: 0
---- !u!114 &1597933071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1597933064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 020945cd4256d4ac2979994720b16dad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballPrefab: {fileID: 8258303840590375760, guid: 5e86fc4469d2a41e380c189e7375cf62, type: 3}
---- !u!114 &1597933072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1597933064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4492b62439a084cf9867e1f7c884fe64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  currentHealth: 0
-  anim: {fileID: 0}
 --- !u!1001 &1704649804
 PrefabInstance:
   m_ObjectHideFlags: 0
