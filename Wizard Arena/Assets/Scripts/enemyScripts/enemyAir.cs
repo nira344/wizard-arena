@@ -25,7 +25,7 @@ public class enemyAir : MonoBehaviour
             direction.Normalize();
 
             // restrict to horizontal movement
-            direction.y = 0;
+            direction.y *= 0.5f;
 
             // scale the vector to our desired speed 
             direction = direction * speed * Time.deltaTime;

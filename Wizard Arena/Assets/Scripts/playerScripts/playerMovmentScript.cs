@@ -130,7 +130,7 @@ public class PlayerScript : MonoBehaviour
 
     private void HandleWallSliding()
     {
-        float rayLength = 1.5f; 
+        float rayLength = 1.1f; 
         Vector2 rayDirection = transform.right; 
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, rayLength, LayerMask.GetMask("Wall"));
