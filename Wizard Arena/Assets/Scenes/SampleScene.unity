@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8591fdf121c444932b0631125cd389f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 2
   manaDamageMultiplier: 1.5
   attackCooldown: 1
 --- !u!1 &98637518
@@ -1699,7 +1699,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020945cd4256d4ac2979994720b16dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireballPrefab: {fileID: 8258303840590375760, guid: 5e86fc4469d2a41e380c189e7375cf62, type: 3}
+  fireballPrefab: {fileID: 8242415882551670338, guid: 5166f9cfd2b0445ba8fa4f73e8648849, type: 3}
+  iceshardPrefab: {fileID: 8258303840590375760, guid: 5e86fc4469d2a41e380c189e7375cf62, type: 3}
 --- !u!114 &1597933072
 MonoBehaviour:
   m_ObjectHideFlags: 0

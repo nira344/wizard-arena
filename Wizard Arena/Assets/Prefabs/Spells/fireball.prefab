@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3cb9be683464b9e9ac3d035b0b4098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 15
+  projectileSpeed: 12
   damage: 5
 --- !u!60 &7409760874042615733
 PolygonCollider2D:
