@@ -3,6 +3,7 @@ using UnityEngine;
 public class fireball : MonoBehaviour
 {
     public int projectileSpeed = 15;
+    public int damage = 5;  // Make damage configurable from the Inspector
     private Rigidbody2D rb;  // Declare the Rigidbody2D
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,7 +21,6 @@ public class fireball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
         // Fixing the typo "collison" to "collision"
         if (collision.gameObject.tag == "Solid")
         {
@@ -37,7 +37,7 @@ public class fireball : MonoBehaviour
 
             if (healthComponent != null)
             {
-                healthComponent.TakeDamage(5);  // Call TakeDamage method correctly
+                healthComponent.TakeDamage(damage);  // Use the damage variable
                 Destroy(gameObject);  // Destroy the fireball object
                 GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
             }
