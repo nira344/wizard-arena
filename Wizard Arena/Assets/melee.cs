@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class fireball : MonoBehaviour
+public class melee : MonoBehaviour
 {
-    public int projectileSpeed = 15;
-    public int damage = 5;  // Make damage configurable from the Inspector
-    private Rigidbody2D rb;  // Declare the Rigidbody2D
+    public int damage = 1;  // Configurable from the Inspector
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();  // Get the Rigidbody2D component
-        rb.linearVelocity = transform.right * projectileSpeed;  // Use velocity to move the fireball
+        
     }
 
     // Update is called once per frame
@@ -23,21 +20,21 @@ public class fireball : MonoBehaviour
     {
         if (collision.gameObject.tag == "Solid")
         {
-            Debug.Log("Fireball hit non-enemy " + collision.gameObject);
-            Destroy(gameObject);  // Destroy the fireball object
+            Debug.Log("Hit non-enemy " + collision.gameObject);
+            Destroy(gameObject);  // Destroy the object
             GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
         }
 
         // Check if the collision is with an object tagged "Enemy"
         if (collision.gameObject.tag.Equals("Enemy"))
         {
-            Debug.Log("Fireball hit enemy " + collision.gameObject);
+            Debug.Log("Hit enemy " + collision.gameObject);
             var healthComponent = collision.gameObject.GetComponent<enemyHealth>();
 
             if (healthComponent != null)
             {
                 healthComponent.TakeDamage(damage);  // Use the damage variable
-                Destroy(gameObject);  // Destroy the fireball object
+                Destroy(gameObject);  // Destroy the object
                 GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
             }
         }

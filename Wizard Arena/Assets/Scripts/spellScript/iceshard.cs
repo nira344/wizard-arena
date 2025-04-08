@@ -3,7 +3,7 @@ using UnityEngine;
 public class HomingProjectile : MonoBehaviour
 {
     public int projectileSpeed = 15;
-    public int damage = 5;  // Damage that can be adjusted in the Inspector
+    public int damage = 2;  // Damage that can be adjusted in the Inspector
     public float homingSpeed = 5f;  // How fast the projectile homes towards the target
     private Rigidbody2D rb;
     private Transform target;  // Target for homing (enemy)
@@ -67,7 +67,7 @@ public class HomingProjectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Homing projectile hit " + collision.gameObject);
+            Debug.Log("iceShard hit " + collision.gameObject);
             var healthComponent = collision.gameObject.GetComponent<enemyHealth>();
 
             if (healthComponent != null)
