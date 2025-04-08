@@ -55,7 +55,7 @@ public class PlayerScript : MonoBehaviour
         HandleMovement();
 
         // Handle Dodge
-        if (Input.GetKeyDown(KeyCode.S) && !isWallJumping) // Press S to dodge
+        if (Input.GetKeyDown(KeyCode.C) && !isWallJumping) // Press C to dodge
         {
             if (direction != 0) // If moving horizontally, do a dash in that direction
             {
