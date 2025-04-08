@@ -1574,12 +1574,12 @@ MonoBehaviour:
   fallGravityMult: 2
   maxFallSpeed: -10
   gravityScale: 1
-  speed: 12
-  jumpForce: 15
+  speed: 10
+  jumpForce: 12
   jumpSpeed: 10
-  maxJumpForce: 30
+  maxJumpForce: 25
   wallSlideSpeed: 2
-  wallJumpForce: 10
+  wallJumpForce: 6
   wallJumpTime: 0.2
   isWallJumping: 0
   wallJumpingDirection: 0
@@ -1587,6 +1587,9 @@ MonoBehaviour:
   wallJumpingCounter: 0
   wallJumpingDuration: 0.4
   wallJumpingPower: {x: 8, y: 16}
+  dodgeSpeed: 20
+  dodgeDuration: 0.2
+  invincibilityDuration: 0.5
 --- !u!50 &1597933067
 Rigidbody2D:
   serializedVersion: 5
