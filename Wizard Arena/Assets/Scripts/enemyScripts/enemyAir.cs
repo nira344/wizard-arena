@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class enemyScript : MonoBehaviour
+public class enemyAir : MonoBehaviour
 {
 
     public float range;
