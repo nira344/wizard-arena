@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d2312978aa9bf47819d532440df77927
+guid: 4a965284c73e64c7ea3211a470ff8cfc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6464869995595449900
-    second: Adobe Express - file (1)_0
+      213: 4300636228488809460
+    second: Sorcerer 3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Adobe Express - file (1)_0
+      name: Sorcerer 3_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 14
-        width: 207
-        height: 347
+        x: 45
+        y: 19
+        width: 187
+        height: 243
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d9b379cdfa2846a0800000000000000
-      internalID: -6464869995595449900
+      spriteID: 4fb40433dddeeab30800000000000000
+      internalID: 4300636228488809460
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Adobe Express - file (1)_0: -6464869995595449900
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
