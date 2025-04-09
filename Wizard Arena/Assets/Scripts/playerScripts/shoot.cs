@@ -6,6 +6,9 @@ public class shoot : MonoBehaviour
     public GameObject iceshardPrefab;
     public GameObject meleePrefab;
 
+    private float cooldownTime = 0.5f;  // Cooldown time in seconds
+    private float lastAttackTime = 0f;  // Time when the last melee attack was performed
+
     void Start()
     {
         // Log initial mana and collision status at the start
@@ -69,10 +72,28 @@ public class shoot : MonoBehaviour
         // Handling Melee Attack (Fire1)
         if (Input.GetButtonDown("Fire1"))
         {
-            HealthAndMana statScript = GetComponent<HealthAndMana>();
+            // Check if the cooldown has passed
+            if (Time.time - lastAttackTime >= cooldownTime)
+            {
+                // Perform melee attack
+                HealthAndMana statScript = GetComponent<HealthAndMana>();
+                Debug.Log("Melee Attack Button Pressed");
+                var melee = Instantiate(meleePrefab, transform.position, transform.rotation);  // Instantiate the melee
 
-            Debug.Log("Melee Attack Button Pressed");
-            var melee = Instantiate(meleePrefab, transform.position, transform.rotation);  // Instantiate the melee
+                // Add 1 mana for melee attack
+                if (statScript != null)
+                {
+                    statScript.currentMana += 1;
+                    Debug.Log("Melee Attack: Mana after: " + statScript.currentMana);
+                }
+
+                // Update the time of last attack
+                lastAttackTime = Time.time;
+            }
+            else
+            {
+                Debug.Log("Melee attack is on cooldown.");
+            }
         }
     }
 }
