@@ -11,6 +11,8 @@ public class melee : MonoBehaviour
    public float attackRange = 1.5f; // Distance at which the melee attack should appear from the player
    private HealthAndMana playerHealthAndMana;
 
+    private bool active = true;
+
 
    void Start()
    {
@@ -106,7 +108,7 @@ public class melee : MonoBehaviour
 
 
        // Check if the collision is with an object tagged "Enemy"
-       if (collision.gameObject.tag.Equals("Enemy"))
+       if (collision.gameObject.tag.Equals("Enemy") && active)
        {
 
 
@@ -116,8 +118,15 @@ public class melee : MonoBehaviour
 
            if (healthComponent != null)
            {
-               healthComponent.TakeDamage(damage);  // Use the damage variable
-           }
+                healthComponent.TakeDamage(damage);  // Use the damage variable
+                active = false;
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                HealthAndMana manaComponent = player.GetComponent<HealthAndMana>();
+                if (manaComponent.currentMana < manaComponent.maxMana)
+                {
+                    manaComponent.currentMana++;
+                }
+            }
 
 
            GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
