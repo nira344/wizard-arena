@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerMovmentScript : MonoBehaviour
 {
     // Gravity parameters
     public float fallGravityMult = 2.0f; 
@@ -31,14 +31,14 @@ public class PlayerScript : MonoBehaviour
     // Dodge parameters
     public float dodgeSpeed = 15f; // Dodge movement speed
     public float dodgeDuration = 0.2f; // Duration of the dodge
-    public float invincibilityDuration = 0.5f; // Duration of invincibility after dodge
+    public float invincibilityDuration = 0.3f; // Duration of invincibility after dodge
     private bool isDodging = false; // Is the player dodging
     private bool isInvincible = false; // Is the player invincible
     private float dodgeTimeCounter = 0f; // Timer for dodge duration
     private float invincibilityTimeCounter = 0f; // Timer for invincibility duration
 
     // Other variables
-    private float direction = 0f;   
+    public float direction = 0f;   
     private bool isWallSliding = false; 
     private bool isTouchingWall = false; 
     private Rigidbody2D rb; 
