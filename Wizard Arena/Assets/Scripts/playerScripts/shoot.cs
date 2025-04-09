@@ -73,10 +73,6 @@ public class shoot : MonoBehaviour
 
             Debug.Log("Melee Attack Button Pressed");
             var melee = Instantiate(meleePrefab, transform.position, transform.rotation);  // Instantiate the melee
-            if (statScript.currentMana < statScript.maxMana)
-            {
-                statScript.currentMana += 1;
-            }
         }
     }
 }

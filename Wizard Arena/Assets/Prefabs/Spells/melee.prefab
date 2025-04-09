@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4899002490937443281}
   - component: {fileID: 8436596090160238864}
   - component: {fileID: 5668921464115959302}
-  - component: {fileID: 217356094770388630}
+  - component: {fileID: 1683778636264200451}
   m_Layer: 0
   m_Name: melee
   m_TagString: Untagged
@@ -139,7 +139,7 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &217356094770388630
+--- !u!114 &1683778636264200451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +148,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3057016599928121658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f984e05ca3453465796357c90a79e856, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b3a8a42f1cb244efbff634ba465b150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  attackRange: 1.5
