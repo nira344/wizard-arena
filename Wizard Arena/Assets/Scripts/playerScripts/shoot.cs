@@ -6,7 +6,7 @@ public class shoot : MonoBehaviour
     public GameObject iceshardPrefab;
     public GameObject meleePrefab;
 
-    private float cooldownTime = 0.5f;  // Cooldown time in seconds
+    public float cooldownTime = 0.5f;  // Cooldown time in seconds
     private float lastAttackTime = 0f;  // Time when the last melee attack was performed
 
     void Start()
