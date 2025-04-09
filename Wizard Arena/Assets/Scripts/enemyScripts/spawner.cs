@@ -21,6 +21,16 @@ public class spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Iterate through the list in reverse order to avoid skipping elements when removing them
+        for (int i = spawnedEnemyObjects.Count - 1; i >= 0; i--)
+        {
+            // If the GameObject is missing (null), remove it from the list
+            if (spawnedEnemyObjects[i] == null)
+            {
+                spawnedEnemyObjects.RemoveAt(i);
+            }
+        }
+
         if (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -29,8 +39,7 @@ public class spawner : MonoBehaviour
         {
             if (spawnedEnemyObjects.Count < maxEnemies)
             {
-                GameObject goober = prefabs[0];
-                Instantiate(goober, gameObject.transform.position, Quaternion.identity);
+                GameObject goober = Instantiate(prefabs[0], gameObject.transform.position, Quaternion.identity);
                 timer = spawnCooldown;
                 spawnedEnemyObjects.Insert(0, goober);
             }
