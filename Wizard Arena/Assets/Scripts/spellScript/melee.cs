@@ -189,7 +189,10 @@ public class melee : MonoBehaviour
             if (playerHealthAndMana != null && playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
             {
                 // Pulse mana back to the player
-                playerHealthAndMana.currentMana += 1;
+                if (playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
+                {
+                    playerHealthAndMana.currentMana += 1;
+                }
                 Debug.Log("Melee hit an enemy. Mana pulsed! Current Mana: " + playerHealthAndMana.currentMana);
 
 

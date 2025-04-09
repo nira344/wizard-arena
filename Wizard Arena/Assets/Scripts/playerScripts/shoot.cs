@@ -83,7 +83,10 @@ public class shoot : MonoBehaviour
                 // Add 1 mana for melee attack
                 if (statScript != null)
                 {
-                    statScript.currentMana += 1;
+                    if (statScript.currentHealth < statScript.maxHealth)
+                    {
+                        statScript.currentMana += 1;
+                    }
                     Debug.Log("Melee Attack: Mana after: " + statScript.currentMana);
                 }
 
