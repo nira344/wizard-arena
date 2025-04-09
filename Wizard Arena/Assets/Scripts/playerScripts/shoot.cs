@@ -6,24 +6,34 @@ public class shoot : MonoBehaviour
     public GameObject iceshardPrefab;
     public GameObject meleePrefab;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // Log initial mana and collision status at the start
+        HealthAndMana statScript = GetComponent<HealthAndMana>();
+        if (statScript != null)
+        {
+            Debug.Log("Starting Mana: " + statScript.currentMana + "/" + statScript.maxMana);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        // Handling Ice Shard Attack (Fire3)
+        if (Input.GetButtonDown("Fire3"))
         {
             HealthAndMana statScript = GetComponent<HealthAndMana>();
             if (statScript != null)
             {
                 if (statScript.currentMana > 1)
                 {
-                    statScript.currentMana--;
+                    Debug.Log("Ice Shard Attack: Mana before: " + statScript.currentMana);
+                    statScript.currentMana -= 1;
+                    Debug.Log("Ice Shard Attack: Mana after: " + statScript.currentMana);
                     var iceShard = Instantiate(iceshardPrefab, transform.position, transform.rotation);  // Instantiate the iceshard
+                }
+                else
+                {
+                    Debug.Log("Not enough mana for Ice Shard");
                 }
             }
             else
@@ -32,6 +42,7 @@ public class shoot : MonoBehaviour
             }
         }
 
+        // Handling Fireball Attack (Fire2)
         if (Input.GetButtonDown("Fire2"))
         {
             HealthAndMana statScript = GetComponent<HealthAndMana>();
@@ -39,8 +50,14 @@ public class shoot : MonoBehaviour
             {
                 if (statScript.currentMana > 3)
                 {
-                    statScript.currentMana-= 3;
-                    var fierBall = Instantiate(fireballPrefab, transform.position, transform.rotation);  // Instantiate the fireball
+                    Debug.Log("Fireball Attack: Mana before: " + statScript.currentMana);
+                    statScript.currentMana -= 3;
+                    Debug.Log("Fireball Attack: Mana after: " + statScript.currentMana);
+                    var fireBall = Instantiate(fireballPrefab, transform.position, transform.rotation);  // Instantiate the fireball
+                }
+                else
+                {
+                    Debug.Log("Not enough mana for Fireball");
                 }
             }
             else
@@ -49,19 +66,13 @@ public class shoot : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Fire3"))
+        // Handling Melee Attack (Fire1)
+        if (Input.GetButtonDown("Fire1"))
         {
             HealthAndMana statScript = GetComponent<HealthAndMana>();
-            if (statScript != null)
-            {
-                statScript.currentMana += 1;
-                var melee = Instantiate(meleePrefab, transform.position, transform.rotation);  // Instantiate the melee
-              
-            }
-            else
-            {
-                var melee = Instantiate(meleePrefab, transform.position, transform.rotation);  // Instantiate the melee
-            }
+
+            Debug.Log("Melee Attack Button Pressed");
+            var melee = Instantiate(meleePrefab, transform.position, transform.rotation);  // Instantiate the melee
         }
     }
 }

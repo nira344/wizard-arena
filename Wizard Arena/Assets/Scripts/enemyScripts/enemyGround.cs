@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class enemyScript : MonoBehaviour
+public class enemyGround : MonoBehaviour
 {
 
     public float range;
