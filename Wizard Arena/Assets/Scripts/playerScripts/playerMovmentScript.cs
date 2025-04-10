@@ -50,7 +50,7 @@ public class PlayerMovmentScript : MonoBehaviour
     private bool isWallSliding = false;
     private bool isTouchingWall = false;
     private Rigidbody2D rb;
-    private HealthAndMana playerHealthAndMana;  // Reference to the player's health and mana script
+    public HealthAndMana playerHealthAndMana;  // Reference to the player's health and mana script
 
     public HealthBar healthBar;
 
@@ -274,5 +274,3 @@ public class PlayerMovmentScript : MonoBehaviour
         return hit.collider != null;
     }
 }
-
-
