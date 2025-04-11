@@ -17,14 +17,16 @@ public class HealthAndMana : MonoBehaviour
 
    // Health Bar
    public HealthBar healthBar;
+   public ManaBar manaBar;
 
-   void Start()
+    void Start()
    {
        currentHealth = maxHealth;
        currentMana = maxMana;
        deathText.gameObject.SetActive(false); // Hide death text at the start
        healthBar.SetMaxHealth(maxHealth);
-   }
+       manaBar.SetMaxMana(maxMana);
+    }
    
    void Update()
    {
@@ -32,8 +34,9 @@ public class HealthAndMana : MonoBehaviour
        healthText.text = "HP: " + currentHealth + "/" + maxHealth;
        healthBar.SetHealth(currentHealth);
        manaText.text = "MP: " + currentMana + "/" + maxMana;
+       manaBar.SetMana(currentMana);
 
-       if (isDead)
+        if (isDead)
        {
            deathText.gameObject.SetActive(true); // Show death message when player dies
            return;  // Stop further updates if the player is dead
