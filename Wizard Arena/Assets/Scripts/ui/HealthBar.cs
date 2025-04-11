@@ -25,7 +25,7 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(int health)
 	{
 		currentHealth = health;
-		rt.localScale = new Vector3((5.0f * currentHealth / maxHealth), rt.localScale.y, rt.localScale.z);
+		if (rt) rt.localScale = new Vector3((5.0f * currentHealth / maxHealth), rt.localScale.y, rt.localScale.z);
 	}
 
 }
