@@ -24,7 +24,7 @@ public class ManaBar : MonoBehaviour
     public void SetMana(int mana)
 	{
 		currentMana = mana;
-		rt.localScale = new Vector3 (5.0f * currentMana / maxMana, rt.localScale.y, rt.localScale.z);
+		rt.localScale = new Vector3 ((5.0f * currentMana / maxMana), rt.localScale.y, rt.localScale.z);
 	}
 
 }

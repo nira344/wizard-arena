@@ -8,7 +8,6 @@ public class HealthBar : MonoBehaviour
 	private int maxHealth;
 	private int currentHealth;
 
-	public Gradient brad;
 	private RectTransform rt;
 
     private void Start()
@@ -25,7 +24,7 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(int health)
 	{
 		currentHealth = health;
-		rt.localScale = new Vector3 (5.0f * currentHealth / maxHealth, rt.localScale.y, rt.localScale.z);
+		rt.localScale = new Vector3 ((5.0f * currentHealth / maxHealth), rt.localScale.y, rt.localScale.z);
 	}
 
 }
