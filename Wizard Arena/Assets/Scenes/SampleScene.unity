@@ -778,11 +778,11 @@ Transform:
   m_GameObject: {fileID: 152718365}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 322.58, y: -25.65, z: 1.0911043}
+  m_LocalPosition: {x: 97.23549, y: -9.5205345, z: 1.4}
   m_LocalScale: {x: 1.4217, y: 4.1897497, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1951948062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &153731031
 GameObject:
@@ -6110,11 +6110,11 @@ Transform:
   m_GameObject: {fileID: 954664013}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 322.58, y: -23.7583, z: 0.99110425}
+  m_LocalPosition: {x: 97.23549, y: -7.6288357, z: 1.3}
   m_LocalScale: {x: 2.5306098, y: 0.72424, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1951948062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &956391728
 GameObject:
@@ -10602,7 +10602,6 @@ MonoBehaviour:
   invincibilityDuration: 0.25
   direction: 0
   playerHealthAndMana: {fileID: 1597933072}
-  healthBar: {fileID: 2080015301}
 --- !u!50 &1597933067
 Rigidbody2D:
   serializedVersion: 5
@@ -10735,6 +10734,7 @@ MonoBehaviour:
   healthText: {fileID: 194363097}
   manaText: {fileID: 1410857875}
   deathText: {fileID: 1492946552}
+  healthBar: {fileID: 2080015301}
 --- !u!61 &1597933073
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13054,6 +13054,8 @@ Transform:
   - {fileID: 10568785}
   - {fileID: 133514310}
   - {fileID: 1414478041}
+  - {fileID: 954664015}
+  - {fileID: 152718367}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1970220987
@@ -14088,7 +14090,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 0, b: 0, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -14347,5 +14349,3 @@ SceneRoots:
   - {fileID: 407060250}
   - {fileID: 1217029439}
   - {fileID: 1951948062}
-  - {fileID: 954664015}
-  - {fileID: 152718367}

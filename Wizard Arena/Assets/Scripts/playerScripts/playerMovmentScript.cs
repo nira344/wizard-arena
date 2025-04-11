@@ -52,14 +52,11 @@ public class PlayerMovmentScript : MonoBehaviour
     private Rigidbody2D rb;
     public HealthAndMana playerHealthAndMana;  // Reference to the player's health and mana script
 
-    public HealthBar healthBar;
-
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // Get Rigidbody
         playerHealthAndMana = GetComponent<HealthAndMana>();  // Get the HealthAndMana script
-        healthBar.SetMaxHealth(playerHealthAndMana.maxHealth);
     }
 
 
@@ -147,8 +144,6 @@ public class PlayerMovmentScript : MonoBehaviour
         {
             rb.gravityScale = gravityScale;
         }
-
-        healthBar.SetHealth(playerHealthAndMana.currentHealth);
     }
 
 

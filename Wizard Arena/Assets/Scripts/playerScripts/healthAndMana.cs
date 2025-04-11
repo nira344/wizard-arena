@@ -15,18 +15,22 @@ public class HealthAndMana : MonoBehaviour
    public TextMeshProUGUI manaText;
    public TextMeshProUGUI deathText;
 
+   // Health Bar
+   public HealthBar healthBar;
+
    void Start()
    {
        currentHealth = maxHealth;
        currentMana = maxMana;
-       BalanceHealthAndMana();
        deathText.gameObject.SetActive(false); // Hide death text at the start
+       healthBar.SetMaxHealth(maxHealth);
    }
-
+   
    void Update()
    {
        BalanceHealthAndMana();
        healthText.text = "HP: " + currentHealth + "/" + maxHealth;
+       healthBar.SetHealth(currentHealth);
        manaText.text = "MP: " + currentMana + "/" + maxMana;
 
        if (isDead)
@@ -35,7 +39,7 @@ public class HealthAndMana : MonoBehaviour
            return;  // Stop further updates if the player is dead
        }
    }
-
+    
    // Add a public method to check if the player is dead
    public bool IsDead()
    {
@@ -47,17 +51,8 @@ public class HealthAndMana : MonoBehaviour
        // If the player is already dead, do nothing
        if (isDead) return;
 
-       // If there's mana, damage the mana first (with 1.5x damage)
-       if (currentMana > currentHealth)
-       {
-           float manaDamage = Mathf.Min(amount * 1.5f, currentMana);
-           currentMana -= Mathf.FloorToInt(manaDamage);
-       }
-       else
-       {
-           currentHealth -= Mathf.FloorToInt(amount);
-           currentMana -= Mathf.FloorToInt(amount);
-       }
+       // Remove health
+       currentHealth -= Mathf.FloorToInt(amount);
 
        // Prevent health from going below zero
        if (currentHealth <= 0)
@@ -67,21 +62,15 @@ public class HealthAndMana : MonoBehaviour
            deathText.text = "YOU DIED"; // Show the death text
            Debug.Log("Player is dead!");
        }
-
-       // Prevent mana from going below zero
-       if (currentMana < 0)
-       {
-           currentMana = 0;
-       }
-
-       // Ensure that HP and Mana balance out
-       BalanceHealthAndMana();
    }
 
    // Method to balance health and mana
    void BalanceHealthAndMana()
    {
-       if (currentHealth > currentMana) currentHealth = currentMana;
-       else if (currentMana < currentHealth) currentMana = currentHealth;
+        if (currentMana < 0)
+        {
+            currentHealth += currentMana;
+            currentMana = 0;
+        }
    }
 }

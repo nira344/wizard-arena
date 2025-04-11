@@ -27,7 +27,7 @@ public class shoot : MonoBehaviour
             HealthAndMana statScript = GetComponent<HealthAndMana>();
             if (statScript != null)
             {
-                if (statScript.currentMana > 1)
+                if (statScript.currentMana + statScript.currentHealth > 1)
                 {
                     Debug.Log("Ice Shard Attack: Mana before: " + statScript.currentMana);
                     statScript.currentMana -= 1;
@@ -51,7 +51,7 @@ public class shoot : MonoBehaviour
             HealthAndMana statScript = GetComponent<HealthAndMana>();
             if (statScript != null)
             {
-                if (statScript.currentMana > 3)
+                if (statScript.currentMana + statScript.currentHealth > 3)
                 {
                     Debug.Log("Fireball Attack: Mana before: " + statScript.currentMana);
                     statScript.currentMana -= 3;
