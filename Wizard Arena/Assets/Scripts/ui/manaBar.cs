@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ManaBar : MonoBehaviour
 {
-	private int maxMana;
-	private int currentMana;
+	public int maxMana;
+	public int currentMana;
 
 	private RectTransform rt;
 
@@ -18,7 +18,7 @@ public class ManaBar : MonoBehaviour
     public void SetMaxMana(int mana)
 	{
 		maxMana = mana;
-		SetMana(mana);
+		SetMana(maxMana);
 	}
 
     public void SetMana(int mana)

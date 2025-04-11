@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-	private int maxHealth;
-	private int currentHealth;
+	public int maxHealth;
+	public int currentHealth;
 
 	private RectTransform rt;
 
@@ -17,6 +17,7 @@ public class HealthBar : MonoBehaviour
 
     public void SetMaxHealth(int health)
 	{
+		Debug.Log("max hp set");
 		maxHealth = health;
 		SetHealth(health);
 	}
@@ -24,7 +25,7 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(int health)
 	{
 		currentHealth = health;
-		rt.localScale = new Vector3 ((5.0f * currentHealth / maxHealth), rt.localScale.y, rt.localScale.z);
+		rt.localScale = new Vector3((5.0f * currentHealth / maxHealth), rt.localScale.y, rt.localScale.z);
 	}
 
 }

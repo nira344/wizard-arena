@@ -76,7 +76,7 @@ public class PlayerMovmentScript : MonoBehaviour
 
 
        // Handle Dodge
-       if (Input.GetKeyDown(KeyCode.LeftShift) && !isWallJumping) // Press shift to dodge
+       if (Input.GetKeyDown(KeyCode.Mouse1) && !isWallJumping) // Press right click to dodge
        {
            if (direction != 0) // If moving horizontally, do a dash in that direction
            {
