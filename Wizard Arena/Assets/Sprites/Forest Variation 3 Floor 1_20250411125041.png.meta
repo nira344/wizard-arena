@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6dde65500519b4fe29ed3a34947987b0
+guid: edd04285227384da9bcd4489f603db2e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4671225773540348477
-    second: Untitled95_20250409132832_0
+      213: -543905834733832468
+    second: Forest Variation 3 Floor 1_20250411125041_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Untitled95_20250409132832_0
+      name: Forest Variation 3 Floor 1_20250411125041_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 0
         width: 1800
-        height: 1004
+        height: 1100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d329581871783d040800000000000000
-      internalID: 4671225773540348477
+      spriteID: ce67d696688a378f0800000000000000
+      internalID: -543905834733832468
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b1e046d927a654404b26f6f6d22e7e3f
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Untitled95_20250409132832_0: 4671225773540348477
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
