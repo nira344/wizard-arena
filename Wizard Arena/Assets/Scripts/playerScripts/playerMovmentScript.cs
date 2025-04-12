@@ -36,6 +36,7 @@ public class PlayerMovmentScript : MonoBehaviour
 
 
     // Dodge parameters
+    public float dodgeCooldownTime = 0.2f;  // Cooldown time for dodge
     public float dodgeSpeed = 15f; // Dodge movement speed
     public float dodgeDuration = 0.2f; // Duration of the dodge
     public float invincibilityDuration = 0.3f; // Duration of invincibility after dodge
@@ -46,6 +47,7 @@ public class PlayerMovmentScript : MonoBehaviour
 
 
     // Other variables
+    private float lastAttackTime = 0f;
     public float direction = 0f;  
     private bool isWallSliding = false;
     private bool isTouchingWall = false;
@@ -62,42 +64,50 @@ public class PlayerMovmentScript : MonoBehaviour
 
    void Update()
    {
-        // If the player is dead, stop all movement
-       if (playerHealthAndMana.IsDead())
-       {
-           rb.linearVelocity = Vector2.zero;  // Stop movement
-           return;  // Skip the rest of the update to prevent movement
-       }
+            // If the player is dead, stop all movement
+        if (playerHealthAndMana.IsDead())
+        {
+            rb.linearVelocity = Vector2.zero;  // Stop movement
+            return;  // Skip the rest of the update to prevent movement
+        }
 
 
-       HandleWallSliding();
-       HandleWallJumping();
-       HandleMovement();
+        HandleWallSliding();
+        HandleWallJumping();
+        HandleMovement();
 
 
-       // Handle Dodge
-       if (Input.GetKeyDown(KeyCode.Mouse1) && !isWallJumping) // Press right click to dodge
-       {
-           if (direction != 0) // If moving horizontally, do a dash in that direction
-           {
-               isDodging = true;
-               dodgeTimeCounter = dodgeDuration;
-               isInvincible = true;
-               invincibilityTimeCounter = invincibilityDuration;
-               rb.linearVelocity = new Vector2(direction * dodgeSpeed, rb.linearVelocity.y); // Dash in the direction of movement
-               Debug.Log("Dodging with direction: " + direction);
-           }
-           else // If standing still, dodge in place
-           {
-               isDodging = true;
-               dodgeTimeCounter = dodgeDuration;
-               isInvincible = true;
-               invincibilityTimeCounter = invincibilityDuration;
-               rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // Stay in place while dodging
-               Debug.Log("Dodging in place");
-           }
-       }
+        // Handle Dodge
 
+        // Check if the cooldown has passed
+        if (Time.time - lastAttackTime >= dodgeCooldownTime)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1) && !isWallJumping)
+            {
+                isDodging = true;
+                dodgeTimeCounter = dodgeDuration;
+                isInvincible = true;
+                invincibilityTimeCounter = invincibilityDuration;
+
+                if (direction != 0)
+                {
+                    rb.linearVelocity = new Vector2(direction * dodgeSpeed, rb.linearVelocity.y);
+                    Debug.Log("Dodging with direction: " + direction);
+                }
+                else
+                {
+                    rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+                    Debug.Log("Dodging in place");
+                }
+
+                // Now we update the time only when dodge is triggered
+                lastAttackTime = Time.time;
+            }
+        }
+        else
+        {
+            Debug.Log("dodge is on cooldown.");
+        }
 
        if (isDodging)
        {
@@ -128,12 +138,12 @@ public class PlayerMovmentScript : MonoBehaviour
        HandleJump();
 
 
-       // Update camera position
-       Vector3 cameraPos = Camera.main.transform.position;
-       cameraPos.x = transform.position.x;
-       cameraPos.y = transform.position.y;
-       Camera.main.transform.position = cameraPos;
-
+        // Update camera position with vertical offset
+        float verticalOffset = 4f; // Adjust this value to move camera higher or lower
+        Vector3 cameraPos = Camera.main.transform.position;
+        cameraPos.x = transform.position.x;
+        cameraPos.y = transform.position.y + verticalOffset;
+        Camera.main.transform.position = cameraPos;
 
         if (rb.linearVelocity.y < 0)
         {
@@ -149,7 +159,7 @@ public class PlayerMovmentScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isWallJumping && !isDodging)
+        if (!isWallJumping && !isDodging && !GetComponent<ShadowDodge>().IsShadowDashing())
         {
             rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
         }
@@ -241,12 +251,11 @@ public class PlayerMovmentScript : MonoBehaviour
      {
         direction = Input.GetAxis("Horizontal");
 
-
-        if (direction != 0f && !isWallSliding && !isDodging)
+        if (direction != 0f && !isWallSliding && !isDodging && !GetComponent<ShadowDodge>().IsShadowDashing())
         {
             rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y); 
         }
-        else if (!isWallSliding && !isDodging)
+        else if (!isWallSliding && !isDodging && !GetComponent<ShadowDodge>().IsShadowDashing())
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); 
         }

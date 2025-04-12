@@ -115,7 +115,7 @@ public class melee : MonoBehaviour
 
 
    // This will be called when the melee object collides with another collider marked as a trigger
-   void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
    {
        // If the melee hits an enemy (assuming enemy has a tag "Enemy")
        if (other.CompareTag("Enemy"))
