@@ -206,7 +206,7 @@ public class PlayerMovmentScript : MonoBehaviour
     {
         if (Time.time - lastAttackTime >= dodgeCooldownTime)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse1) && !isWallJumping)
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 isDodging = true;
                 dodgeTimeCounter = dodgeDuration;
