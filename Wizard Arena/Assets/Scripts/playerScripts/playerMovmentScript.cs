@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class PlayerMovmentScript : MonoBehaviour
 {
     // Gravity parameters
@@ -9,22 +8,18 @@ public class PlayerMovmentScript : MonoBehaviour
     public float maxFallSpeed = -10.0f;
     public float gravityScale = 1.0f;
 
-     
     // Speed parameters
     public float speed = 5f;
-
 
     // Jump parameters
     public float jumpForce = 10f;
     public float jumpSpeed = 10f;
     public float maxJumpForce = 15f;
 
-
     // Wall sliding parameters
-    public float wallSlideSpeed = 2f; 
-    public float wallJumpForce = 10f; 
+    public float wallSlideSpeed = 2f;
+    public float wallJumpForce = 10f;
     public float wallJumpTime = 0.2f;
-
 
     // Wall jumping parameters
     public bool isWallJumping;
@@ -34,52 +29,42 @@ public class PlayerMovmentScript : MonoBehaviour
     public float wallJumpingDuration = 0.4f;
     public Vector2 wallJumpingPower = new Vector2(8f, 16f);
 
-
     // Dodge parameters
-    public float dodgeCooldownTime = 0.2f;  // Cooldown time for dodge
-    public float dodgeSpeed = 15f; // Dodge movement speed
-    public float dodgeDuration = 0.2f; // Duration of the dodge
-    public float invincibilityDuration = 0.3f; // Duration of invincibility after dodge
-    private bool isDodging = false; // Is the player dodging
-    private bool isInvincible = false; // Is the player invincible
-    private float dodgeTimeCounter = 0f; // Timer for dodge duration
-    private float invincibilityTimeCounter = 0f; // Timer for invincibility duration
-
+    public float dodgeCooldownTime = 0.2f;
+    public float dodgeSpeed = 15f;
+    public float dodgeDuration = 0.2f;
+    public float invincibilityDuration = 0.3f;
+    private bool isDodging = false;
+    private bool isInvincible = false;
+    private float dodgeTimeCounter = 0f;
+    private float invincibilityTimeCounter = 0f;
 
     // Other variables
     private float lastAttackTime = 0f;
-    public float direction = 0f;  
+    public float direction = 0f;
     private bool isWallSliding = false;
     private bool isTouchingWall = false;
     private Rigidbody2D rb;
-    public HealthAndMana playerHealthAndMana;  // Reference to the player's health and mana script
-
+    public HealthAndMana playerHealthAndMana;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); // Get Rigidbody
-        playerHealthAndMana = GetComponent<HealthAndMana>();  // Get the HealthAndMana script
+        rb = GetComponent<Rigidbody2D>();
+        playerHealthAndMana = GetComponent<HealthAndMana>();
     }
 
-
-   void Update()
-   {
-            // If the player is dead, stop all movement
+    void Update()
+    {
         if (playerHealthAndMana.IsDead())
         {
-            rb.linearVelocity = Vector2.zero;  // Stop movement
-            return;  // Skip the rest of the update to prevent movement
+            rb.linearVelocity = Vector2.zero;
+            return;
         }
-
 
         HandleWallSliding();
         HandleWallJumping();
         HandleMovement();
 
-
-        // Handle Dodge
-
-        // Check if the cooldown has passed
         if (Time.time - lastAttackTime >= dodgeCooldownTime)
         {
             if (Input.GetKeyDown(KeyCode.Mouse1) && !isWallJumping)
@@ -100,46 +85,41 @@ public class PlayerMovmentScript : MonoBehaviour
                     Debug.Log("Dodging in place");
                 }
 
-                // Now we update the time only when dodge is triggered
                 lastAttackTime = Time.time;
             }
         }
         else
         {
-            Debug.Log("dodge is on cooldown.");
+            Debug.Log("Dodge is on cooldown.");
         }
 
-       if (isDodging)
-       {
-           dodgeTimeCounter -= Time.deltaTime;
-           if (dodgeTimeCounter <= 0f)
-           {
-               isDodging = false;
-               Debug.Log("Dodge Ended");
-           }
-       }
+        if (isDodging)
+        {
+            dodgeTimeCounter -= Time.deltaTime;
+            if (dodgeTimeCounter <= 0f)
+            {
+                isDodging = false;
+                Debug.Log("Dodge Ended");
+            }
+        }
 
+        if (isInvincible)
+        {
+            invincibilityTimeCounter -= Time.deltaTime;
+            Debug.Log("Invincibility Time Left: " + invincibilityTimeCounter);
+            if (invincibilityTimeCounter <= 0f)
+            {
+                isInvincible = false;
+                Debug.Log("Invincibility Ended");
+            }
+        }
 
-       // Handle invincibility
-       if (isInvincible)
-       {
-           invincibilityTimeCounter -= Time.deltaTime;
-           Debug.Log("Invincibility Time Left: " + invincibilityTimeCounter);
-           if (invincibilityTimeCounter <= 0f)
-           {
-               isInvincible = false;
-               Debug.Log("Invincibility Ended");
-           }
-       }
-
-
-       HandleFall();
-       HandleFlip();  
-       HandleJump();
-
+        HandleFall();
+        HandleFlip();
+        HandleJump();
 
         // Update camera position with vertical offset
-        float verticalOffset = 4f; // Adjust this value to move camera higher or lower
+        float verticalOffset = 4f;
         Vector3 cameraPos = Camera.main.transform.position;
         cameraPos.x = transform.position.x;
         cameraPos.y = transform.position.y + verticalOffset;
@@ -156,7 +136,6 @@ public class PlayerMovmentScript : MonoBehaviour
         }
     }
 
-
     private void FixedUpdate()
     {
         if (!isWallJumping && !isDodging && !GetComponent<ShadowDodge>().IsShadowDashing())
@@ -165,21 +144,31 @@ public class PlayerMovmentScript : MonoBehaviour
         }
     }
 
-
     private void HandleWallSliding()
     {
-        float rayLength = 1.1f;
+        float rayLength = 1f;
         Vector2 rayDirection = transform.right;
 
- 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, rayLength, LayerMask.GetMask("Wall"));
-        isTouchingWall = hit.collider != null;
 
+        // Debug Ray for wall check
+        Debug.DrawRay(transform.position, rayDirection * rayLength, Color.red);
+
+        if (hit.collider != null)
+        {
+            isTouchingWall = true;
+            Debug.Log("Wall detected: " + hit.collider.name);
+        }
+        else
+        {
+            isTouchingWall = false;
+        }
 
         if (isTouchingWall && !IsGrounded())
         {
             isWallSliding = true;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed); 
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);
+            Debug.Log("Wall sliding");
         }
         else
         {
@@ -187,9 +176,8 @@ public class PlayerMovmentScript : MonoBehaviour
         }
     }
 
-
     private void HandleWallJumping()
-   {
+    {
         if (isWallSliding)
         {
             wallJumpingDirection = -Mathf.Sign(transform.position.x);
@@ -201,37 +189,34 @@ public class PlayerMovmentScript : MonoBehaviour
             wallJumpingCounter -= Time.deltaTime;
         }
 
-
         if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
         {
             isWallJumping = true;
             rb.linearVelocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
 
-
             float targetRotation = wallJumpingDirection > 0 ? 0f : 180f;
             transform.rotation = Quaternion.Euler(0f, targetRotation, 0f);
 
-
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
+            Debug.Log("Wall Jumped");
         }
     }
-
 
     private void StopWallJumping()
     {
         isWallJumping = false;
+        Debug.Log("Stopped Wall Jumping");
     }
-
 
     private void HandleJump()
     {
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed); 
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
+            Debug.Log("Jumped");
         }
     }
-
 
     private void HandleFall()
     {
@@ -246,21 +231,19 @@ public class PlayerMovmentScript : MonoBehaviour
         }
     }
 
-
-   private void HandleMovement()
-     {
+    private void HandleMovement()
+    {
         direction = Input.GetAxis("Horizontal");
 
         if (direction != 0f && !isWallSliding && !isDodging && !GetComponent<ShadowDodge>().IsShadowDashing())
         {
-            rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y); 
+            rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
         }
         else if (!isWallSliding && !isDodging && !GetComponent<ShadowDodge>().IsShadowDashing())
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); 
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
     }
-
 
     private void HandleFlip()
     {
@@ -271,10 +254,23 @@ public class PlayerMovmentScript : MonoBehaviour
         }
     }
 
-
     private bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 2.25f, LayerMask.GetMask("Ground"));
-        return hit.collider != null;
+        float rayLength = 2.25f;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength, LayerMask.GetMask("Ground"));
+
+        // Debug Ray for ground check
+        Debug.DrawRay(transform.position, Vector2.down * rayLength, Color.green);
+
+        if (hit.collider != null)
+        {
+            Debug.Log("Grounded on: " + hit.collider.name);
+            return true;
+        }
+        else
+        {
+            Debug.Log("Not grounded");
+            return false;
+        }
     }
 }
