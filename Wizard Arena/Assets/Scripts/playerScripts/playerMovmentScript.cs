@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerMovmentScript : MonoBehaviour
 {
@@ -12,14 +11,10 @@ public class PlayerMovmentScript : MonoBehaviour
     public float speed = 5f;
 
     // Jump parameters
-    public float jumpForce = 10f;
     public float jumpSpeed = 10f;
-    public float maxJumpForce = 15f;
 
     // Wall sliding parameters
     public float wallSlideSpeed = 2f;
-    public float wallJumpForce = 10f;
-    public float wallJumpTime = 0.2f;
 
     // Wall jumping parameters
     public bool isWallJumping;
@@ -28,6 +23,8 @@ public class PlayerMovmentScript : MonoBehaviour
     public float wallJumpingCounter;
     public float wallJumpingDuration = 0.4f;
     public Vector2 wallJumpingPower = new Vector2(8f, 16f);
+    private float wallSlideLockTimer = 0f;
+    public float wallSlideLockDuration = 0.2f;
 
     // Dodge parameters
     public float dodgeCooldownTime = 0.2f;
@@ -43,13 +40,18 @@ public class PlayerMovmentScript : MonoBehaviour
     private float lastAttackTime = 0f;
     public float direction = 0f;
     private bool isWallSliding = false;
+    private bool isTouchingLeftWall = false;
+    private bool isTouchingRightWall = false;
     private bool isTouchingWall = false;
+
     private Rigidbody2D rb;
+    private BoxCollider2D coll;
     public HealthAndMana playerHealthAndMana;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<BoxCollider2D>();
         playerHealthAndMana = GetComponent<HealthAndMana>();
     }
 
@@ -61,79 +63,22 @@ public class PlayerMovmentScript : MonoBehaviour
             return;
         }
 
+        CheckWallContacts();
+
+        if (wallSlideLockTimer > 0f)
+        {
+            wallSlideLockTimer -= Time.deltaTime;
+        }
+
         HandleWallSliding();
         HandleWallJumping();
         HandleMovement();
 
-        if (Time.time - lastAttackTime >= dodgeCooldownTime)
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse1) && !isWallJumping)
-            {
-                isDodging = true;
-                dodgeTimeCounter = dodgeDuration;
-                isInvincible = true;
-                invincibilityTimeCounter = invincibilityDuration;
-
-                if (direction != 0)
-                {
-                    rb.linearVelocity = new Vector2(direction * dodgeSpeed, rb.linearVelocity.y);
-                    Debug.Log("Dodging with direction: " + direction);
-                }
-                else
-                {
-                    rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-                    Debug.Log("Dodging in place");
-                }
-
-                lastAttackTime = Time.time;
-            }
-        }
-        else
-        {
-            Debug.Log("Dodge is on cooldown.");
-        }
-
-        if (isDodging)
-        {
-            dodgeTimeCounter -= Time.deltaTime;
-            if (dodgeTimeCounter <= 0f)
-            {
-                isDodging = false;
-                Debug.Log("Dodge Ended");
-            }
-        }
-
-        if (isInvincible)
-        {
-            invincibilityTimeCounter -= Time.deltaTime;
-            Debug.Log("Invincibility Time Left: " + invincibilityTimeCounter);
-            if (invincibilityTimeCounter <= 0f)
-            {
-                isInvincible = false;
-                Debug.Log("Invincibility Ended");
-            }
-        }
-
+        HandleDodge();
         HandleFall();
         HandleFlip();
         HandleJump();
-
-        // Update camera position with vertical offset
-        float verticalOffset = 4f;
-        Vector3 cameraPos = Camera.main.transform.position;
-        cameraPos.x = transform.position.x;
-        cameraPos.y = transform.position.y + verticalOffset;
-        Camera.main.transform.position = cameraPos;
-
-        if (rb.linearVelocity.y < 0)
-        {
-            rb.gravityScale = gravityScale * fallGravityMult;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, maxFallSpeed));
-        }
-        else
-        {
-            rb.gravityScale = gravityScale;
-        }
+        UpdateCameraPosition();
     }
 
     private void FixedUpdate()
@@ -144,27 +89,26 @@ public class PlayerMovmentScript : MonoBehaviour
         }
     }
 
+    private void CheckWallContacts()
+    {
+        float rayLength = 0.9f;
+
+        RaycastHit2D leftHit = Physics2D.Raycast(transform.position, Vector2.left, rayLength, LayerMask.GetMask("Wall"));
+        RaycastHit2D rightHit = Physics2D.Raycast(transform.position, Vector2.right, rayLength, LayerMask.GetMask("Wall"));
+
+        isTouchingLeftWall = leftHit.collider != null;
+        isTouchingRightWall = rightHit.collider != null;
+        isTouchingWall = isTouchingLeftWall || isTouchingRightWall;
+
+        Debug.DrawRay(transform.position, Vector2.left * rayLength, Color.red);
+        Debug.DrawRay(transform.position, Vector2.right * rayLength, Color.red);
+    }
+
     private void HandleWallSliding()
     {
-        float rayLength = 1f;
-        Vector2 rayDirection = transform.right;
+        bool facingWall = (isTouchingLeftWall && direction < 0) || (isTouchingRightWall && direction > 0);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, rayLength, LayerMask.GetMask("Wall"));
-
-        // Debug Ray for wall check
-        Debug.DrawRay(transform.position, rayDirection * rayLength, Color.red);
-
-        if (hit.collider != null)
-        {
-            isTouchingWall = true;
-            Debug.Log("Wall detected: " + hit.collider.name);
-        }
-        else
-        {
-            isTouchingWall = false;
-        }
-
-        if (isTouchingWall && !IsGrounded())
+        if (isTouchingWall && !IsGrounded() && wallSlideLockTimer <= 0f && facingWall)
         {
             isWallSliding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);
@@ -180,7 +124,9 @@ public class PlayerMovmentScript : MonoBehaviour
     {
         if (isWallSliding)
         {
-            wallJumpingDirection = -Mathf.Sign(transform.position.x);
+            if (isTouchingLeftWall) wallJumpingDirection = 1f;
+            if (isTouchingRightWall) wallJumpingDirection = -1f;
+
             wallJumpingCounter = wallJumpingTime;
             CancelInvoke(nameof(StopWallJumping));
         }
@@ -197,6 +143,8 @@ public class PlayerMovmentScript : MonoBehaviour
 
             float targetRotation = wallJumpingDirection > 0 ? 0f : 180f;
             transform.rotation = Quaternion.Euler(0f, targetRotation, 0f);
+
+            wallSlideLockTimer = wallSlideLockDuration;
 
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
             Debug.Log("Wall Jumped");
@@ -254,13 +202,66 @@ public class PlayerMovmentScript : MonoBehaviour
         }
     }
 
+    private void HandleDodge()
+    {
+        if (Time.time - lastAttackTime >= dodgeCooldownTime)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1) && !isWallJumping)
+            {
+                isDodging = true;
+                dodgeTimeCounter = dodgeDuration;
+                isInvincible = true;
+                invincibilityTimeCounter = invincibilityDuration;
+
+                rb.linearVelocity = new Vector2(direction * dodgeSpeed, rb.linearVelocity.y);
+                lastAttackTime = Time.time;
+            }
+        }
+
+        if (isDodging)
+        {
+            dodgeTimeCounter -= Time.deltaTime;
+            if (dodgeTimeCounter <= 0f)
+            {
+                isDodging = false;
+            }
+        }
+
+        if (isInvincible)
+        {
+            invincibilityTimeCounter -= Time.deltaTime;
+            if (invincibilityTimeCounter <= 0f)
+            {
+                isInvincible = false;
+            }
+        }
+    }
+
+    private void UpdateCameraPosition()
+    {
+        float verticalOffset = 4f;
+        Vector3 cameraPos = Camera.main.transform.position;
+        cameraPos.x = transform.position.x;
+        cameraPos.y = transform.position.y + verticalOffset;
+        Camera.main.transform.position = cameraPos;
+    }
+
     private bool IsGrounded()
     {
-        float rayLength = 2.25f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength, LayerMask.GetMask("Ground"));
+        float extraHeight = 0.1f;
+        RaycastHit2D hit = Physics2D.BoxCast(
+            coll.bounds.center,
+            coll.bounds.size,
+            0f,
+            Vector2.down,
+            extraHeight,
+            LayerMask.GetMask("Ground")
+        );
 
-        // Debug Ray for ground check
-        Debug.DrawRay(transform.position, Vector2.down * rayLength, Color.green);
+        Color rayColor = hit.collider != null ? Color.green : Color.red;
+        Debug.DrawRay(coll.bounds.center + new Vector3(coll.bounds.extents.x, 0), Vector2.down * (coll.bounds.extents.y + extraHeight), rayColor);
+        Debug.DrawRay(coll.bounds.center - new Vector3(coll.bounds.extents.x, 0), Vector2.down * (coll.bounds.extents.y + extraHeight), rayColor);
+        Debug.DrawRay(coll.bounds.center, Vector2.down * (coll.bounds.extents.y + extraHeight), rayColor);
 
         if (hit.collider != null)
         {
