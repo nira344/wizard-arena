@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 15
+  soulReward: 1
 --- !u!114 &4813494050716393124
 MonoBehaviour:
   m_ObjectHideFlags: 0

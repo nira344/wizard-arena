@@ -132,10 +132,8 @@ public class melee : MonoBehaviour
                        playerHealthAndMana.currentMana += 1;  // Add mana to the player
                        Debug.Log("Melee hit an enemy. Mana pulsed! Current Mana: " + playerHealthAndMana.currentMana);
 
-
                        // Optionally, destroy or deactivate the melee object after hitting an enemy
                        Destroy(gameObject);
-
 
                        // Update the time of the last successful mana heal
                        lastAttackTime = Time.time;
