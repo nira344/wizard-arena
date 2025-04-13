@@ -10,17 +10,15 @@ public class SoulManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject); // Keeps it between scenes
         }
         else
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject); // Optional: Keeps it between scenes
     }
 
     void Start()
@@ -41,9 +39,9 @@ public class SoulManager : MonoBehaviour
         UpdateSoulText();
     }
 
-    private void UpdateSoulText()
+    public void UpdateSoulText()
     {
-        soulText.text = soulEssence.ToString(); // Fixed the error here
+        soulText.text = soulEssence.ToString();
     }
 
     void OnApplicationQuit()

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 4
   manaDamageMultiplier: 1.5
-  attackCooldown: 1
+  attackCooldown: 10
 --- !u!114 &6575963666043311139
 MonoBehaviour:
   m_ObjectHideFlags: 0
