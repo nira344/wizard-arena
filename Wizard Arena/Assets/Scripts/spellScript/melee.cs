@@ -9,7 +9,7 @@ public class melee : MonoBehaviour
     private Vector2 attackDirection;
     public float attackRange = 1.5f;
 
-    private static float manaCooldownTime = 5f;
+    private static float manaCooldownTime = 0.5f;
     private static float lastManaGainTime = -999f;
 
     private HealthAndMana playerHealthAndMana;
