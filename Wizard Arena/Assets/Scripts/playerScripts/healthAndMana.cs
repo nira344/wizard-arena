@@ -17,6 +17,8 @@ public class HealthAndMana : MonoBehaviour
     public HealthBar healthBar;
     public HealthBar manaBar;
 
+    public bool debugEnabled;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -29,6 +31,12 @@ public class HealthAndMana : MonoBehaviour
     void Update()
     {
         BalanceHealthAndMana();
+
+        if (debugEnabled && Input.GetKeyDown("o"))
+        {
+            TakeDamage(currentHealth);
+        }
+
         healthText.text = "HP: " + currentHealth + "/" + maxHealth;
         healthBar.SetHealth(currentHealth);
         manaText.text = "MP: " + currentMana + "/" + maxMana;
