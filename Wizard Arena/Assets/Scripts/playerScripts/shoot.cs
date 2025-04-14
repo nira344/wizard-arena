@@ -10,9 +10,8 @@ public class shoot : MonoBehaviour
     public float iceshardCooldownTime = 0.5f;
     public float meleeCooldownTime = 0.1f;  // Increased for clearer cooldown
 
-    private float lastFireballTime = 0f;
-    private float lastIceshardTime = 0f;
-    private float lastMeleeTime = 0f;
+
+    private float lastTime = 0f;
 
 
     void Start()
@@ -29,7 +28,7 @@ public class shoot : MonoBehaviour
         // Ice Shard Attack (Fire2)
         if (Input.GetButtonDown("Fire2"))
         {
-            if (Time.time - lastIceshardTime >= iceshardCooldownTime)
+            if (Time.time - lastTime >= iceshardCooldownTime)
             {
                 HealthAndMana statScript = GetComponent<HealthAndMana>();
                 if (statScript != null)
@@ -45,7 +44,7 @@ public class shoot : MonoBehaviour
                     }
                 }
 
-                lastIceshardTime = Time.time;
+                lastTime = Time.time;
             }
             else
             {
@@ -56,7 +55,7 @@ public class shoot : MonoBehaviour
         // Fireball Attack (Fire3)
         if (Input.GetButtonDown("Fire3"))
         {
-            if (Time.time - lastFireballTime >= fireballCooldownTime)
+            if (Time.time - lastTime >= fireballCooldownTime)
             {
                 HealthAndMana statScript = GetComponent<HealthAndMana>();
                 if (statScript != null)
@@ -72,7 +71,7 @@ public class shoot : MonoBehaviour
                     }
                 }
 
-                lastFireballTime = Time.time;
+                lastTime = Time.time;
             }
             else
             {
@@ -83,7 +82,7 @@ public class shoot : MonoBehaviour
         // Melee Attack (Fire1)
         if (Input.GetButtonDown("Fire1"))
         {
-            if (Time.time - lastMeleeTime >= meleeCooldownTime)
+            if (Time.time - lastTime >= meleeCooldownTime)
             {
                 Debug.Log("Melee Attack Button Pressed");
                 Instantiate(meleePrefab, transform.position, transform.rotation);
@@ -94,7 +93,7 @@ public class shoot : MonoBehaviour
                     Debug.Log("Melee Attack: Mana after: " + statScript.currentMana);
                 }
 
-                lastMeleeTime = Time.time;
+                lastTime = Time.time;
             }
             else
             {
