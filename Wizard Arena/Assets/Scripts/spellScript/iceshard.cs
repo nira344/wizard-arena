@@ -5,6 +5,7 @@ public class HomingProjectile : MonoBehaviour
     public int projectileSpeed = 15;
     public int damage = 2;  // Damage that can be adjusted in the Inspector
     public float homingSpeed = 5f;  // How fast the projectile homes towards the target
+    public GameObject explosion;
     private Rigidbody2D rb;
     private Transform target;  // Target for homing (enemy)
 
@@ -75,6 +76,7 @@ public class HomingProjectile : MonoBehaviour
                 healthComponent.TakeDamage(damage);  // Apply damage to enemy
             }
 
+            //Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);  // Destroy the projectile after impact
         }
 

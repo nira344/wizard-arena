@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BigTallMushgoonBottom_0: 7844492477641471362
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
