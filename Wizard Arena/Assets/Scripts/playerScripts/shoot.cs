@@ -82,22 +82,13 @@ public class shoot : MonoBehaviour
         // Melee Attack (Fire1)
         if (Input.GetButtonDown("Fire1"))
         {
-            if (Time.time - lastTime >= meleeCooldownTime)
-            {
-                Debug.Log("Melee Attack Button Pressed");
-                Instantiate(meleePrefab, transform.position, transform.rotation);
+            Debug.Log("Melee Attack Button Pressed");
+            Instantiate(meleePrefab, transform.position, transform.rotation);
 
-                HealthAndMana statScript = GetComponent<HealthAndMana>();
-                if (statScript != null)
-                {
-                    Debug.Log("Melee Attack: Mana after: " + statScript.currentMana);
-                }
-
-                lastTime = Time.time;
-            }
-            else
+            HealthAndMana statScript = GetComponent<HealthAndMana>();
+            if (statScript != null)
             {
-                Debug.Log("Melee attack is on cooldown.");
+                Debug.Log("Melee Attack: Mana after: " + statScript.currentMana);
             }
         }
     }
