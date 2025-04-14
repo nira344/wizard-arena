@@ -8,8 +8,10 @@ public class melee : MonoBehaviour
     private Collider2D playerCollider;
     private Vector2 attackDirection;
     public float attackRange = 1.5f;
-    public float manaCooldownTime = 1f;
-    private float lastAttackTime = 0f;
+
+    private static float manaCooldownTime = 5f;
+    private static float lastManaGainTime = -999f;
+
     private HealthAndMana playerHealthAndMana;
 
     private bool active = true;
@@ -17,7 +19,7 @@ public class melee : MonoBehaviour
     void Start()
     {
         playerHealthAndMana = Object.FindFirstObjectByType<HealthAndMana>();
-        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+        playerCollider = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Collider2D>();
 
         if (playerCollider != null)
         {
@@ -50,24 +52,19 @@ public class melee : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Melee trigger hit: " + other.gameObject.name);
-
-        // Hit Enemy
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Melee hit an enemy!");
-
             if (playerHealthAndMana != null && playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
             {
-                if (Time.time - lastAttackTime >= manaCooldownTime)
+                if (Time.time - lastManaGainTime >= manaCooldownTime)
                 {
                     playerHealthAndMana.currentMana += 1;
-                    Debug.Log("Melee hit an enemy. Mana pulsed! Current Mana: " + playerHealthAndMana.currentMana);
-                    lastAttackTime = Time.time;
+                    Debug.Log("Melee hit an enemy. Mana gained! Current Mana: " + playerHealthAndMana.currentMana);
+                    lastManaGainTime = Time.time;
                 }
                 else
                 {
-                    Debug.Log("Mana heal is on cooldown.");
+                    Debug.Log("Mana gain on cooldown.");
                 }
             }
 
@@ -79,12 +76,8 @@ public class melee : MonoBehaviour
 
             Destroy(gameObject);
         }
-
-        // Hit Grave
         else if (other.CompareTag("Grave"))
         {
-            Debug.Log("Melee hit a grave!");
-
             Grave grave = other.GetComponent<Grave>();
             if (grave != null)
             {
@@ -100,13 +93,12 @@ public class melee : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Solid"))
         {
-            Debug.Log("Hit non-enemy solid object: " + collision.gameObject.name);
+            Debug.Log("Hit solid object: " + collision.gameObject.name);
             GetComponent<PolygonCollider2D>().enabled = false;
         }
 
         if (collision.gameObject.CompareTag("Enemy") && active)
         {
-            Debug.Log("Hit enemy (non-trigger): " + collision.gameObject.name);
             var healthComponent = collision.gameObject.GetComponent<enemyHealth>();
 
             if (healthComponent != null)
@@ -114,9 +106,18 @@ public class melee : MonoBehaviour
                 healthComponent.TakeDamage(damage);
                 active = false;
 
-                if (playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
+                if (playerHealthAndMana != null && playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
                 {
-                    playerHealthAndMana.currentMana++;
+                    if (Time.time - lastManaGainTime >= manaCooldownTime)
+                    {
+                        playerHealthAndMana.currentMana += 1;
+                        Debug.Log("Melee (collision) hit enemy. Mana gained.");
+                        lastManaGainTime = Time.time;
+                    }
+                    else
+                    {
+                        Debug.Log("Mana gain on cooldown (collision).");
+                    }
                 }
             }
 

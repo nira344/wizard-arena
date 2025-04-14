@@ -6,7 +6,7 @@ public class ShadowDodge : MonoBehaviour
     public float shadowDashDuration = .3f;      // Longer dash duration
     private float shadowDashTimeCounter;
     private bool isShadowDashing = false;
-    public float sDashCooldownTime = 0.5f;  // Cooldown time for iceshard
+    public float sDashCooldownTime = 3f;  // Cooldown time for iceshard
     private float lastAttackTime = 0f;
 
     private Rigidbody2D rb;
@@ -27,14 +27,14 @@ public class ShadowDodge : MonoBehaviour
             {
                 HealthAndMana statScript = GetComponent<HealthAndMana>();
 
-                if (statScript.currentMana + statScript.currentHealth > 5)
+                if (statScript.currentMana + statScript.currentHealth > 13)
                 {
                     isShadowDashing = true;
                     shadowDashTimeCounter = shadowDashDuration;
 
                     rb.linearVelocity = new Vector2(playerMovement.direction * shadowDashSpeed, rb.linearVelocity.y);
                     Debug.Log("shadow dashing with direction: " + playerMovement.direction);
-                    statScript.currentMana -= 5;
+                    statScript.currentMana -= 13;
                     // Now we update the time only when dodge is triggered
                     lastAttackTime = Time.time;
                 }
