@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c8064cd9718f34c29bfbc0d332deeed3
+guid: 76a2b754517f54ff9bc8a72cd62e6aa8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6654332742823631670
-    second: Adobe Express - file (6)_0
+      213: 5123730365141269091
+    second: Tall Mushgoon top_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Adobe Express - file (6)_0
+      name: Tall Mushgoon top_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 231
-        width: 1092
-        height: 648
+        x: 2
+        y: 776
+        width: 546
+        height: 232
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 63bd0499f50f85c50800000000000000
-      internalID: 6654332742823631670
+      spriteID: 36ab023de952b1740800000000000000
+      internalID: 5123730365141269091
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Adobe Express - file (6)_0: 6654332742823631670
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

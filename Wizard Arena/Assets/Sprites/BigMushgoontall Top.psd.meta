@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7a4ef098cb6f547c9bfe11ca9008a08a
+guid: 537301d0c12764c848cb84a312e6aa94
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3087105572530362484
-    second: SmallMushroom_0
+      213: -8182370989588463452
+    second: BigMushgoontall Top_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SmallMushroom_0
+      name: BigMushgoontall Top_0
       rect:
         serializedVersion: 2
-        x: 40
-        y: 22
-        width: 470
-        height: 510
+        x: 33
+        y: 658
+        width: 684
+        height: 415
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c87e23586d56825d0800000000000000
-      internalID: -3087105572530362484
+      spriteID: 4a04e11efe0627e80800000000000000
+      internalID: -8182370989588463452
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      SmallMushroom_0: -3087105572530362484
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

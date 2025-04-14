@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3ea0e327b8d2d49478c7b1eeb06bb192
+guid: abbdb217fd7904088b0af87593e1f6cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5498873291523913286
-    second: Medium Mushgoon_0
+      213: -8225887862950292858
+    second: Tall Mushgoon Bottm_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Medium Mushgoon_0
+      name: Tall Mushgoon Bottm_0
       rect:
         serializedVersion: 2
-        x: 96
-        y: 10
-        width: 358
-        height: 528
+        x: 160
+        y: 94
+        width: 230
+        height: 702
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ab985d920e310b3b0800000000000000
-      internalID: -5498873291523913286
+      spriteID: 68296ae3296c7dd80800000000000000
+      internalID: -8225887862950292858
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Medium Mushgoon_0: -5498873291523913286
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
