@@ -79,8 +79,7 @@ public class HomingProjectile : MonoBehaviour
             //Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);  // Destroy the projectile after impact
         }
-
-        if (collision.gameObject.CompareTag("Solid"))
+        else
         {
             Debug.Log("Homing projectile hit solid object");
             Destroy(gameObject);  // Destroy the projectile if it hits a solid object
