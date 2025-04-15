@@ -5,7 +5,7 @@ public class arenaBounds : MonoBehaviour
 
     public GameObject[] bounds;
     public GameObject boss;
-    private bool triggered;
+    private bool triggered = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +34,25 @@ public class arenaBounds : MonoBehaviour
 
             // UNLEASH GILBERT
             boss.GetComponent<wizardBoss>().Activate();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && triggered)
+        {
+            // Enable self
+            triggered = false;
+
+            // Deactivate invisible walls
+            foreach (GameObject bound in bounds)
+            {
+                bound.GetComponent<BoxCollider2D>().enabled = false;
+                Debug.Log(bound.name + " disabled");
+            }
+
+            // Silence Gilbert
+            boss.GetComponent<wizardBoss>().Deactivate();
         }
     }
 }

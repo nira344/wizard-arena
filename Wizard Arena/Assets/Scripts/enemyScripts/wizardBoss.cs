@@ -60,6 +60,12 @@ public class wizardBoss : MonoBehaviour
         bossHealthBar.Show();
     }
 
+    public void Deactivate()
+    {
+        activated = false;
+        bossHealthBar.Hide();
+    }
+
     private void OnDestroy()
     {
         healthBar.SetHealth(hp.health);
