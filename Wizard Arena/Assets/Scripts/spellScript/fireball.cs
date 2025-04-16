@@ -21,12 +21,6 @@ public class fireball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Solid")
-        {
-            Debug.Log("Fireball hit non-enemy " + collision.gameObject);
-            Destroy(gameObject);  // Destroy the fireball object
-            GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
-        }
 
         // Check if the collision is with an object tagged "Enemy"
         if (collision.gameObject.tag.Equals("Enemy"))
@@ -41,5 +35,12 @@ public class fireball : MonoBehaviour
                 GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
             }
         }
+        else
+        {
+            Debug.Log("Fireball hit non-enemy " + collision.gameObject);
+            Destroy(gameObject);  // Destroy the fireball object
+            GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
+        }
+        
     }
 }
