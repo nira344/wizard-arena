@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Forest_Ruins_0: 3720258390012281609
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
