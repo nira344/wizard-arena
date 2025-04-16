@@ -1,10 +1,13 @@
 using UnityEngine;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
     public GameObject InventoryMenu;
     private bool menuActivated;
     public itemSlot[] itemSlot;
+
+    public TextMeshProUGUI winText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,17 +18,20 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && menuActivated)
+        if (!winText.IsActive())
         {
-            Time.timeScale = 1;
-            InventoryMenu.SetActive(false);
-            menuActivated = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.Tab) && !menuActivated)
-        {
-            Time.timeScale = 0;
-            InventoryMenu.SetActive(true);
-            menuActivated = true;
+            if (Input.GetKeyDown(KeyCode.Tab) && menuActivated)
+            {
+                Time.timeScale = 1;
+                InventoryMenu.SetActive(false);
+                menuActivated = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.Tab) && !menuActivated)
+            {
+                Time.timeScale = 0;
+                InventoryMenu.SetActive(true);
+                menuActivated = true;
+            }
         }
     }
 

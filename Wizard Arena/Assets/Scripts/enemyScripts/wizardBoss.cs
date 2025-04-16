@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class wizardBoss : MonoBehaviour
 {
@@ -15,9 +16,12 @@ public class wizardBoss : MonoBehaviour
     public HealthBar healthBar;
     public bossBar bossHealthBar;
 
+    public TextMeshProUGUI winText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        winText.gameObject.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
         hp = gameObject.GetComponent<enemyHealth>();
         cooldownTimer = 0;
@@ -70,5 +74,9 @@ public class wizardBoss : MonoBehaviour
     {
         healthBar.SetHealth(hp.health);
         bossHealthBar.Hide();
+        winText.gameObject.SetActive(true);
+        winText.text = "GILBERT DEFEATED";
+        Debug.Log("Player has win!");
+        Time.timeScale = 0;
     }
 }
