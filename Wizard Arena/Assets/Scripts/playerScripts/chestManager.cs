@@ -17,7 +17,7 @@ public class ChestManager : MonoBehaviour
         if (chest != null)
         {
             Destroy(chest);
-            Debug.Log("Chest destroyed.");
+            Debug.Log("Old chest destroyed.");
         }
 
         chest = Instantiate(chestPrefab, position, Quaternion.identity);

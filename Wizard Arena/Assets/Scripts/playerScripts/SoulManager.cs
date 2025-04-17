@@ -8,6 +8,8 @@ public class SoulManager : MonoBehaviour
     public int soulEssence = 0;
     public TextMeshProUGUI soulText;
 
+    private const int MAX_SOULS = 999;
+
     private void Awake()
     {
         if (Instance == null)
@@ -30,18 +32,32 @@ public class SoulManager : MonoBehaviour
     public void AddSouls(int amount)
     {
         soulEssence += amount;
+
+        // Clamp between 0 and max
+        soulEssence = Mathf.Clamp(soulEssence, 0, MAX_SOULS);
+
         UpdateSoulText();
     }
 
     public void SpendSouls(int amount)
     {
-        soulEssence = Mathf.Max(0, soulEssence - amount);
-        UpdateSoulText();
+        if (soulEssence >= amount)
+        {
+            soulEssence -= amount;
+            UpdateSoulText();
+        }
+        else
+        {
+            Debug.Log("Not enough souls to spend.");
+        }
     }
 
     public void UpdateSoulText()
     {
-        soulText.text = soulEssence.ToString();
+        if (soulText != null)
+        {
+            soulText.text = soulEssence.ToString();
+        }
     }
 
     void OnApplicationQuit()

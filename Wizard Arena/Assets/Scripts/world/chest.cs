@@ -6,7 +6,7 @@ public class Chest : MonoBehaviour
 
     public void Initialize(int souls)
     {
-        storedSouls = souls;
+        storedSouls = Mathf.Max(0, souls); // Prevent negative souls
     }
 
     public void OnMeleeHit()
