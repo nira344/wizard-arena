@@ -60,6 +60,10 @@ public class melee : MonoBehaviour
         {
             HandleChestHit(other);
         }
+        else if (other.CompareTag("Grave"))
+        {
+            HandleGraveHit(other);  // Ensure interaction with the grave
+        }
     }
 
     private void HandleEnemyHit(Collider2D other)
@@ -97,6 +101,18 @@ public class melee : MonoBehaviour
         }
 
         Destroy(gameObject); // Destroy melee object after hitting chest
+    }
+
+    private void HandleGraveHit(Collider2D other)
+    {
+        Grave grave = other.GetComponent<Grave>();
+        if (grave != null)
+        {
+            grave.OnMeleeHit(); // This calls OnMeleeHit from the Grave script
+            GraveManager.Instance.ClearGrave(); // Clear grave manager
+        }
+
+        Destroy(gameObject); // Destroy melee object after hitting grave
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
