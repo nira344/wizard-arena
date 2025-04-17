@@ -10,9 +10,11 @@ public class shoot : MonoBehaviour
     public float iceshardCooldownTime = 0.5f;
     public float meleeCooldownTime = 0.1f;  // Increased for clearer cooldown
 
+    AudioSource Ice_Sound;
 
     private float lastTime = 0f;
 
+    public AudioClip ice_sound;
 
     void Start()
     {
@@ -21,6 +23,7 @@ public class shoot : MonoBehaviour
         {
             Debug.Log("Starting Mana: " + statScript.currentMana + "/" + statScript.maxMana);
         }
+        Ice_Sound = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -51,6 +54,10 @@ public class shoot : MonoBehaviour
                 else
                 {
                     Debug.Log("Ice shard on cooldown.");
+                }
+                if (Ice_Sound.isPlaying == false)
+                {
+                    Ice_Sound.Play();
                 }
             }
 
@@ -88,6 +95,7 @@ public class shoot : MonoBehaviour
                 Instantiate(meleePrefab, transform.position, transform.rotation);
 
                 HealthAndMana statScript = GetComponent<HealthAndMana>();
+
                 if (statScript != null)
                 {
                     Debug.Log("Melee Attack: Mana after: " + statScript.currentMana);
