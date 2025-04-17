@@ -11,10 +11,12 @@ public class shoot : MonoBehaviour
     public float meleeCooldownTime = 0.1f;  // Increased for clearer cooldown
 
     AudioSource Ice_Sound;
+    AudioSource Fire_Sound;
 
     private float lastTime = 0f;
 
     public AudioClip ice_sound;
+    public AudioClip fire_sound;
 
     void Start()
     {
@@ -85,6 +87,10 @@ public class shoot : MonoBehaviour
                 else
                 {
                     Debug.Log("Fireball on cooldown.");
+                }
+                if (Fire_Sound.isPlaying == false)
+                {
+                    Fire_Sound.Play();
                 }
             }
 
