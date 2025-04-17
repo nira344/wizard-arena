@@ -54,39 +54,49 @@ public class melee : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (playerHealthAndMana != null && playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
-            {
-                if (Time.time - lastManaGainTime >= manaCooldownTime)
-                {
-                    playerHealthAndMana.currentMana += 1;
-                    Debug.Log("Melee hit an enemy. Mana gained! Current Mana: " + playerHealthAndMana.currentMana);
-                    lastManaGainTime = Time.time;
-                }
-                else
-                {
-                    Debug.Log("Mana gain on cooldown.");
-                }
-            }
-
-            var healthComponent = other.GetComponent<enemyHealth>();
-            if (healthComponent != null)
-            {
-                healthComponent.TakeDamage(damage);
-            }
-
-            Destroy(gameObject);
+            HandleEnemyHit(other);
         }
-        else if (other.CompareTag("Grave"))
+        else if (other.CompareTag("Chest"))
         {
-            Grave grave = other.GetComponent<Grave>();
-            if (grave != null)
-            {
-                grave.OnMeleeHit();
-                GraveManager.Instance.ClearGrave();
-            }
-
-            Destroy(gameObject);
+            HandleChestHit(other);
         }
+    }
+
+    private void HandleEnemyHit(Collider2D other)
+    {
+        if (playerHealthAndMana != null && playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
+        {
+            if (Time.time - lastManaGainTime >= manaCooldownTime)
+            {
+                playerHealthAndMana.currentMana += 1;
+                Debug.Log("Melee hit an enemy. Mana gained! Current Mana: " + playerHealthAndMana.currentMana);
+                lastManaGainTime = Time.time;
+            }
+            else
+            {
+                Debug.Log("Mana gain on cooldown.");
+            }
+        }
+
+        var healthComponent = other.GetComponent<enemyHealth>();
+        if (healthComponent != null)
+        {
+            healthComponent.TakeDamage(damage);
+        }
+
+        Destroy(gameObject); // Destroy melee object after collision
+    }
+
+    private void HandleChestHit(Collider2D other)
+    {
+        Chest chest = other.GetComponent<Chest>();
+        if (chest != null)
+        {
+            chest.OnMeleeHit(); // This calls OnMeleeHit from the Chest script
+            ChestManager.Instance.ClearChest(); // Clear chest manager
+        }
+
+        Destroy(gameObject); // Destroy melee object after hitting chest
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
