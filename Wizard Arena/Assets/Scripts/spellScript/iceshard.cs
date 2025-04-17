@@ -5,6 +5,7 @@ public class HomingProjectile : MonoBehaviour
     public int projectileSpeed = 15;
     public int damage = 2;  // Damage that can be adjusted in the Inspector
     public float homingSpeed = 5f;  // How fast the projectile homes towards the target
+    public float range = 30f;
     public GameObject explosion;
     private Rigidbody2D rb;
     private Transform target;  // Target for homing (enemy)
@@ -49,7 +50,7 @@ public class HomingProjectile : MonoBehaviour
         {
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
             
-            if (distanceToEnemy < shortestDistance)
+            if (distanceToEnemy < shortestDistance && distanceToEnemy <= range)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
