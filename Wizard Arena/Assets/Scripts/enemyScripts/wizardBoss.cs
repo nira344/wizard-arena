@@ -72,11 +72,14 @@ public class wizardBoss : MonoBehaviour
 
     private void OnDestroy()
     {
-        healthBar.SetHealth(hp.health);
-        bossHealthBar.Hide();
-        winText.gameObject.SetActive(true);
-        winText.text = "GILBERT DEFEATED";
-        Debug.Log("Player has win!");
-        Time.timeScale = 0;
+        if (activated)
+        {
+            healthBar.SetHealth(hp.health);
+            bossHealthBar.Hide();
+            winText.gameObject.SetActive(true);
+            winText.text = "GILBERT DEFEATED";
+            Debug.Log("Player has win!");
+            Time.timeScale = 0;
+        }
     }
 }

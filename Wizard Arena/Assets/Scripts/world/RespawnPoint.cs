@@ -33,7 +33,7 @@ public class RespawnPoint : MonoBehaviour
 
     void RespawnPlayer()
     {
-        player.transform.position = respawnPosition;
+        player.transform.position = new Vector3 (respawnPosition.x, respawnPosition.y, player.transform.position.z);
 
         // Restore health and mana
         healthAndMana.currentHealth = healthAndMana.maxHealth;
