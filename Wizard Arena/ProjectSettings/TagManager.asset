@@ -8,6 +8,7 @@ TagManager:
   - Projectile
   - Solid
   - Grave
+  - Chest
   layers:
   - Default
   - TransparentFX
