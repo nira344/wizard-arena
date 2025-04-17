@@ -5055,4 +5055,5 @@ MonoBehaviour:
   projectileSpeed: 15
   damage: 2
   homingSpeed: 5
+  range: 30
   explosion: {fileID: 6442821772542911070, guid: f7890582e790946569dbafbc1e9165c6, type: 3}
