@@ -5669,7 +5669,7 @@ GameObject:
   - component: {fileID: 397596020}
   m_Layer: 0
   m_Name: Forest_Ruins_0
-  m_TagString: Untagged
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12662,6 +12662,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &916207930 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1846143029308329274, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
+  m_PrefabInstance: {fileID: 4759036931025681962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &922363056
 GameObject:
   m_ObjectHideFlags: 0
@@ -15241,6 +15246,7 @@ Transform:
   - {fileID: 385397739}
   - {fileID: 570964333}
   - {fileID: 392020790}
+  - {fileID: 916207930}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1220707310
@@ -19566,7 +19572,7 @@ GameObject:
   - component: {fileID: 1533179404}
   m_Layer: 0
   m_Name: Mushgoon (1)
-  m_TagString: Untagged
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20563,7 +20569,7 @@ GameObject:
   - component: {fileID: 1565885171}
   m_Layer: 0
   m_Name: Forest_Ruins_0 (1)
-  m_TagString: Untagged
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21645,7 +21651,7 @@ GameObject:
   - component: {fileID: 1649682558}
   m_Layer: 0
   m_Name: Mushgoon
-  m_TagString: Untagged
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24479,9 +24485,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1970220987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98195a95595ad439e960fad52cb45e66, type: 3}
+  m_Script: {fileID: 11500000, guid: 8591fdf121c444932b0631125cd389f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1000
+  manaDamageMultiplier: 1
+  attackCooldown: 0
 --- !u!1 &1974409634
 GameObject:
   m_ObjectHideFlags: 0
@@ -25283,7 +25292,7 @@ GameObject:
   - component: {fileID: 2030381044}
   m_Layer: 0
   m_Name: Mushgoon (2)
-  m_TagString: Untagged
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25574,7 +25583,7 @@ GameObject:
   - component: {fileID: 2045456080}
   m_Layer: 0
   m_Name: Forest_Ruins_0 (2)
-  m_TagString: Untagged
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26289,19 +26298,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1217029439}
     m_Modifications:
     - target: {fileID: 1846143029308329274, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 54
+      value: -102.30133
       objectReference: {fileID: 0}
     - target: {fileID: 1846143029308329274, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.56
+      value: -22.354261
       objectReference: {fileID: 0}
     - target: {fileID: 1846143029308329274, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.121246
       objectReference: {fileID: 0}
     - target: {fileID: 1846143029308329274, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26309,15 +26318,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846143029308329274, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1846143029308329274, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1846143029308329274, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1846143029308329274, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -26529,4 +26538,3 @@ SceneRoots:
   - {fileID: 1448204055}
   - {fileID: 1217029439}
   - {fileID: 1951948062}
-  - {fileID: 4759036931025681962}

@@ -27,7 +27,7 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the collision is with an object tagged "Player"
         if (collision.gameObject.CompareTag("Player"))

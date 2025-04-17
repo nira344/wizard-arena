@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 8330987332522740408}
   - component: {fileID: 6540033840681773031}
   - component: {fileID: 4303933290347520131}
+  - component: {fileID: 4335730203574092860}
+  - component: {fileID: 8726017875670950087}
   - component: {fileID: 5591699036653942253}
   - component: {fileID: 9080981991395392354}
   - component: {fileID: 1219307001440849708}
-  - component: {fileID: 4335730203574092860}
-  - component: {fileID: 8726017875670950087}
   m_Layer: 8
   m_Name: Jimbo
   m_TagString: Enemy
@@ -120,49 +120,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5591699036653942253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271953346806986975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8591fdf121c444932b0631125cd389f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 4
-  manaDamageMultiplier: 1.5
-  attackCooldown: 1
---- !u!114 &9080981991395392354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271953346806986975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bee959b08fef5415bb717a0d98376ecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 15
-  soulReward: 1
---- !u!114 &1219307001440849708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271953346806986975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 767cd75435a014b19b303f22aca80197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 25
-  speed: 6
 --- !u!61 &4335730203574092860
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -255,3 +212,46 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.5728645, y: 4.05}
   m_EdgeRadius: 0
+--- !u!114 &5591699036653942253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271953346806986975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8591fdf121c444932b0631125cd389f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 4
+  manaDamageMultiplier: 1
+  attackCooldown: 1
+--- !u!114 &9080981991395392354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271953346806986975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee959b08fef5415bb717a0d98376ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  soulReward: 1
+--- !u!114 &1219307001440849708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271953346806986975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767cd75435a014b19b303f22aca80197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 25
+  speed: 6
