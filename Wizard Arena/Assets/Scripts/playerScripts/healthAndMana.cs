@@ -55,6 +55,9 @@ public class HealthAndMana : MonoBehaviour
     {
         if (isDead) return;
 
+        // Block damage if invincible
+        if (GetComponent<PlayerMovmentScript>().isInvincible) return;
+
         currentHealth -= Mathf.FloorToInt(amount);
 
         if (currentHealth <= 0)

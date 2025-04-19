@@ -32,7 +32,7 @@ public class PlayerMovmentScript : MonoBehaviour
     public float dodgeDuration = 0.2f;
     public float invincibilityDuration = 0.3f;
     private bool isDodging = false;
-    private bool isInvincible = false;
+    [HideInInspector] public bool isInvincible = false;
     private float dodgeTimeCounter = 0f;
     private float invincibilityTimeCounter = 0f;
 
@@ -46,12 +46,14 @@ public class PlayerMovmentScript : MonoBehaviour
 
     private Rigidbody2D rb;
     private BoxCollider2D coll;
+    private SpriteRenderer spriteRenderer;
     public HealthAndMana playerHealthAndMana;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         playerHealthAndMana = GetComponent<HealthAndMana>();
     }
 
@@ -79,6 +81,7 @@ public class PlayerMovmentScript : MonoBehaviour
         HandleFlip();
         HandleJump();
         UpdateCameraPosition();
+        UpdateInvincibilityVisual(); // Flashing
     }
 
     private void FixedUpdate()
@@ -112,7 +115,6 @@ public class PlayerMovmentScript : MonoBehaviour
         {
             isWallSliding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);
-            Debug.Log("Wall sliding");
         }
         else
         {
@@ -147,14 +149,12 @@ public class PlayerMovmentScript : MonoBehaviour
             wallSlideLockTimer = wallSlideLockDuration;
 
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
-            Debug.Log("Wall Jumped");
         }
     }
 
     private void StopWallJumping()
     {
         isWallJumping = false;
-        Debug.Log("Stopped Wall Jumping");
     }
 
     private void HandleJump()
@@ -162,7 +162,6 @@ public class PlayerMovmentScript : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
-            Debug.Log("Jumped");
         }
     }
 
@@ -258,20 +257,20 @@ public class PlayerMovmentScript : MonoBehaviour
             LayerMask.GetMask("Ground")
         );
 
-        Color rayColor = hit.collider != null ? Color.green : Color.red;
-        Debug.DrawRay(coll.bounds.center + new Vector3(coll.bounds.extents.x, 0), Vector2.down * (coll.bounds.extents.y + extraHeight), rayColor);
-        Debug.DrawRay(coll.bounds.center - new Vector3(coll.bounds.extents.x, 0), Vector2.down * (coll.bounds.extents.y + extraHeight), rayColor);
-        Debug.DrawRay(coll.bounds.center, Vector2.down * (coll.bounds.extents.y + extraHeight), rayColor);
+        return hit.collider != null;
+    }
 
-        if (hit.collider != null)
+    private void UpdateInvincibilityVisual()
+    {
+        if (spriteRenderer == null) return;
+
+        if (isInvincible)
         {
-            Debug.Log("Grounded on: " + hit.collider.name);
-            return true;
+            spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f); // transparent
         }
         else
         {
-            Debug.Log("Not grounded");
-            return false;
+            spriteRenderer.color = Color.white; // normal
         }
     }
 }
