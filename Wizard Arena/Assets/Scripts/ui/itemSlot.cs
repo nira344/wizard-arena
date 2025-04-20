@@ -11,6 +11,7 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
     public Sprite itemSprite;
     public bool isFull;
     public string itemDescription;
+    public Sprite emptySprite;
 
     //====== ITEM SLOT UI ======//
     [SerializeField] private TMP_Text quantityText;
@@ -71,7 +72,10 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
         ItemDescriptionNameText.text = itemName;
         ItemDescriptionText.text = itemDescription;
         itemDescriptionImage.sprite = itemSprite;
-
+        if(itemDescriptionImage.sprite == null)
+        {
+            itemDescriptionImage.sprite = emptySprite;
+        }
     }
 
 }
