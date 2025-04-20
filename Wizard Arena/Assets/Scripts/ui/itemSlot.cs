@@ -10,10 +10,16 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
     public int quantity;
     public Sprite itemSprite;
     public bool isFull;
+    public string itemDescription;
 
     //====== ITEM SLOT UI ======//
     [SerializeField] private TMP_Text quantityText;
     [SerializeField] private Image itemImage;
+
+    //====== ITEM DESCRIPTION SLOT ======//
+    public Image itemDescriptionImage;
+    public TMP_Text ItemDescriptionNameText;
+    public TMP_Text ItemDescriptionText;
 
     public GameObject selectedShader;
     public bool thisItemSelected;
@@ -33,20 +39,16 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void AddItem(string itemName, int addedQuantity, Sprite itemSprite)
+    public void AddItem(string itemName, int addedQuantity, Sprite itemSprite, string itemDescription)
     {
-        if (isFull && this.itemName == itemName)
-        {
-            quantity += addedQuantity;
-        }
-        else
-        {
-            this.itemName = itemName;
-            this.quantity = addedQuantity;
-            this.itemSprite = itemSprite;
-            isFull = true;
-            itemImage.sprite = itemSprite;
-        }
+
+        this.itemName = itemName;
+        this.quantity = addedQuantity;
+        this.itemSprite = itemSprite;
+        this.itemDescription = itemDescription;
+
+        isFull = true;
+        itemImage.sprite = itemSprite;
 
         quantityText.text = quantity.ToString();
         quantityText.enabled = true;
@@ -63,13 +65,12 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnLeftClick()
     {
-        if (inventoryManager != null)
-        {
-            inventoryManager.DeselectAllSlots();
-        }
-
+        inventoryManager.DeselectAllSlots();
         selectedShader.SetActive(true);
         thisItemSelected = true;
+        ItemDescriptionNameText.text = itemName;
+        ItemDescriptionText.text = itemDescription;
+        itemDescriptionImage.sprite = itemSprite;
 
     }
 
