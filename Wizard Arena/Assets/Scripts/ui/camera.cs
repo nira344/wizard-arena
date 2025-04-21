@@ -22,7 +22,8 @@ public class camera : MonoBehaviour
 		// Calulate and move to midpoint of ships
 		if (follow) // Check config
 		{
-			Vector3 desiredPos = new Vector3(player.transform.position.x, player.transform.position.y, gameObject.transform.position.z);
+			float playerVelocityY = player.GetComponent<Rigidbody2D>().linearVelocityY;
+			Vector3 desiredPos = new Vector3(player.transform.position.x, player.transform.position.y + 2 + (playerVelocityY / 8), gameObject.transform.position.z);
 			transform.position = Vector3.Lerp(transform.position, desiredPos, Time.deltaTime * followTightness);
 		}
 	}
