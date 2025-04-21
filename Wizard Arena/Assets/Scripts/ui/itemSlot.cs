@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class itemSlot : MonoBehaviour, IPointerClickHandler
 {
-    //====== ITEM DATA ======//
     public string itemName;
     public int quantity;
     public Sprite itemSprite;
@@ -13,11 +12,9 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
     public string itemDescription;
     public Sprite emptySprite;
 
-    //====== ITEM SLOT UI ======//
     [SerializeField] private TMP_Text quantityText;
     [SerializeField] private Image itemImage;
 
-    //====== ITEM DESCRIPTION SLOT ======//
     public Image itemDescriptionImage;
     public TMP_Text ItemDescriptionNameText;
     public TMP_Text ItemDescriptionText;
@@ -26,23 +23,44 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
     public bool thisItemSelected;
 
     private InventoryManager inventoryManager;
+    public GameObject player;
 
     void Start()
     {
-        GameObject inventoryCanvas = GameObject.Find("InventoryCanvas");
-        if (inventoryCanvas != null)
+        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    void Update()
+    {
+        if (thisItemSelected && Input.GetKeyDown(KeyCode.F) && isFull)
         {
-            inventoryManager = inventoryCanvas.GetComponent<InventoryManager>();
-        }
-        else
-        {
-            Debug.LogError("InventoryCanvas not found in scene!");
+            var usable = GetComponent<IUsableItem>();
+            Debug.Log("Trying to use: " + itemName + " | Usable: " + (usable != null));
+
+            if (usable != null)
+            {
+                usable.Use(player);
+                quantity--;
+
+                if (quantity <= 0)
+                {
+                    ClearSlot();
+                }
+                else
+                {
+                    quantityText.text = quantity.ToString();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Item does not implement IUsableItem: " + itemName);
+            }
         }
     }
 
     public void AddItem(string itemName, int addedQuantity, Sprite itemSprite, string itemDescription)
     {
-
         this.itemName = itemName;
         this.quantity = addedQuantity;
         this.itemSprite = itemSprite;
@@ -56,26 +74,34 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
         itemImage.enabled = true;
     }
 
+    public void ClearSlot()
+    {
+        itemName = "";
+        quantity = 0;
+        itemSprite = emptySprite;
+        itemDescription = "";
+
+        itemImage.sprite = emptySprite;
+        quantityText.text = "";
+        itemImage.enabled = false;
+        quantityText.enabled = false;
+
+        isFull = false;
+        thisItemSelected = false;
+        selectedShader.SetActive(false);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            OnLeftClick();
+            inventoryManager.DeselectAllSlots();
+            selectedShader.SetActive(true);
+            thisItemSelected = true;
+
+            ItemDescriptionNameText.text = itemName;
+            ItemDescriptionText.text = itemDescription;
+            itemDescriptionImage.sprite = itemSprite != null ? itemSprite : emptySprite;
         }
     }
-
-    public void OnLeftClick()
-    {
-        inventoryManager.DeselectAllSlots();
-        selectedShader.SetActive(true);
-        thisItemSelected = true;
-        ItemDescriptionNameText.text = itemName;
-        ItemDescriptionText.text = itemDescription;
-        itemDescriptionImage.sprite = itemSprite;
-        if(itemDescriptionImage.sprite == null)
-        {
-            itemDescriptionImage.sprite = emptySprite;
-        }
-    }
-
 }

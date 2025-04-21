@@ -6,55 +6,51 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryMenu;
     private bool menuActivated;
     public itemSlot[] itemSlot;
+    public TextMeshProUGUI winText;
 
-    public TextMeshProUGUI winText;  // Ensure winText is linked to the UI TextMeshPro component
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Optionally initialize other components or settings
-        winText.gameObject.SetActive(false);  // Hiding winText at start, just in case
+        winText.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!winText.IsActive())  // Ensure the win text is not showing before toggling the menu
+        if (!winText.IsActive())
         {
-            if (Input.GetKeyDown(KeyCode.Tab) && menuActivated)
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
-                Time.timeScale = 1;  // Unfreeze time when closing inventory
-                InventoryMenu.SetActive(false);
-                menuActivated = false;
-            }
-            else if (Input.GetKeyDown(KeyCode.Tab) && !menuActivated)
-            {
-                Time.timeScale = 0;  // Freeze time when inventory is opened
-                InventoryMenu.SetActive(true);
-                menuActivated = true;
+                menuActivated = !menuActivated;
+                InventoryMenu.SetActive(menuActivated);
+                Time.timeScale = menuActivated ? 0 : 1;
             }
         }
     }
 
-    // Add an item to the inventory
-    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
+    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, GameObject usableItemObject)
     {
-        // Loop through each item slot
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            // Check for an empty slot
             if (!itemSlot[i].isFull)
             {
                 itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
-                return;  // Stop after adding to the first empty slot
+
+                // Copy usable item script from prefab to slot
+                if (usableItemObject.TryGetComponent<IUsableItem>(out var usable))
+                {
+                    System.Type usableType = usable.GetType();
+                    if (!itemSlot[i].gameObject.GetComponent(usableType))
+                    {
+                        itemSlot[i].gameObject.AddComponent(usableType);
+                    }
+                }
+
+                return;
             }
         }
 
-        // Optionally, you can handle the case where no empty slots are available
-        Debug.LogWarning("No empty slot found for " + itemName);
+        Debug.LogWarning("No empty inventory slot found for: " + itemName);
     }
 
-    // Deselect all slots
     public void DeselectAllSlots()
     {
         foreach (var slot in itemSlot)

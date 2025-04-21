@@ -21,8 +21,12 @@ public class HealthAndMana : MonoBehaviour
 
     void Start()
     {
+        maxHealth = PlayerPrefs.GetInt("MaxHealth", maxHealth);
+        maxMana = PlayerPrefs.GetInt("MaxMana", maxMana);
+
         currentHealth = maxHealth;
         currentMana = maxMana;
+
         deathText.gameObject.SetActive(false);
         healthBar.SetMaxHealth(maxHealth);
         manaBar.SetMaxHealth(maxMana);
@@ -30,6 +34,13 @@ public class HealthAndMana : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            PlayerPrefs.DeleteKey("MaxHealth");
+            PlayerPrefs.DeleteKey("MaxMana");
+            Debug.Log("PlayerPrefs reset.");
+        }
+
         BalanceHealthAndMana();
 
         if (debugEnabled && Input.GetKeyDown("o"))
@@ -49,13 +60,10 @@ public class HealthAndMana : MonoBehaviour
         }
     }
 
-    public bool IsDead() => isDead;
-
     public void TakeDamage(float amount)
     {
         if (isDead) return;
 
-        // Block damage if invincible
         if (GetComponent<PlayerMovmentScript>().isInvincible) return;
 
         currentHealth -= Mathf.FloorToInt(amount);
@@ -82,5 +90,23 @@ public class HealthAndMana : MonoBehaviour
             currentHealth += currentMana;
             currentMana = 0;
         }
+    }
+
+    public bool IsDead() => isDead;
+
+    public void IncreaseMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        currentHealth += amount;
+        healthBar.SetMaxHealth(maxHealth);
+        PlayerPrefs.SetInt("MaxHealth", maxHealth);
+    }
+
+    public void IncreaseMaxMana(int amount)
+    {
+        maxMana += amount;
+        currentMana += amount;
+        manaBar.SetMaxHealth(maxMana);
+        PlayerPrefs.SetInt("MaxMana", maxMana);
     }
 }

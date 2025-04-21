@@ -315,6 +315,7 @@ MonoBehaviour:
   ItemDescriptionText: {fileID: 0}
   selectedShader: {fileID: 9174500383574059774}
   thisItemSelected: 0
+  player: {fileID: 0}
 --- !u!1 &9174500383574059774
 GameObject:
   m_ObjectHideFlags: 0
