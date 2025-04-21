@@ -20253,7 +20253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3244ddf67847c450fb23240ec39c406c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLine: Hello, adventurer! Welcome to the land of magic!
+  dialogueLines:
+  - Hello, adventurer!
+  - Welcome to the realm of magic!
   dialoguePanel: {fileID: 1641066446}
   dialogueText: {fileID: 1640515275}
   typingSpeed: 0.05
@@ -25897,7 +25899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: sceneToLoad
-      value: Void
+      value: House1
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.x
