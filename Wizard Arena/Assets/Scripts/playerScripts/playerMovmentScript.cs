@@ -49,6 +49,8 @@ public class PlayerMovmentScript : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public HealthAndMana playerHealthAndMana;
 
+    public AudioSource footstep;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -189,6 +191,10 @@ public class PlayerMovmentScript : MonoBehaviour
         else if (!isWallSliding && !isDodging && !GetComponent<ShadowDodge>().IsShadowDashing())
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
+        if (Input.GetAxis("Horizontal") != 0 && !footstep.isPlaying)
+        {
+            footstep.Play();
         }
     }
 
