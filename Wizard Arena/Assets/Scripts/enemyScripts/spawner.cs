@@ -27,6 +27,10 @@ public class spawner : MonoBehaviour
             // If the GameObject is missing (null), remove it from the list
             if (spawnedEnemyObjects[i] == null)
             {
+                if (spawnedEnemyObjects.Count == maxEnemies)
+                {
+                    timer = spawnCooldown;
+                }
                 spawnedEnemyObjects.RemoveAt(i);
             }
         }
