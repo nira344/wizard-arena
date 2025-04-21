@@ -119,7 +119,7 @@ MonoBehaviour:
   itemName: Crystal Mana
   quantity: 1
   sprite: {fileID: 0}
-  itemDescription: A shard of crystal made up of mana.. When crushed  gain 1 max
+  itemDescription: A shard of crystal made up of mana.. When crushed, gain 1 max
     mana.
 --- !u!50 &7322583203831458457
 Rigidbody2D:
