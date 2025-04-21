@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1344641878865871010}
   - component: {fileID: 4843792100524908767}
   - component: {fileID: 4689154134395843804}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,3 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Void
+  locked: 0
+  spawnX: 0
+  spawnY: 0

@@ -82,7 +82,6 @@ public class PlayerMovmentScript : MonoBehaviour
         HandleFall();
         HandleFlip();
         HandleJump();
-        UpdateCameraPosition();
         UpdateInvincibilityVisual(); // Flashing
     }
 
@@ -192,7 +191,7 @@ public class PlayerMovmentScript : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
-        if (Input.GetAxis("Horizontal") != 0 && !footstep.isPlaying)
+        if (Input.GetAxis("Horizontal") != 0 && !footstep.isPlaying && IsGrounded())
         {
             footstep.Play();
         }
@@ -242,15 +241,6 @@ public class PlayerMovmentScript : MonoBehaviour
         }
     }
 
-    private void UpdateCameraPosition()
-    {
-        float verticalOffset = 4f;
-        Vector3 cameraPos = Camera.main.transform.position;
-        cameraPos.x = transform.position.x;
-        cameraPos.y = transform.position.y + verticalOffset;
-        Camera.main.transform.position = cameraPos;
-    }
-
     private bool IsGrounded()
     {
         float extraHeight = 0.1f;
@@ -260,7 +250,7 @@ public class PlayerMovmentScript : MonoBehaviour
             0f,
             Vector2.down,
             extraHeight,
-            LayerMask.GetMask("Ground")
+            LayerMask.GetMask("Ground", "Default", "Enemy")
         );
 
         return hit.collider != null;
