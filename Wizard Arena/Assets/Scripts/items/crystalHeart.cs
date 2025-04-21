@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class crystalHeart : MonoBehaviour
+public class CrystalHeart : MonoBehaviour, IUsableItem
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public int increaseAmount = 1;
 
-    // Update is called once per frame
-    void Update()
+    public void Use(GameObject player)
     {
-        
+        var hm = player.GetComponent<HealthAndMana>();
+        if (hm != null)
+        {
+            hm.IncreaseMaxHealth(increaseAmount);
+            Debug.Log("Used Crystal Heart! Max HP increased.");
+        }
     }
 }
