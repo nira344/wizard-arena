@@ -9,11 +9,12 @@ public class item : MonoBehaviour
 
     private InventoryManager inventoryManager;
 
+
     void Start()
     {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
     }
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
