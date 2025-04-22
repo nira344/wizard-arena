@@ -35,7 +35,45 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
    {
        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
        player = GameObject.FindGameObjectWithTag("Player");
-   }
+        Transform child = transform.Find("SelectedPanel");
+
+        // Find selectedShader
+        if (child != null)
+        {
+            // You can now access the child GameObject like this:
+            selectedShader = child.gameObject;
+        }
+        else
+        {
+            Debug.LogError("SelectedShader child not found for " + gameObject.name + "!");
+        }
+
+        child = transform.Find("QuantityText");
+
+        // Find quantityText
+        if (child != null)
+        {
+            // You can now access the child GameObject like this:
+            quantityText = child.gameObject.GetComponent<TMP_Text>();
+        }
+        else
+        {
+            Debug.LogError("QuantityText child not found for " + gameObject.name + "!");
+        }
+
+        // Find itemImage
+        child = transform.Find("ItemImage");
+
+        if (child != null)
+        {
+            // You can now access the child GameObject like this:
+            itemImage = child.gameObject.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.LogError("ItemImage child not found for " + gameObject.name + "!");
+        }
+    }
 
 
    void Update()
@@ -92,7 +130,6 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
        itemSprite = emptySprite;
        itemDescription = "";
 
-
        itemImage.sprite = emptySprite;
        quantityText.text = "";
        itemImage.enabled = false;
@@ -115,14 +152,22 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
    {
        if (eventData.button == PointerEventData.InputButton.Left)
        {
-           inventoryManager.DeselectAllSlots();
-           selectedShader.SetActive(true);
-           thisItemSelected = true;
+            inventoryManager.DeselectAllSlots();
+            selectedShader.SetActive(true);
+            thisItemSelected = true;
 
-
-           ItemDescriptionNameText.text = itemName;
-           ItemDescriptionText.text = itemDescription;
-           itemDescriptionImage.sprite = itemSprite != null ? itemSprite : emptySprite;
+            if (isFull)
+            {
+                ItemDescriptionNameText.text = itemName;
+                ItemDescriptionText.text = itemDescription;
+                itemDescriptionImage.sprite = itemSprite != null ? itemSprite : emptySprite;
+            }
+            else
+            {
+                ItemDescriptionNameText.text = "";
+                ItemDescriptionText.text = "";
+                itemDescriptionImage.sprite = emptySprite;
+            }
        }
    }
 }
