@@ -76,36 +76,27 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
     }
 
 
-   void Update()
-   {
-       if (thisItemSelected && Input.GetKeyDown(KeyCode.F) && isFull)
-       {
-           if (this == inventoryManager.equipSlot)
-           {
-               inventoryManager.UnequipItem();
-               return;
-           }
+    void Update()
+    {
+        if (thisItemSelected && Input.GetKeyDown(KeyCode.F) && isFull)
+        {
+            if (this == inventoryManager.equipSlot)
+            {
+                GetComponent<ItemEquipper>()?.TryUnequip();
+            }
+            else if (GetComponent<IUsableItem>() != null)
+            {
+                GetComponent<ItemEquipper>()?.TryEquip();
+            }
+            else
+            {
+                GetComponent<ItemConsumer>()?.TryConsume();
+            }
+        }
+    }
 
 
-           var usable = GetComponent<IUsableItem>();
-           if (usable != null && inventoryManager.equipSlot != this)
-           {
-               inventoryManager.EquipItem(this);
-               return;
-           }
-
-
-           usable?.Use(player);
-           quantity--;
-
-
-           if (quantity <= 0) ClearSlot();
-           else UpdateQuantityText();
-       }
-   }
-
-
-   public void AddItem(string itemName, int addedQuantity, Sprite itemSprite, string itemDescription)
+    public void AddItem(string itemName, int addedQuantity, Sprite itemSprite, string itemDescription)
    {
        this.itemName = itemName;
        this.quantity = addedQuantity;
