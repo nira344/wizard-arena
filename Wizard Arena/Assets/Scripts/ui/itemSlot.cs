@@ -49,7 +49,7 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
                 }
                 else
                 {
-                    quantityText.text = quantity.ToString();
+                    UpdateQuantityText();
                 }
             }
             else
@@ -69,7 +69,7 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
         isFull = true;
         itemImage.sprite = itemSprite;
 
-        quantityText.text = quantity.ToString();
+        UpdateQuantityText();
         quantityText.enabled = true;
         itemImage.enabled = true;
     }
@@ -89,6 +89,11 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
         isFull = false;
         thisItemSelected = false;
         selectedShader.SetActive(false);
+    }
+
+    public void UpdateQuantityText()
+    {
+        quantityText.text = quantity.ToString();
     }
 
     public void OnPointerClick(PointerEventData eventData)
