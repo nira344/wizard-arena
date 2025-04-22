@@ -76,26 +76,6 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
     }
 
 
-    void Update()
-    {
-        if (thisItemSelected && Input.GetKeyDown(KeyCode.F) && isFull)
-        {
-            if (this == inventoryManager.equipSlot)
-            {
-                GetComponent<ItemEquipper>()?.TryUnequip();
-            }
-            else if (GetComponent<IUsableItem>() != null)
-            {
-                GetComponent<ItemEquipper>()?.TryEquip();
-            }
-            else
-            {
-                GetComponent<ItemConsumer>()?.TryConsume();
-            }
-        }
-    }
-
-
     public void AddItem(string itemName, int addedQuantity, Sprite itemSprite, string itemDescription)
    {
        this.itemName = itemName;

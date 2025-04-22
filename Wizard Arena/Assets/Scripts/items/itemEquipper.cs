@@ -8,7 +8,34 @@ public class ItemEquipper : MonoBehaviour
     void Start()
     {
         slot = GetComponent<itemSlot>();
-        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+        if (slot == null)
+        {
+            Debug.LogError("ItemEquipper: Missing itemSlot on GameObject.");
+            return;
+        }
+
+        inventoryManager = GameObject.Find("InventoryCanvas")?.GetComponent<InventoryManager>();
+        if (inventoryManager == null)
+        {
+            Debug.LogError("ItemEquipper: InventoryManager not found.");
+        }
+    }
+
+    void Update()
+    {
+        if (slot == null || inventoryManager == null) return;
+
+        if (slot.thisItemSelected && Input.GetKeyDown(KeyCode.F) && slot.isFull)
+        {
+            if (slot == inventoryManager.equipSlot)
+            {
+                TryUnequip();
+            }
+            else if (GetComponent<IUsableItem>() != null)
+            {
+                TryEquip();
+            }
+        }
     }
 
     public void TryEquip()
@@ -16,10 +43,7 @@ public class ItemEquipper : MonoBehaviour
         if (!slot.isFull || slot == inventoryManager.equipSlot)
             return;
 
-        if (slot.GetComponent<IUsableItem>() != null)
-        {
-            inventoryManager.EquipItem(slot);
-        }
+        inventoryManager.EquipItem(slot);
     }
 
     public void TryUnequip()
