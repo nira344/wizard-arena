@@ -67,43 +67,48 @@ public class InventoryManager : MonoBehaviour
    }
 
 
-   public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, GameObject usableItemObject)
-   {
-       foreach (var slot in itemSlot)
-       {
-           if (slot.isFull && slot.itemName == itemName)
-           {
-               slot.quantity += quantity;
-               slot.UpdateQuantityText();
-               return;
-           }
-       }
+    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, GameObject usableItemObject)
+    {
+        foreach (var slot in itemSlot)
+        {
+            if (slot.isFull && slot.itemName == itemName)
+            {
+                slot.quantity += quantity;
+                slot.UpdateQuantityText();
+                return;
+            }
+        }
 
+        itemSlot emptySlot = null;
 
-       foreach (var slot in itemSlot)
-       {
-           if (!slot.isFull)
-           {
-               slot.AddItem(itemName, quantity, itemSprite, itemDescription);
+        foreach (var s in itemSlot)
+        {
+            if (!s.isFull)
+            {
+                emptySlot = s;
+                break;
+            }
+        }
 
+        if (emptySlot != null)
+        {
+            emptySlot.AddItem(itemName, quantity, itemSprite, itemDescription);
 
-               if (usableItemObject.TryGetComponent<IUsableItem>(out var usable))
-               {
-                   var usableType = usable.GetType();
-                   if (!slot.gameObject.GetComponent(usableType))
-                   {
-                       slot.gameObject.AddComponent(usableType);
-                   }
-               }
+            if (usableItemObject.TryGetComponent<IUsableItem>(out var usableItem))
+            {
+                var usableType = usableItem.GetType();
+                if (!emptySlot.gameObject.GetComponent(usableType))
+                {
+                    emptySlot.gameObject.AddComponent(usableType);
+                }
+            }
 
+            return;
+        }
 
-               return;
-           }
-       }
+        Debug.LogWarning("No empty inventory slot for: " + itemName);
+    }
 
-
-       Debug.LogWarning("No empty inventory slot for: " + itemName);
-   }
 
 
    public void DeselectAllSlots()
