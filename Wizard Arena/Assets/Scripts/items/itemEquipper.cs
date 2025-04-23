@@ -38,6 +38,21 @@ public class ItemEquipper : MonoBehaviour
         }
     }
 
+
+    public void UseItem()
+    {
+        InventoryManager inventory = FindFirstObjectByType<InventoryManager>();
+        if (inventory != null)
+        {
+            inventory.EquipItem(GetComponent<itemSlot>());
+        }
+        else
+        {
+            Debug.LogWarning("InventoryManager not found.");
+        }
+    }
+
+
     public void TryEquip()
     {
         if (!slot.isFull || slot == inventoryManager.equipSlot)
