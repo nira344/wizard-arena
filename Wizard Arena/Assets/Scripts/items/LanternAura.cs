@@ -10,7 +10,7 @@ public class LanternAura2D : MonoBehaviour
     {
         CircleCollider2D aura = GetComponent<CircleCollider2D>();
         aura.isTrigger = true;
-        aura.radius = 3f; // Adjust the radius to set how far the aura reaches
+        aura.radius = 3f;
     }
 
     private void OnTriggerStay2D(Collider2D other)

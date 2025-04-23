@@ -20,6 +20,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (!winText.IsActive())
         {
+            // Toggle inventory menu
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 menuActivated = !menuActivated;
@@ -34,29 +35,57 @@ public class InventoryManager : MonoBehaviour
                         itemSlot[0].selectedShader.SetActive(true);
                         itemSlot[0].thisItemSelected = true;
 
-                        if (itemSlot[0].ItemDescriptionNameText != null)
-                            itemSlot[0].ItemDescriptionNameText.text = itemSlot[0].itemName;
+                        itemSlot[0].ItemDescriptionNameText.text = itemSlot[0].itemName;
+                        itemSlot[0].ItemDescriptionText.text = itemSlot[0].itemDescription;
+                        itemSlot[0].itemDescriptionImage.sprite = itemSlot[0].itemSprite != null
+                            ? itemSlot[0].itemSprite
+                            : itemSlot[0].emptySprite;
+                    }
+                }
+            }
 
-                        if (itemSlot[0].ItemDescriptionText != null)
-                            itemSlot[0].ItemDescriptionText.text = itemSlot[0].itemDescription;
-
-                        if (itemSlot[0].itemDescriptionImage != null)
-                            itemSlot[0].itemDescriptionImage.sprite = itemSlot[0].itemSprite != null ? itemSlot[0].itemSprite : itemSlot[0].emptySprite;
+            // Use selected item
+            if (menuActivated && Input.GetKeyDown(KeyCode.F))
+            {
+                foreach (var slot in itemSlot)
+                {
+                    if (slot.thisItemSelected)
+                    {
+                        slot.ActivateSelectedItem();
+                        break;
                     }
                 }
             }
         }
 
-        // Attach Lantern on Close
-        if (!menuActivated && equipSlot.itemName == "Lantern")
+        // 🔦 Attach and activate LanternObject if equipped
+        GameObject lanternObject = GameObject.Find("LanternObject");
+        if (equipSlot.itemName == "Lantern")
         {
-            var lantern = GameObject.Find("LanternObject");
-            if (lantern != null)
+            if (lanternObject != null && !lanternObject.activeSelf)
             {
-                lantern.SetActive(true);
-                lantern.transform.SetParent(player.transform);
-                lantern.transform.localPosition = new Vector3(0.5f, 0.5f, 0);
+                lanternObject.SetActive(true);
             }
+
+            if (lanternObject != null && lanternObject.transform.parent != player.transform)
+            {
+                lanternObject.transform.SetParent(player.transform);
+                lanternObject.transform.localPosition = new Vector3(0.5f, -0.6f, 0); // adjust as needed for belt
+            }
+        }
+        else
+        {
+            if (lanternObject != null)
+            {
+                lanternObject.SetActive(false);
+            }
+        }
+
+        // 🌟 Activate or deactivate the LanternEffect
+        Transform lanternEffect = player.transform.Find("LanternEffect");
+        if (lanternEffect != null)
+        {
+            lanternEffect.gameObject.SetActive(equipSlot.itemName == "Lantern");
         }
     }
 
@@ -73,7 +102,6 @@ public class InventoryManager : MonoBehaviour
         }
 
         itemSlot emptySlot = null;
-
         foreach (var s in itemSlot)
         {
             if (!s.isFull)
@@ -87,31 +115,13 @@ public class InventoryManager : MonoBehaviour
         {
             emptySlot.AddItem(itemName, quantity, itemSprite, itemDescription);
 
-            // Dynamically add the usable script type
-            if (usableItemObject.TryGetComponent<IUsableItem>(out var usableItem))
-            {
-                var usableType = usableItem.GetType();
-                if (!emptySlot.gameObject.GetComponent(usableType))
-                {
-                    emptySlot.gameObject.AddComponent(usableType);
-                }
-            }
+            if (!emptySlot.GetComponent<ItemEquipper>())
+                emptySlot.gameObject.AddComponent<ItemEquipper>();
+            if (!emptySlot.GetComponent<ItemConsumer>())
+                emptySlot.gameObject.AddComponent<ItemConsumer>();
 
-            // Add ItemConsumer or ItemEquipper based on itemName
-            if (itemName == "Lantern")
-            {
-                if (!emptySlot.gameObject.GetComponent<ItemEquipper>())
-                {
-                    emptySlot.gameObject.AddComponent<ItemEquipper>();
-                }
-            }
-            else if (itemName.Contains("Crystal") || itemName.Contains("Potion"))
-            {
-                if (!emptySlot.gameObject.GetComponent<ItemConsumer>())
-                {
-                    emptySlot.gameObject.AddComponent<ItemConsumer>();
-                }
-            }
+            if (usableItemObject.TryGetComponent<IUsableItem>(out var usableItem))
+                emptySlot.ConfigureSlotForItem(usableItem);
 
             return;
         }
