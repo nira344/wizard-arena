@@ -9,6 +9,9 @@ TagManager:
   - Solid
   - Grave
   - Chest
+  - item
+  - Undefined
+  - SmallEnemy
   layers:
   - Default
   - TransparentFX
