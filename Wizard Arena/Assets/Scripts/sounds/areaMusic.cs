@@ -2,19 +2,7 @@ using UnityEngine;
 
 public class areaMusic : MonoBehaviour
 {
-    AudioSource music;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        music = gameObject.GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public AudioSource music;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
