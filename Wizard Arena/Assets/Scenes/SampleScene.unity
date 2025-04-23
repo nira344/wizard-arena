@@ -10202,7 +10202,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 1
+  weight: 0.66
   sharedProfile: {fileID: 11400000, guid: 5086c4aa7a489460399e4d3af6faf03d, type: 2}
 --- !u!4 &680283180
 Transform:
@@ -10213,7 +10213,7 @@ Transform:
   m_GameObject: {fileID: 680283178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.659304, y: 7.945021, z: -2410.792}
+  m_LocalPosition: {x: -31.659304, y: 7.945021, z: -2400}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22744,8 +22744,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.70402, y: 430}
-  m_SizeDelta: {x: 1882, y: 185.02}
+  m_AnchoredPosition: {x: -0.04, y: 362.02}
+  m_SizeDelta: {x: 1843.72, y: 286.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1640515275
 MonoBehaviour:
