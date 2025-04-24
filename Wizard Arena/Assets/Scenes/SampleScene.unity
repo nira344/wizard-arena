@@ -744,7 +744,7 @@ Transform:
   m_GameObject: {fileID: 47714552}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -95.8, y: 37, z: 10}
+  m_LocalPosition: {x: -122.5, y: 37, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1466,7 +1466,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: -6.653404, y: 8.802509, z: 0}
     m_Rotation: {x: -0, y: 0, z: 0}
-    m_Scale: {x: 239.27481, y: 1.884197, z: 0}
+    m_Scale: {x: 288.68048, y: 1.884197, z: 0}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -22046,11 +22046,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae3f550d26c94064860ec795731634b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &844022780 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 106992574567688349, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
-  m_PrefabInstance: {fileID: 1390113102}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &851474153
 GameObject:
   m_ObjectHideFlags: 0
