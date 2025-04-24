@@ -34,6 +34,7 @@ public class ItemConsumer : MonoBehaviour
 
         if (slot.thisItemSelected && Input.GetKeyDown(KeyCode.F) && slot.isFull)
         {
+            Debug.Log("ItemConsumer: F key pressed on selected full slot.");
             TryConsume();
         }
     }
@@ -43,13 +44,24 @@ public class ItemConsumer : MonoBehaviour
         var usable = GetComponent<IUsableItem>();
         if (usable != null)
         {
+            Debug.Log("ItemConsumer: Found IUsableItem, consuming...");
             usable.Use(player);
             slot.quantity--;
 
             if (slot.quantity <= 0)
+            {
+                Debug.Log("ItemConsumer: Slot now empty. Clearing slot.");
                 slot.ClearSlot();
+            }
             else
+            {
+                Debug.Log("ItemConsumer: Updated quantity to " + slot.quantity);
                 slot.UpdateQuantityText();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("ItemConsumer: No IUsableItem found on this GameObject.");
         }
     }
 }

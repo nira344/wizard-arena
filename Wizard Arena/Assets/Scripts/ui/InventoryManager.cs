@@ -58,34 +58,26 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        // 🔦 Attach and activate LanternObject if equipped
-        GameObject lanternObject = GameObject.Find("LanternObject");
-        if (equipSlot.itemName == "Lantern")
+        Transform beltLantern = player.transform.Find("BeltLantern");
+        if (beltLantern == null)
         {
-            if (lanternObject != null && !lanternObject.activeSelf)
-            {
-                lanternObject.SetActive(true);
-            }
-
-            if (lanternObject != null && lanternObject.transform.parent != player.transform)
-            {
-                lanternObject.transform.SetParent(player.transform);
-                lanternObject.transform.localPosition = new Vector3(0.5f, -0.6f, 0); // adjust as needed for belt
-            }
+            Debug.LogError("InventoryManager: BeltLantern not found under Player!");
         }
         else
         {
-            if (lanternObject != null)
+            Debug.Log("InventoryManager: Checking if Lantern is equipped...");
+            if (equipSlot.isFull)
             {
-                lanternObject.SetActive(false);
+                Debug.Log("InventoryManager: EquipSlot has item: " + equipSlot.itemName);
             }
-        }
+            else
+            {
+                Debug.Log("InventoryManager: EquipSlot is empty.");
+            }
 
-        // 🌟 Activate or deactivate the LanternEffect
-        Transform lanternEffect = player.transform.Find("LanternEffect");
-        if (lanternEffect != null)
-        {
-            lanternEffect.gameObject.SetActive(equipSlot.itemName == "Lantern");
+            bool shouldEnable = equipSlot.isFull && equipSlot.itemName == "Lantern";
+            Debug.Log("InventoryManager: Setting BeltLantern active: " + shouldEnable);
+            beltLantern.gameObject.SetActive(shouldEnable);
         }
     }
 
@@ -176,11 +168,8 @@ public class InventoryManager : MonoBehaviour
 
             equipSlot.ClearSlot();
 
-            var lantern = GameObject.Find("LanternObject");
-            if (lantern != null)
-            {
-                lantern.SetActive(false);
-            }
+            // BeltLantern will auto-disable via Update, no need to handle it here
         }
     }
+    
 }
