@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2404695537640488399}
   - component: {fileID: 7712508029699503410}
   - component: {fileID: 7322583203831458457}
-  - component: {fileID: 2816385495387750874}
+  - component: {fileID: 2957157748267370832}
   m_Layer: 0
   m_Name: crystalMana
   m_TagString: item
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 2602945065705507708}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -167.27, y: -22.51, z: 1.121246}
-  m_LocalScale: {x: 0.44907606, y: 0.876006, z: 1}
+  m_LocalPosition: {x: -167.4256, y: -22.71, z: 1.121246}
+  m_LocalScale: {x: 0.33298245, y: 0.3532932, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,7 +59,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3e744dc4b2bae4720b1a0ecf92d1c7d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
-  m_Color: {r: 0.0141509175, g: 0.25733337, b: 1, a: 1}
+  m_Sprite: {fileID: -585513397330211095, guid: b10e6794881694713969c239c68de4f8, type: 3}
+  m_Color: {r: 0.43137255, g: 0.43137255, b: 0.43137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Crystal Mana
   quantity: 1
-  sprite: {fileID: 0}
+  sprite: {fileID: -585513397330211095, guid: b10e6794881694713969c239c68de4f8, type: 3}
   itemDescription: A shard of crystal made up of mana.. When crushed, gain 1 max
     mana.
 --- !u!50 &7322583203831458457
@@ -148,8 +148,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &2816385495387750874
-PolygonCollider2D:
+--- !u!61 &2957157748267370832
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -186,18 +186,11 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8828125, y: 1}
+    oldSize: {x: 2.68, y: 3}
     newSize: {x: 0.8828125, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.43359375, y: 0.25}
-      - {x: -0.43359375, y: -0.25}
-      - {x: 0, y: -0.5}
-      - {x: 0.43359375, y: -0.25}
-      - {x: 0.43359375, y: 0.25}
-      - {x: 0, y: 0.5}
-  m_UseDelaunayMesh: 0
+  m_Size: {x: 2.68, y: 3}
+  m_EdgeRadius: 0

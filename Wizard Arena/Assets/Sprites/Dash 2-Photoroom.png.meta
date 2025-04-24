@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dash 2-Photoroom_0: 1795499332989689323
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

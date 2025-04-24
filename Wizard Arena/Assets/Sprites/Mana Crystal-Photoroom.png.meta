@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mana Crystal-Photoroom_0: -585513397330211095
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: lantern
   quantity: 1
-  sprite: {fileID: -5498873291523913286, guid: 9f66160826ac94637acf39db72a9aac4, type: 3}
+  sprite: {fileID: 2192943755801346305, guid: fc5e2e064258f4c268a15f6b65e52ec7, type: 3}
   itemDescription: A small mushgoon that glows with a dim light that deters small
     monsters.
 --- !u!212 &2234277255810364247
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5498873291523913286, guid: 9f66160826ac94637acf39db72a9aac4, type: 3}
+  m_Sprite: {fileID: 2192943755801346305, guid: fc5e2e064258f4c268a15f6b65e52ec7, type: 3}
   m_Color: {r: 0.47058824, g: 0.47058824, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -182,7 +182,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.58, y: 5.28}
+    oldSize: {x: 2.89, y: 4.19}
     newSize: {x: 5.5, y: 5.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
