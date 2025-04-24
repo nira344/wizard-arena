@@ -2,62 +2,30 @@ using UnityEngine;
 
 public class ItemConsumer : MonoBehaviour
 {
-    private itemSlot slot;
-    private InventoryManager inventoryManager;
-    private GameObject player;
+    private IUsableItem usableItem;
 
     void Start()
     {
-        slot = GetComponent<itemSlot>();
-        if (slot == null)
+        usableItem = GetComponent<IUsableItem>();
+        if (usableItem == null)
         {
-            Debug.LogError("ItemConsumer: Missing itemSlot on GameObject.");
-            return;
-        }
-
-        inventoryManager = GameObject.Find("InventoryCanvas")?.GetComponent<InventoryManager>();
-        if (inventoryManager == null)
-        {
-            Debug.LogError("ItemConsumer: InventoryManager not found.");
-        }
-
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-        {
-            Debug.LogError("ItemConsumer: Player not found.");
+            Debug.LogWarning("ItemConsumer: No IUsableItem found on this GameObject.");
         }
     }
 
     void Update()
     {
-        if (slot == null || inventoryManager == null || player == null) return;
-
-        if (slot.thisItemSelected && Input.GetKeyDown(KeyCode.F) && slot.isFull)
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("ItemConsumer: F key pressed on selected full slot.");
             TryConsume();
         }
     }
 
     public void TryConsume()
     {
-        var usable = GetComponent<IUsableItem>();
-        if (usable != null)
+        if (usableItem != null)
         {
-            Debug.Log("ItemConsumer: Found IUsableItem, consuming...");
-            usable.Use(player);
-            slot.quantity--;
-
-            if (slot.quantity <= 0)
-            {
-                Debug.Log("ItemConsumer: Slot now empty. Clearing slot.");
-                slot.ClearSlot();
-            }
-            else
-            {
-                Debug.Log("ItemConsumer: Updated quantity to " + slot.quantity);
-                slot.UpdateQuantityText();
-            }
+            usableItem.Use(gameObject);
         }
         else
         {

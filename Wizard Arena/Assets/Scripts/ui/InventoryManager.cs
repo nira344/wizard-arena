@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -10,17 +11,25 @@ public class InventoryManager : MonoBehaviour
     public itemSlot equipSlot;
     public GameObject player;
 
+    private GameObject beltLantern;
+
     void Start()
     {
         winText.gameObject.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
+
+        // Try to find BeltLantern once during Start
+        beltLantern = player.GetComponentsInChildren<Transform>(true)
+            .FirstOrDefault(t => t.name.ToLower().Contains("beltlantern"))?.gameObject;
+
+        if (beltLantern == null)
+            Debug.LogError("InventoryManager: BeltLantern not found under Player!");
     }
 
     void Update()
     {
         if (!winText.IsActive())
         {
-            // Toggle inventory menu
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 menuActivated = !menuActivated;
@@ -34,7 +43,6 @@ public class InventoryManager : MonoBehaviour
                     {
                         itemSlot[0].selectedShader.SetActive(true);
                         itemSlot[0].thisItemSelected = true;
-
                         itemSlot[0].ItemDescriptionNameText.text = itemSlot[0].itemName;
                         itemSlot[0].ItemDescriptionText.text = itemSlot[0].itemDescription;
                         itemSlot[0].itemDescriptionImage.sprite = itemSlot[0].itemSprite != null
@@ -44,7 +52,6 @@ public class InventoryManager : MonoBehaviour
                 }
             }
 
-            // Use selected item
             if (menuActivated && Input.GetKeyDown(KeyCode.F))
             {
                 foreach (var slot in itemSlot)
@@ -58,26 +65,10 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        Transform beltLantern = player.transform.Find("BeltLantern");
-        if (beltLantern == null)
+        // Enable or disable BeltLantern based on equipped item
+        if (beltLantern != null)
         {
-            Debug.LogError("InventoryManager: BeltLantern not found under Player!");
-        }
-        else
-        {
-            Debug.Log("InventoryManager: Checking if Lantern is equipped...");
-            if (equipSlot.isFull)
-            {
-                Debug.Log("InventoryManager: EquipSlot has item: " + equipSlot.itemName);
-            }
-            else
-            {
-                Debug.Log("InventoryManager: EquipSlot is empty.");
-            }
-
-            bool shouldEnable = equipSlot.isFull && equipSlot.itemName == "Lantern";
-            Debug.Log("InventoryManager: Setting BeltLantern active: " + shouldEnable);
-            beltLantern.gameObject.SetActive(shouldEnable);
+            beltLantern.SetActive(equipSlot.itemName == "Lantern");
         }
     }
 
@@ -93,15 +84,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        itemSlot emptySlot = null;
-        foreach (var s in itemSlot)
-        {
-            if (!s.isFull)
-            {
-                emptySlot = s;
-                break;
-            }
-        }
+        itemSlot emptySlot = itemSlot.FirstOrDefault(s => !s.isFull);
 
         if (emptySlot != null)
         {
@@ -114,6 +97,8 @@ public class InventoryManager : MonoBehaviour
 
             if (usableItemObject.TryGetComponent<IUsableItem>(out var usableItem))
                 emptySlot.ConfigureSlotForItem(usableItem);
+            else
+                Debug.LogWarning($"AddItem: No IUsableItem found on {usableItemObject.name}");
 
             return;
         }
@@ -167,9 +152,6 @@ public class InventoryManager : MonoBehaviour
             );
 
             equipSlot.ClearSlot();
-
-            // BeltLantern will auto-disable via Update, no need to handle it here
         }
     }
-    
 }
