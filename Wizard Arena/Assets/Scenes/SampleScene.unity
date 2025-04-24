@@ -37476,7 +37476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowDashSpeed: 35
   shadowDashDuration: 1
-  sDashCooldownTime: 0.5
+  sDashCooldownTime: 5
 --- !u!50 &2371919274015267908
 Rigidbody2D:
   serializedVersion: 5
@@ -37533,9 +37533,9 @@ MonoBehaviour:
   fireballPrefab: {fileID: 8242415882551670338, guid: 5166f9cfd2b0445ba8fa4f73e8648849, type: 3}
   iceshardPrefab: {fileID: 8258303840590375760, guid: 5e86fc4469d2a41e380c189e7375cf62, type: 3}
   meleePrefab: {fileID: 3057016599928121658, guid: df4028011fe8041b7aaaff7431420d5f, type: 3}
-  fireballCooldownTime: 0.5
-  iceshardCooldownTime: 0.2
-  meleeCooldownTime: 5
+  fireballCooldownTime: 4
+  iceshardCooldownTime: 2
+  meleeCooldownTime: 0.1
   ice_sound: {fileID: 8300000, guid: 0bc01bb36b69d4546a1226bb44f3ed8f, type: 3}
   fire_sound: {fileID: 0}
 --- !u!1001 &4759036931025681962
@@ -38083,7 +38083,7 @@ MonoBehaviour:
   wallJumpingDuration: 0.4
   wallJumpingPower: {x: 8, y: 12}
   wallSlideLockDuration: 0.2
-  dodgeCooldownTime: 0.2
+  dodgeCooldownTime: 0.5
   dodgeSpeed: 15
   dodgeDuration: 0.5
   invincibilityDuration: 0.25
