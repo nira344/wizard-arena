@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CrystalHeart : MonoBehaviour, IUsableItem
+public class CrystalHeart : MonoBehaviour, IUsableItem 
 {
     public int increaseAmount = 1;
 
