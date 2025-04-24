@@ -5053,9 +5053,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e1f9977f45e4cc5898b3d528787673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 15
+  projectileSpeed: 25
   damage: 2
-  homingSpeed: 5
+  homingSpeed: 10
   range: 30
   explosion: {fileID: 6442821772542911070, guid: f7890582e790946569dbafbc1e9165c6, type: 3}
 --- !u!82 &-8579702674902632175
