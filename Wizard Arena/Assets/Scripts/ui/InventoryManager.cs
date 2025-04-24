@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -11,19 +10,10 @@ public class InventoryManager : MonoBehaviour
     public itemSlot equipSlot;
     public GameObject player;
 
-    private GameObject beltLantern;
-
     void Start()
     {
         winText.gameObject.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
-
-        // Try to find BeltLantern once during Start
-        beltLantern = player.GetComponentsInChildren<Transform>(true)
-            .FirstOrDefault(t => t.name.ToLower().Contains("beltlantern"))?.gameObject;
-
-        if (beltLantern == null)
-            Debug.LogError("InventoryManager: BeltLantern not found under Player!");
     }
 
     void Update()
@@ -43,11 +33,10 @@ public class InventoryManager : MonoBehaviour
                     {
                         itemSlot[0].selectedShader.SetActive(true);
                         itemSlot[0].thisItemSelected = true;
+
                         itemSlot[0].ItemDescriptionNameText.text = itemSlot[0].itemName;
                         itemSlot[0].ItemDescriptionText.text = itemSlot[0].itemDescription;
-                        itemSlot[0].itemDescriptionImage.sprite = itemSlot[0].itemSprite != null
-                            ? itemSlot[0].itemSprite
-                            : itemSlot[0].emptySprite;
+                        itemSlot[0].itemDescriptionImage.sprite = itemSlot[0].itemSprite != null ? itemSlot[0].itemSprite : itemSlot[0].emptySprite;
                     }
                 }
             }
@@ -65,10 +54,15 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        // Enable or disable BeltLantern based on equipped item
-        if (beltLantern != null)
+        if (!menuActivated && equipSlot.itemName == "Lantern")
         {
-            beltLantern.SetActive(equipSlot.itemName == "Lantern");
+            var lantern = GameObject.Find("LanternObject");
+            if (lantern != null)
+            {
+                lantern.SetActive(true);
+                lantern.transform.SetParent(player.transform);
+                lantern.transform.localPosition = new Vector3(0.5f, 0.5f, 0);
+            }
         }
     }
 
@@ -84,21 +78,43 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        itemSlot emptySlot = itemSlot.FirstOrDefault(s => !s.isFull);
+        itemSlot emptySlot = null;
+        foreach (var s in itemSlot)
+        {
+            if (!s.isFull)
+            {
+                emptySlot = s;
+                break;
+            }
+        }
 
         if (emptySlot != null)
         {
             emptySlot.AddItem(itemName, quantity, itemSprite, itemDescription);
 
-            if (!emptySlot.GetComponent<ItemEquipper>())
-                emptySlot.gameObject.AddComponent<ItemEquipper>();
-            if (!emptySlot.GetComponent<ItemConsumer>())
-                emptySlot.gameObject.AddComponent<ItemConsumer>();
-
+            // Add usable item script
             if (usableItemObject.TryGetComponent<IUsableItem>(out var usableItem))
+            {
+                var usableType = usableItem.GetType();
+                if (!emptySlot.GetComponent(usableType))
+                {
+                    emptySlot.gameObject.AddComponent(usableType);
+                }
+
                 emptySlot.ConfigureSlotForItem(usableItem);
-            else
-                Debug.LogWarning($"AddItem: No IUsableItem found on {usableItemObject.name}");
+            }
+
+            // Add functional scripts
+            if (itemName == "Lantern")
+            {
+                if (!emptySlot.GetComponent<ItemEquipper>())
+                    emptySlot.gameObject.AddComponent<ItemEquipper>();
+            }
+            else if (itemName.Contains("Crystal") || itemName.Contains("Potion"))
+            {
+                if (!emptySlot.GetComponent<ItemConsumer>())
+                    emptySlot.gameObject.AddComponent<ItemConsumer>();
+            }
 
             return;
         }
@@ -152,6 +168,12 @@ public class InventoryManager : MonoBehaviour
             );
 
             equipSlot.ClearSlot();
+
+            var lantern = GameObject.Find("LanternObject");
+            if (lantern != null)
+            {
+                lantern.SetActive(false);
+            }
         }
     }
 }

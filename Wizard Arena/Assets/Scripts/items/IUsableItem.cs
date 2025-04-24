@@ -1,4 +1,6 @@
-public interface IUsableItem
+using UnityEngine;
+
+public interface IUsableItem 
 {
-    void Use(UnityEngine.GameObject player);
+    void Use(GameObject user);
 }

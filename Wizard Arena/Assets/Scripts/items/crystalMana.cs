@@ -1,6 +1,6 @@
-using UnityEngine;
+ using UnityEngine;
 
-public class CrystalMana : MonoBehaviour, IUsableItem
+public class CrystalMana : MonoBehaviour, IUsableItem 
 {
     public int increaseAmount = 1;
 

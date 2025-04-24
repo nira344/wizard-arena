@@ -2,20 +2,37 @@ using UnityEngine;
 
 public class ItemConsumer : MonoBehaviour
 {
-    private IUsableItem usableItem;
+    private itemSlot slot;
+    private InventoryManager inventoryManager;
+    private GameObject player;
 
     void Start()
     {
-        usableItem = GetComponent<IUsableItem>();
-        if (usableItem == null)
+        slot = GetComponent<itemSlot>();
+        if (slot == null)
         {
-            Debug.LogWarning("ItemConsumer: No IUsableItem found on this GameObject.");
+            Debug.LogError("ItemConsumer: Missing itemSlot on GameObject.");
+            return;
+        }
+
+        inventoryManager = GameObject.Find("InventoryCanvas")?.GetComponent<InventoryManager>();
+        if (inventoryManager == null)
+        {
+            Debug.LogError("ItemConsumer: InventoryManager not found.");
+        }
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogError("ItemConsumer: Player not found.");
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (slot == null || inventoryManager == null || player == null) return;
+
+        if (slot.thisItemSelected && Input.GetKeyDown(KeyCode.F) && slot.isFull)
         {
             TryConsume();
         }
@@ -23,13 +40,16 @@ public class ItemConsumer : MonoBehaviour
 
     public void TryConsume()
     {
-        if (usableItem != null)
+        var usable = GetComponent<IUsableItem>();
+        if (usable != null)
         {
-            usableItem.Use(gameObject);
-        }
-        else
-        {
-            Debug.LogWarning("ItemConsumer: No IUsableItem found on this GameObject.");
+            usable.Use(player);
+            slot.quantity--;
+
+            if (slot.quantity <= 0)
+                slot.ClearSlot();
+            else
+                slot.UpdateQuantityText();
         }
     }
 }
