@@ -27807,6 +27807,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestPrefab: {fileID: 5529699204525107739, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
+  possibleItemDrops: []
+  maxItemsToDrop: 2
 --- !u!114 &2147399950996562165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27978,6 +27980,7 @@ GameObject:
   - component: {fileID: 738769862746482544}
   - component: {fileID: 8907761031978245165}
   - component: {fileID: 8907761031978245164}
+  - component: {fileID: 8907761031978245166}
   m_Layer: 9
   m_Name: Sorcerer
   m_TagString: Player
@@ -28304,6 +28307,7 @@ MonoBehaviour:
   direction: 0
   playerHealthAndMana: {fileID: 5179767963300924614}
   footstep: {fileID: 7816640375626821902}
+  sorcerer: {fileID: 8907761031978245166}
 --- !u!82 &8907761031978245164
 AudioSource:
   m_ObjectHideFlags: 0
@@ -28414,6 +28418,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pop: {fileID: 8907761031978245164}
+--- !u!95 &8907761031978245166
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4834298303938560702}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5ef6fae60bd8e405ebc623a95f67939e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

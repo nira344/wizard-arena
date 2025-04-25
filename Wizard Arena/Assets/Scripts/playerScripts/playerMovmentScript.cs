@@ -51,6 +51,8 @@ public class PlayerMovmentScript : MonoBehaviour
 
     public AudioSource footstep;
 
+    public Animator sorcerer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -74,6 +76,7 @@ public class PlayerMovmentScript : MonoBehaviour
             wallSlideLockTimer -= Time.deltaTime;
         }
 
+        sorcerer.SetInteger("everythingbutdeath", 0);
         HandleWallSliding();
         HandleWallJumping();
         HandleMovement();
@@ -172,6 +175,7 @@ public class PlayerMovmentScript : MonoBehaviour
         {
             rb.gravityScale = gravityScale * fallGravityMult;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, maxFallSpeed));
+            sorcerer.SetInteger("everythingbutdeath", 3);
         }
         else
         {
@@ -194,6 +198,7 @@ public class PlayerMovmentScript : MonoBehaviour
         if (Input.GetAxis("Horizontal") != 0 && !footstep.isPlaying && IsGrounded())
         {
             footstep.Play();
+            sorcerer.SetInteger("everythingbutdeath", 1);
         }
     }
 
