@@ -37651,6 +37651,7 @@ GameObject:
   - component: {fileID: 738769862746482544}
   - component: {fileID: 8907761031978245165}
   - component: {fileID: 8907761031978245164}
+  - component: {fileID: 8907761031978245166}
   m_Layer: 3
   m_Name: Sorcerer
   m_TagString: Player
@@ -38073,6 +38074,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pop: {fileID: 8907761031978245164}
+--- !u!114 &8907761031978245166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4834298303938560702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cfdccdbdedf4547ac24b8b7276a088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillColor: {r: 0.018393278, g: 1, b: 0, a: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

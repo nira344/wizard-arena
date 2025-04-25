@@ -15,7 +15,7 @@ public class door : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         box = GetComponent<BoxCollider2D>();
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -25,15 +25,6 @@ public class door : MonoBehaviour
             {
                 player.transform.position = new Vector3(exitDoor.transform.position.x, exitDoor.transform.position.y, player.transform.position.z);
             }
-        }
-    }
-
-    void OnDrawGizmos()
-    {
-        if (box != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
         }
     }
 
