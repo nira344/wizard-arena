@@ -94,6 +94,14 @@ public class HealthAndMana : MonoBehaviour
 
     public bool IsDead() => isDead;
 
+    public void Heal(int amount)
+    {
+        if (isDead) return;
+
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        Debug.Log("Healed for " + amount + " HP. Current HP: " + currentHealth);
+    }
+
     public void IncreaseMaxHealth(int amount)
     {
         maxHealth += amount;

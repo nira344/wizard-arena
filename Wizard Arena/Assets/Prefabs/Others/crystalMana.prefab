@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2602945065705507708}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -167.4256, y: -22.71, z: 1.121246}
+  m_LocalPosition: {x: -166.99133, y: -22.195965, z: 2.242492}
   m_LocalScale: {x: 0.33298245, y: 0.3532932, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -119,8 +119,8 @@ MonoBehaviour:
   itemName: Crystal Mana
   quantity: 1
   sprite: {fileID: -585513397330211095, guid: b10e6794881694713969c239c68de4f8, type: 3}
-  itemDescription: A shard of crystal made up of mana.. When crushed, gain 1 max
-    mana.
+  itemDescription: 'A shard of crystal made up of mana.. When crushed restores your
+    mana. [gain 1 max mana]'
 --- !u!50 &7322583203831458457
 Rigidbody2D:
   serializedVersion: 5
