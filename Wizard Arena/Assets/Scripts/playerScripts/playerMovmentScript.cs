@@ -27,7 +27,7 @@ public class PlayerMovmentScript : MonoBehaviour
     public float wallSlideLockDuration = 0.2f;
 
     // Dodge parameters
-    public float dodgeCooldownTime = 0.2f;
+    public float dodgeCooldownTime = 1.0f;
     public float dodgeSpeed = 15f;
     public float dodgeDuration = 0.2f;
     public float invincibilityDuration = 0.3f;
@@ -50,8 +50,6 @@ public class PlayerMovmentScript : MonoBehaviour
     public HealthAndMana playerHealthAndMana;
 
     public AudioSource footstep;
-
-    public Animator sorcerer;
 
     void Start()
     {
@@ -76,7 +74,6 @@ public class PlayerMovmentScript : MonoBehaviour
             wallSlideLockTimer -= Time.deltaTime;
         }
 
-        sorcerer.SetInteger("everythingbutdeath", 0);
         HandleWallSliding();
         HandleWallJumping();
         HandleMovement();
@@ -175,7 +172,6 @@ public class PlayerMovmentScript : MonoBehaviour
         {
             rb.gravityScale = gravityScale * fallGravityMult;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, maxFallSpeed));
-            sorcerer.SetInteger("everythingbutdeath", 3);
         }
         else
         {
@@ -198,7 +194,6 @@ public class PlayerMovmentScript : MonoBehaviour
         if (Input.GetAxis("Horizontal") != 0 && !footstep.isPlaying && IsGrounded())
         {
             footstep.Play();
-            sorcerer.SetInteger("everythingbutdeath", 1);
         }
     }
 

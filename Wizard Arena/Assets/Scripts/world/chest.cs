@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Chest : MonoBehaviour
 {
-    public int storedSouls;
+    private int storedSouls;
 
     [SerializeField] private List<GameObject> itemDrops = new List<GameObject>();
 
@@ -32,7 +32,7 @@ public class Chest : MonoBehaviour
             }
         }
 
-        Destroy(gameObject, 0.3f);
+        Destroy(gameObject, 0.5f); // optional delay for animations or sound
     }
 
     public void OnMeleeHit()
