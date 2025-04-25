@@ -3,34 +3,44 @@ using UnityEngine.SceneManagement;
 
 public class door : MonoBehaviour
 {
-    public string sceneToLoad;
+    public GameObject exitDoor;
     public bool locked = false;
-    public float spawnX;
-    public float spawnY;
 
     private GameObject player;
+    private BoxCollider2D box;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        box = GetComponent<BoxCollider2D>();
     }
     
     // Update is called once per frame
     void Update()
     {
-        if (sceneToLoad != null)
+        if (TouchingPlayer())
         {
-            if (Input.GetKeyDown("f") && TouchingPlayer() && !locked)
+            if (Input.GetKeyDown("f") && !locked)
             {
-                SceneManager.LoadScene(sceneToLoad);
+                player.transform.position = new Vector3(exitDoor.transform.position.x, exitDoor.transform.position.y, player.transform.position.z);
             }
         }
     }
 
-    private bool TouchingPlayer()
+    void OnDrawGizmos()
     {
-        return gameObject.GetComponent<BoxCollider2D>().IsTouching(player.GetComponent<BoxCollider2D>());
+        if (box != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
+        }
+    }
+
+    bool TouchingPlayer()
+    {
+        Collider2D hit = Physics2D.OverlapBox(box.bounds.center, box.bounds.size, 0f);
+        return (bool)(hit.gameObject == player);
     }
 
     public void Lock()
