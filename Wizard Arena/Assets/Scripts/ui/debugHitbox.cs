@@ -14,14 +14,14 @@ public class debugHitbox : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        //if (boxes != null)
-        //{
-            Debug.LogError("okay time for box");
+        if (boxes != null)
+        {
+            //Debug.LogError("okay time for box");
             foreach (BoxCollider2D box in boxes)
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
             }
-        //}
+        }
     }
 }

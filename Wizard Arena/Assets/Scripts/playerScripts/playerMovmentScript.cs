@@ -50,6 +50,7 @@ public class PlayerMovmentScript : MonoBehaviour
     public HealthAndMana playerHealthAndMana;
 
     public AudioSource footstep;
+    private Animator animator;
 
     void Start()
     {
@@ -57,6 +58,7 @@ public class PlayerMovmentScript : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerHealthAndMana = GetComponent<HealthAndMana>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -64,25 +66,22 @@ public class PlayerMovmentScript : MonoBehaviour
         if (playerHealthAndMana.IsDead())
         {
             rb.linearVelocity = Vector2.zero;
+            SetAnimationState(4); // Dead
             return;
         }
 
         CheckWallContacts();
-
-        if (wallSlideLockTimer > 0f)
-        {
-            wallSlideLockTimer -= Time.deltaTime;
-        }
+        wallSlideLockTimer -= Time.deltaTime;
 
         HandleWallSliding();
         HandleWallJumping();
         HandleMovement();
-
         HandleDodge();
         HandleFall();
         HandleFlip();
         HandleJump();
-        UpdateInvincibilityVisual(); // Flashing
+        UpdateInvincibilityVisual();
+        UpdateAnimationState();
     }
 
     private void FixedUpdate()
@@ -267,6 +266,42 @@ public class PlayerMovmentScript : MonoBehaviour
         else
         {
             spriteRenderer.color = Color.white; // normal
+        }
+    }
+
+    private void UpdateAnimationState()
+    {
+        if (playerHealthAndMana.IsDead())
+        {
+            animator.SetInteger("State", 4); // Dead
+        }
+        else if (isDodging)
+        {
+            animator.SetInteger("State", 3); // Dash
+        }
+        else if (!IsGrounded() && rb.linearVelocity.y > 0.1f)
+        {
+            animator.SetInteger("State", 2); // Jumping
+        }
+        else if (!IsGrounded() && rb.linearVelocity.y < -0.1f)
+        {
+            animator.SetInteger("State", 5); // Falling
+        }
+        else if (Mathf.Abs(direction) > 0.1f)
+        {
+            animator.SetInteger("State", 1); // Walking
+        }
+        else
+        {
+            animator.SetInteger("State", 0); // Idle
+        }
+    }
+
+    private void SetAnimationState(int state)
+    {
+        if (animator != null)
+        {
+            animator.SetInteger("State", state);
         }
     }
 }

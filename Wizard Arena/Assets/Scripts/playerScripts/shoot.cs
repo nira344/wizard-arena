@@ -17,9 +17,12 @@ public class shoot : MonoBehaviour
 
     public AudioClip ice_sound;
     public AudioClip fire_sound;
+    private Animator animator;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         HealthAndMana statScript = GetComponent<HealthAndMana>();
         if (statScript != null)
         {
@@ -44,6 +47,7 @@ public class shoot : MonoBehaviour
                         {
                             statScript.currentMana -= 1;
                             Instantiate(iceshardPrefab, transform.position, transform.rotation);
+                            animator.SetInteger("State", 7); // CastIce
                         }
                         else
                         {
@@ -57,11 +61,13 @@ public class shoot : MonoBehaviour
                 {
                     Debug.Log("Ice shard on cooldown.");
                 }
-                if (Ice_Sound.isPlaying == false)
+
+                if (Ice_Sound != null && !Ice_Sound.isPlaying)
                 {
                     Ice_Sound.Play();
                 }
             }
+
 
             // Fireball Attack (Fire3)
             if (Input.GetButtonDown("Fire3"))
@@ -75,6 +81,7 @@ public class shoot : MonoBehaviour
                         {
                             statScript.currentMana -= 3;
                             Instantiate(fireballPrefab, transform.position, transform.rotation);
+                            animator.SetInteger("State", 6); // CastFire
                         }
                         else
                         {
@@ -88,7 +95,8 @@ public class shoot : MonoBehaviour
                 {
                     Debug.Log("Fireball on cooldown.");
                 }
-                if (Fire_Sound.isPlaying == false)
+
+                if (Fire_Sound != null && !Fire_Sound.isPlaying)
                 {
                     Fire_Sound.Play();
                 }
