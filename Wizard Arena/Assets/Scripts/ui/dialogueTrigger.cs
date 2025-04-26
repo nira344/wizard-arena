@@ -8,17 +8,14 @@ public class DialogueTrigger : MonoBehaviour
     public List<string> dialogueLines;
     private bool playerInRange = false;
 
-    public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
-
-    public float typingSpeed = 0.05f;  // Adjust typing speed
+    public float typingSpeed = 0.05f;
 
     private bool inUse;
     private int currentLine = 0;
 
     void Update()
     {
-        // When the player presses 'F' while in range, start typing the dialogue
         if (playerInRange && Input.GetKeyDown(KeyCode.F))
         {
             if (inUse)
@@ -30,7 +27,6 @@ public class DialogueTrigger : MonoBehaviour
             }
             else
             {
-                dialoguePanel.SetActive(true);
                 if (currentLine >= dialogueLines.Count)
                 {
                     if (currentLine == 0)
@@ -44,7 +40,7 @@ public class DialogueTrigger : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(TypeDialogue(dialogueLines[currentLine]));  // Start typing effect
+                    StartCoroutine(TypeDialogue(dialogueLines[currentLine]));
                 }
             }
         }
@@ -69,22 +65,20 @@ public class DialogueTrigger : MonoBehaviour
 
     private void CloseDialogue()
     {
-        dialoguePanel.SetActive(false);
-        StopAllCoroutines();  // Stop typing if the player leaves
-        dialogueText.text = "";  // Clear the text
+        StopAllCoroutines();
+        dialogueText.text = "";
         inUse = false;
         currentLine = 0;
     }
 
-    // Coroutine for typing effect
     IEnumerator TypeDialogue(string line)
     {
         inUse = true;
-        dialogueText.text = "";  // Start with empty text
+        dialogueText.text = "";
         foreach (char letter in line.ToCharArray())
         {
-            dialogueText.text += letter;  // Add one letter at a time
-            yield return new WaitForSeconds(typingSpeed);  // Wait before adding the next letter
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
         }
         inUse = false;
         currentLine++;
