@@ -44,12 +44,19 @@ public class PlayerMovmentScript : MonoBehaviour
     private bool isTouchingRightWall = false;
     private bool isTouchingWall = false;
 
+    public footstepRNG roll;
+
     private Rigidbody2D rb;
     private BoxCollider2D coll;
     private SpriteRenderer spriteRenderer;
     public HealthAndMana playerHealthAndMana;
 
-    public AudioSource footstep;
+    private AudioSource footstep;
+    public AudioClip footstep1;
+    public AudioClip footstep2;
+    public AudioClip footstep3;
+    public AudioClip footstep4;
+    public AudioClip footstep5;
     private Animator animator;
 
     void Start()
@@ -59,6 +66,7 @@ public class PlayerMovmentScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerHealthAndMana = GetComponent<HealthAndMana>();
         animator = GetComponent<Animator>();
+        footstep = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -192,7 +200,32 @@ public class PlayerMovmentScript : MonoBehaviour
         }
         if (Input.GetAxis("Horizontal") != 0 && !footstep.isPlaying && IsGrounded())
         {
-            footstep.Play();
+            int num = (int)Random.Range(1, 5);
+            if (num == 1)
+            {
+                footstep.clip = footstep1;
+                footstep.Play();
+            }
+            if (num == 2)
+            {
+                footstep.clip = footstep2;
+                footstep.Play();
+            }
+            if (num == 3)
+            {
+                footstep.clip = footstep3;
+                footstep.Play();
+            }
+            if (num == 4)
+            {
+                footstep.clip = footstep4;
+                footstep.Play();
+            }
+            if (num == 5)
+            {
+                footstep.clip = footstep5;
+                footstep.Play();
+            }
         }
     }
 
