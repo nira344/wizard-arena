@@ -44,6 +44,13 @@ public class DialogueTrigger : MonoBehaviour
                 }
             }
         }
+        else if (playerInRange && Input.GetKeyDown(KeyCode.C))
+        {
+            if (inUse)
+            {
+                CloseDialogue();
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

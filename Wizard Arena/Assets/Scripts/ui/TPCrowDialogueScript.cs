@@ -38,6 +38,15 @@ public class TPCrowDialogueScript : MonoBehaviour
                 dialogueText.text = "";
             }
         }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (inUse)
+            {
+                StopAllCoroutines();
+                dialogueText.text = "";
+                inUse = false;
+            }
+        }
     }
 
     IEnumerator TypeDialogue(string line)
