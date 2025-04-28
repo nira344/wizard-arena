@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3f44bc79646ab4746940888968885dc0
+guid: aa37e6e4f33904c57b217c22c26260a2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3573943903930564949
-    second: Forest Walking 2-Photoroom_0
+      213: 9160294382883406776
+    second: Untitled225_20250428130050-Photoroom_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Forest Walking 2-Photoroom_0
+      name: Untitled225_20250428130050-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 103
-        y: 245
-        width: 799
-        height: 879
+        x: 0
+        y: 0
+        width: 969
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 55144f88b03399130800000000000000
-      internalID: 3573943903930564949
+      spriteID: 8b385c93537ef1f70800000000000000
+      internalID: 9160294382883406776
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Forest Walking 2-Photoroom_0: 3573943903930564949
+      Untitled225_20250428130050-Photoroom_0: 9160294382883406776
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
