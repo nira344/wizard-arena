@@ -1193,8 +1193,8 @@ Transform:
   m_GameObject: {fileID: 65442600}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.218403, y: -81.509995, z: 0}
-  m_LocalScale: {x: -17.88774, y: -2.204015, z: 1}
+  m_LocalPosition: {x: 49.7729, y: -80.9489, z: 0}
+  m_LocalScale: {x: -34.996105, y: -3.3262994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4753,10 +4753,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door_4
       objectReference: {fileID: 0}
+    - target: {fileID: 106992574567688349, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: exitDoor
       value: 
       objectReference: {fileID: 3479978715295085249}
+    - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: cameraLockPos.x
+      value: 49.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: cameraLockPos.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -125.12
@@ -7664,7 +7676,7 @@ Transform:
   m_GameObject: {fileID: 414874299}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.79, y: -90, z: 0}
+  m_LocalPosition: {x: 65.9, y: -90, z: 0}
   m_LocalScale: {x: -2.6846364, y: -15.066426, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9642,7 +9654,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.94, y: 0.1, z: -10}
+  m_LocalPosition: {x: 49.73, y: -90, z: -10}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -9672,7 +9684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34252ab622aa5419eb7a83a654a1b3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow: 1
+  locked: 0
+  lockPosition: {x: 0, y: 0}
   followTightness: 10
   player: {fileID: 4834298303938560702}
 --- !u!114 &519420035
@@ -22260,10 +22273,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door_2
       objectReference: {fileID: 0}
+    - target: {fileID: 106992574567688349, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: exitDoor
       value: 
       objectReference: {fileID: 3479978715295085249}
+    - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: cameraLockPos.x
+      value: 49.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: cameraLockPos.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -143.00322
@@ -22687,8 +22712,8 @@ Transform:
   m_GameObject: {fileID: 793998878}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.1884, y: -98.58, z: 0}
-  m_LocalScale: {x: -17.88774, y: -2.204015, z: 1}
+  m_LocalPosition: {x: 49.7951, y: -99.2002, z: 0}
+  m_LocalScale: {x: -35.10252, y: -3.444435, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -31290,10 +31315,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door_3
       objectReference: {fileID: 0}
+    - target: {fileID: 106992574567688349, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: exitDoor
       value: 
       objectReference: {fileID: 3479978715295085249}
+    - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: cameraLockPos.x
+      value: 49.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: cameraLockPos.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -130.40579
@@ -40779,13 +40816,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 106992574567688349, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: exitDoor
       value: 
       objectReference: {fileID: 33434349}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -115.37
+      value: -118.26
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -41202,6 +41243,14 @@ PrefabInstance:
       propertyPath: exitDoor
       value: 
       objectReference: {fileID: 3479978715295085249}
+    - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: cameraLockPos.x
+      value: 49.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689154134395843804, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
+      propertyPath: cameraLockPos.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -150.72496

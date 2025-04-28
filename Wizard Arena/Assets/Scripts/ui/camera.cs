@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class camera : MonoBehaviour
+public class cameraController : MonoBehaviour
 {
 	// Config
-	public bool follow;
+	public bool locked = false;
+	public Vector2 lockPosition;
 	public float followTightness;
 
 	// Ship Targets
@@ -19,12 +20,19 @@ public class camera : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
+		Vector3 desiredPos;
+
 		// Calulate and move to midpoint of ships
-		if (follow) // Check config
+		if (locked && (lockPosition != null)) // Check config
+		{
+			desiredPos = new Vector3(lockPosition.x, lockPosition.y, transform.position.z);
+		}
+		else
 		{
 			float playerVelocityY = player.GetComponent<Rigidbody2D>().linearVelocityY;
-			Vector3 desiredPos = new Vector3(player.transform.position.x, player.transform.position.y + 2 + (playerVelocityY / 8), gameObject.transform.position.z);
-			transform.position = Vector3.Lerp(transform.position, desiredPos, Time.deltaTime * followTightness);
+			desiredPos = new Vector3(player.transform.position.x, player.transform.position.y + 2 + (playerVelocityY / 8), gameObject.transform.position.z);
 		}
+
+		transform.position = Vector3.Lerp(transform.position, desiredPos, Time.deltaTime * followTightness);
 	}
 }

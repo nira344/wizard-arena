@@ -5,33 +5,45 @@ public class door : MonoBehaviour
 {
     public GameObject exitDoor;
     public bool locked = false;
+    public Vector2 cameraLockPos;
 
     private GameObject player;
-    private BoxCollider2D box;
+    private cameraController cam;
+    private bool playerTouching;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        box = GetComponent<BoxCollider2D>();
+        cam = Camera.main.GetComponent<cameraController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (TouchingPlayer())
+        if (Input.GetKeyDown("f") && !locked && playerTouching && (Time.timeScale > 0))
         {
-            if (Input.GetKeyDown("f") && !locked)
+            if (cameraLockPos.x != 0)
             {
-                player.transform.position = new Vector3(exitDoor.transform.position.x, exitDoor.transform.position.y, player.transform.position.z);
+                cam.lockPosition = cameraLockPos;
+                cam.locked = true;
             }
+            else
+                cam.locked = false;
+            player.transform.position = new Vector3(exitDoor.transform.position.x, exitDoor.transform.position.y, player.transform.position.z);
         }
     }
 
-    bool TouchingPlayer()
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        Collider2D hit = Physics2D.OverlapBox(box.bounds.center, box.bounds.size, 0f);
-        return (bool)(hit.gameObject == player);
+        if (collider == player.GetComponent<Collider2D>())
+            playerTouching = true;
+    }
+
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider == player.GetComponent<Collider2D>())
+            playerTouching = false;
     }
 
     public void Lock()
