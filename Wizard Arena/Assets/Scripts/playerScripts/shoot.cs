@@ -2,119 +2,138 @@ using UnityEngine;
 
 public class shoot : MonoBehaviour
 {
+    [Header("Prefabs")]
     public GameObject fireballPrefab;
     public GameObject iceshardPrefab;
     public GameObject meleePrefab;
 
+    [Header("Cooldown Times")]
     public float fireballCooldownTime = 1.0f;
     public float iceshardCooldownTime = 0.5f;
-    public float meleeCooldownTime = 0.1f;  // Increased for clearer cooldown
+    public float meleeCooldownTime = 0.1f;
 
-    AudioSource Ice_Sound;
-    AudioSource Fire_Sound;
-
-    private float lastTime = 0f;
-
+    [Header("Audio Clips")]
     public AudioClip ice_sound;
     public AudioClip fire_sound;
+
+    private AudioSource audioSource;
     private Animator animator;
+    private HealthAndMana statScript;
+
+    private float lastIceTime = 0f;
+    private float lastFireTime = 0f;
+    private float lastMeleeTime = 0f;
+
+    private bool isCasting = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        statScript = GetComponent<HealthAndMana>();
 
-        HealthAndMana statScript = GetComponent<HealthAndMana>();
-        if (statScript != null)
+        if (statScript == null)
         {
-            Debug.Log("Starting Mana: " + statScript.currentMana + "/" + statScript.maxMana);
+            Debug.LogError("HealthAndMana script not found on player!");
         }
-        Ice_Sound = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if (Time.timeScale > 0)
+        if (Time.timeScale <= 0) return;
+
+        HandleIceShard();
+        HandleFireball();
+        HandleMelee();
+
+        UpdateAnimationState();
+    }
+
+    private void HandleIceShard()
+    {
+        if (Input.GetButtonDown("Fire2") && Time.time - lastIceTime >= iceshardCooldownTime)
         {
-            // Ice Shard Attack (Fire2)
-            if (Input.GetButtonDown("Fire2"))
+            if (statScript != null && statScript.currentMana >= 1)
             {
-                if (Time.time - lastTime >= iceshardCooldownTime)
-                {
-                    HealthAndMana statScript = GetComponent<HealthAndMana>();
-                    if (statScript != null)
-                    {
-                        if (statScript.currentMana + statScript.currentHealth > 1)
-                        {
-                            statScript.currentMana -= 1;
-                            Instantiate(iceshardPrefab, transform.position, transform.rotation);
-                            animator.SetInteger("State", 7); // CastIce
-                        }
-                        else
-                        {
-                            Debug.Log("Not enough mana for Ice Shard");
-                        }
-                    }
-
-                    lastTime = Time.time;
-                }
-                else
-                {
-                    Debug.Log("Ice shard on cooldown.");
-                }
-
-                if (Ice_Sound != null && !Ice_Sound.isPlaying)
-                {
-                    Ice_Sound.Play();
-                }
+                statScript.currentMana -= 1;
+                Instantiate(iceshardPrefab, transform.position, transform.rotation);
+                PlaySound(ice_sound);
+                SetAnimationState(7); // Cast Ice Shard
+                isCasting = true;
             }
-
-
-            // Fireball Attack (Fire3)
-            if (Input.GetButtonDown("Fire3"))
+            else
             {
-                if (Time.time - lastTime >= fireballCooldownTime)
-                {
-                    HealthAndMana statScript = GetComponent<HealthAndMana>();
-                    if (statScript != null)
-                    {
-                        if (statScript.currentMana + statScript.currentHealth > 3)
-                        {
-                            statScript.currentMana -= 3;
-                            Instantiate(fireballPrefab, transform.position, transform.rotation);
-                            animator.SetInteger("State", 6); // CastFire
-                        }
-                        else
-                        {
-                            Debug.Log("Not enough mana for Fireball");
-                        }
-                    }
-
-                    lastTime = Time.time;
-                }
-                else
-                {
-                    Debug.Log("Fireball on cooldown.");
-                }
-
-                if (Fire_Sound != null && !Fire_Sound.isPlaying)
-                {
-                    Fire_Sound.Play();
-                }
+                Debug.Log("Not enough mana for Ice Shard");
             }
+            lastIceTime = Time.time;
+        }
+    }
 
-            // Melee Attack (Fire1)
-            if (Input.GetButtonDown("Fire1"))
+    private void HandleFireball()
+    {
+        if (Input.GetButtonDown("Fire3") && Time.time - lastFireTime >= fireballCooldownTime)
+        {
+            if (statScript != null && statScript.currentMana >= 3)
             {
-                Debug.Log("Melee Attack Button Pressed");
-                Instantiate(meleePrefab, transform.position, transform.rotation);
-
-                HealthAndMana statScript = GetComponent<HealthAndMana>();
-
-                if (statScript != null)
-                {
-                    Debug.Log("Melee Attack: Mana after: " + statScript.currentMana);
-                }
+                statScript.currentMana -= 3;
+                Instantiate(fireballPrefab, transform.position, transform.rotation);
+                PlaySound(fire_sound);
+                SetAnimationState(6); // Cast Fireball
+                isCasting = true;
             }
+            else
+            {
+                Debug.Log("Not enough mana for Fireball");
+            }
+            lastFireTime = Time.time;
+        }
+    }
+
+    private void HandleMelee()
+    {
+        if (Input.GetButtonDown("Fire1") && Time.time - lastMeleeTime >= meleeCooldownTime)
+        {
+            Instantiate(meleePrefab, transform.position, transform.rotation);
+            SetAnimationState(5); // Attack Animation (you can set your melee anim state here)
+            isCasting = true;
+            lastMeleeTime = Time.time;
+        }
+    }
+
+    private void UpdateAnimationState()
+    {
+        if (statScript != null && statScript.IsDead())
+        {
+            SetAnimationState(4); // Dead
+            return;
+        }
+
+        if (isCasting)
+        {
+            // Casting animations already set, reset after short time if needed
+            isCasting = false;
+        }
+        else
+        {
+            // Set Idle or Walk based on player movement
+            SetAnimationState(0); // Idle
+        }
+    }
+
+    private void SetAnimationState(int state)
+    {
+        if (animator != null)
+        {
+            animator.SetInteger("State", state);
+        }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.clip = clip;
+            audioSource.Play();
         }
     }
 }
