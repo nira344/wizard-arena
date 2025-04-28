@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Health Pot-Photoroom_0: 1556246580650779015
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gravestone Death-Photoroom_0: 1312454927735025407
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
