@@ -44,8 +44,6 @@ public class PlayerMovmentScript : MonoBehaviour
     private bool isTouchingRightWall = false;
     private bool isTouchingWall = false;
 
-    public footstepRNG roll;
-
     private Rigidbody2D rb;
     private BoxCollider2D coll;
     private SpriteRenderer spriteRenderer;
