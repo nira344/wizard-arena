@@ -31,7 +31,10 @@ public class door : MonoBehaviour
                 cam.locked = true;
             }
             else
+            {
+                cam.teleport = true;
                 cam.locked = false;
+            }
             player.transform.position = new Vector3(exitDoor.transform.position.x, exitDoor.transform.position.y, player.transform.position.z);
             sqweek.Play();
         }
