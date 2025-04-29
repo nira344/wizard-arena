@@ -58,6 +58,10 @@ public class PlayerMovmentScript : MonoBehaviour
     public AudioClip footstep4;
     public AudioClip footstep5;
     private Animator animator;
+    
+    // Step SFX Spacing
+    public float stepCooldown = 0.2f;
+    private float stepTimer;
 
     void Start()
     {
@@ -67,6 +71,7 @@ public class PlayerMovmentScript : MonoBehaviour
         playerHealthAndMana = GetComponent<HealthAndMana>();
         animator = GetComponent<Animator>();
         footstep = GetComponent<AudioSource>();
+        stepTimer = stepCooldown;
     }
 
     void Update()
@@ -77,6 +82,9 @@ public class PlayerMovmentScript : MonoBehaviour
             SetAnimationState(4); // Dead
             return;
         }
+
+        if (stepTimer > 0)
+        { stepTimer -= Time.deltaTime; }
 
         CheckWallContacts();
         wallSlideLockTimer -= Time.deltaTime;
@@ -198,7 +206,7 @@ public class PlayerMovmentScript : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
-        if (Input.GetAxis("Horizontal") != 0 && !footstep.isPlaying && IsGrounded())
+        if (Input.GetAxis("Horizontal") != 0 && stepTimer <= 0 && IsGrounded())
         {
             int num = (int)Random.Range(1, 5);
             if (num == 1)
@@ -226,6 +234,7 @@ public class PlayerMovmentScript : MonoBehaviour
                 footstep.clip = footstep5;
                 footstep.Play();
             }
+            stepTimer = stepCooldown;
         }
     }
 

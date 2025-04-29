@@ -1122,6 +1122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 65442602}
   - component: {fileID: 65442601}
+  - component: {fileID: 65442603}
   m_Layer: 0
   m_Name: House
   m_TagString: Solid
@@ -1199,6 +1200,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &65442603
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65442600}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &69583407
 GameObject:
   m_ObjectHideFlags: 0
@@ -4775,11 +4822,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -122.83
+      value: -122.86
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.87
+      value: -4.79
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7522,6 +7569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 414874301}
   - component: {fileID: 414874300}
+  - component: {fileID: 414874302}
   m_Layer: 6
   m_Name: House (2)
   m_TagString: Solid
@@ -7599,6 +7647,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &414874302
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414874299}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &416840137
 GameObject:
   m_ObjectHideFlags: 0
@@ -7647,7 +7741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -245, y: 463}
+  m_AnchoredPosition: {x: -125, y: 402}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.28614235, y: -1.7989769}
 --- !u!1001 &424558790
@@ -9484,7 +9578,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.73, y: -90, z: -10}
+  m_LocalPosition: {x: -24.9, y: -0.5, z: -10}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -21935,11 +22029,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -143.15
+      value: -143.01
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.11
+      value: -4.97
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25575,7 +25669,7 @@ Transform:
   m_GameObject: {fileID: 987191902}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -131.30133, y: -19.844261, z: 1.121246}
+  m_LocalPosition: {x: -131.30133, y: -20.084, z: 1.121246}
   m_LocalScale: {x: 1.701132, y: 1.810362, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30844,11 +30938,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -133.37
+      value: -133.26
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.9346924
+      value: -4.9
       objectReference: {fileID: 0}
     - target: {fileID: 5254472861705164434, guid: 3e8a2d2235b8c402cb2ba8378af1cd4e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -39422,6 +39516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2046392040}
   - component: {fileID: 2046392039}
+  - component: {fileID: 2046392041}
   m_Layer: 6
   m_Name: House (1)
   m_TagString: Solid
@@ -39499,6 +39594,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2046392041
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046392038}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &2047224537
 GameObject:
   m_ObjectHideFlags: 0
@@ -40282,7 +40423,6 @@ GameObject:
   - component: {fileID: 2371919274015267908}
   - component: {fileID: 348974493351219256}
   - component: {fileID: 8907761031978245163}
-  - component: {fileID: 8907761031978245168}
   - component: {fileID: 5179767963300924614}
   - component: {fileID: 4253311368682843710}
   - component: {fileID: 2147399950996562165}
@@ -40521,6 +40661,7 @@ MonoBehaviour:
   footstep3: {fileID: 8300000, guid: 66ef14be0602f4c55b003e590c0963c2, type: 3}
   footstep4: {fileID: 8300000, guid: 7441f4f6a9c8742398bdb891e5a5732d, type: 3}
   footstep5: {fileID: 8300000, guid: 74e05e50dde2b4a03b1f9f543d5aa66d, type: 3}
+  stepCooldown: 0.2
 --- !u!82 &8907761031978245164
 AudioSource:
   m_ObjectHideFlags: 0
