@@ -4,28 +4,40 @@ using TMPro;
 public class wizardBoss : MonoBehaviour
 {
 
+    // Configuration
     public float speed;
     public float spellCooldown;
     public float cooldownTimer;
     public GameObject spell;
 
+    // Components
     private GameObject player;
     private enemyHealth hp;
+    
+    // AI status
     private bool activated;
 
+    // HUD elements
     public HealthBar healthBar;
     public bossBar bossHealthBar;
-
     public TextMeshProUGUI winText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Disable boss HUD elements
         winText.gameObject.SetActive(false);
-        player = GameObject.FindGameObjectWithTag("Player");
-        hp = gameObject.GetComponent<enemyHealth>();
-        cooldownTimer = 0;
         healthBar.SetMaxHealth(hp.health);
+
+        // Find player
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        // Get own health script and turn invincible
+        hp = gameObject.GetComponent<enemyHealth>();
+        hp.invincible = true;
+
+        // Reset spell cooldown
+        cooldownTimer = 0;
     }
 
     // Update is called once per frame
@@ -60,12 +72,16 @@ public class wizardBoss : MonoBehaviour
 
     public void Activate()
     {
+        // Enable AI + remove invincibility
+        hp.invincible = false;
         activated = true;
         bossHealthBar.Show();
     }
 
     public void Deactivate()
     {
+        // Disable AI + become invincible
+        hp.invincible = true;
         activated = false;
         bossHealthBar.Hide();
     }
@@ -74,6 +90,7 @@ public class wizardBoss : MonoBehaviour
     {
         if (activated)
         {
+            // mods, drop a comical anvil on his head
             healthBar.SetHealth(hp.health);
             bossHealthBar.Hide();
             winText.gameObject.SetActive(true);

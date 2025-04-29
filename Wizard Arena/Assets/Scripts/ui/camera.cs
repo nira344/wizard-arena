@@ -3,15 +3,22 @@ using System.Collections;
 
 public class cameraController : MonoBehaviour
 {
-	// Config
-	public bool locked = false;
+	// Configuration
+	public bool teleport = false;
 	public float followTightness;
 
-	// Publicly accesible camera lock position
+	// Publicly accesible camera locking variables
 	public Vector2 lockPosition;
+	public bool locked = false;
 
 	// Player object
-	public GameObject player;
+	private GameObject player;
+
+	void Start()
+	{
+		// Find player
+		player = GameObject.FindGameObjectWithTag("Player");
+	}
 
 	// Update is called once per frame
 	void FixedUpdate()
@@ -19,9 +26,15 @@ public class cameraController : MonoBehaviour
 		Vector3 desiredPos;
 
 		// If camera is locked, instantly move the camera to that spot
-		if (locked && (lockPosition != null))
+		if (locked && lockPosition != null)
 		{
 			transform.position = new Vector3(lockPosition.x, lockPosition.y, transform.position.z);
+		}
+		// If the camera is moving out of a room, teleport for 1 frame only
+		else if (teleport)
+		{
+			transform.position = new Vector3(lockPosition.x, lockPosition.y, transform.position.z);
+			teleport = false;
 		}
 		// If the camera is not locked, lerp to the player's approximate position
 		else

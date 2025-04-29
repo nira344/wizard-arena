@@ -40,12 +40,10 @@ public class TPCrowDialogueScript : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            if (inUse)
-            {
-                StopAllCoroutines();
-                dialogueText.text = "";
-                inUse = false;
-            }
+            StopAllCoroutines();
+            dialogueText.text = "";
+            inUse = false;
+            currentLine = dialogueLines.Count;
         }
     }
 
