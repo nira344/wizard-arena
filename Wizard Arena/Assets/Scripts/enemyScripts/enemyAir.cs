@@ -6,11 +6,13 @@ public class enemyAir : MonoBehaviour
     public float range;
     public float speed;
     GameObject player;
+    Rigidbody2D rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,13 @@ public class enemyAir : MonoBehaviour
 
             // scale the vector to our desired speed 
             direction = direction * speed * Time.deltaTime;
+
+            // deal with spell knockback
+            if (rb && (rb.linearVelocityX != 0 || rb.linearVelocityY != 0))
+            {
+                rb.AddForceX(rb.linearVelocityX / -(1 + (Time.deltaTime * 2)));
+                rb.AddForceY(rb.linearVelocityY / -(1 + (Time.deltaTime * 2)));
+            }
 
             // move in the direction we have calculated
             transform.Translate(direction);
