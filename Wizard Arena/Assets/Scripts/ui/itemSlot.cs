@@ -102,25 +102,15 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
     public void ConfigureSlotForItem(IUsableItem usable)
     {
         var consumer = GetComponent<ItemConsumer>();
-        var equipper = GetComponent<ItemEquipper>();
-
-        if (usable is CrystalMana || usable is CrystalHeart)
-        {
-            if (consumer != null) consumer.enabled = true;
-            if (equipper != null) equipper.enabled = false;
-        }
-        else
-        {
-            if (consumer != null) consumer.enabled = false;
-            if (equipper != null) equipper.enabled = true;
-        }
+        if (consumer != null)
+            consumer.enabled = true;
     }
 
     public void ActivateSelectedItem()
     {
-        if (TryGetComponent<ItemEquipper>(out var equipper) && equipper.enabled)
-            equipper.TryEquip();
-        else if (TryGetComponent<ItemConsumer>(out var consumer) && consumer.enabled)
+        if (TryGetComponent<ItemConsumer>(out var consumer) && consumer.enabled)
+        {
             consumer.TryConsume();
+        }
     }
 }

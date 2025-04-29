@@ -24,6 +24,8 @@ public class shoot : MonoBehaviour
     private float lastFireTime = 0f;
     private float lastMeleeTime = 0f;
 
+    private bool isCasting = false;
+
     void Start()
     {
         // Get own components
@@ -49,6 +51,8 @@ public class shoot : MonoBehaviour
         HandleIceShard();
         HandleFireball();
         HandleMelee();
+
+        UpdateAnimationState();
     }
 
     private void HandleIceShard()
@@ -60,7 +64,8 @@ public class shoot : MonoBehaviour
                 statScript.currentMana -= 1;
                 Instantiate(iceshardPrefab, transform.position, transform.rotation);
                 PlaySound(ice_sound);
-                TriggerAnimation("CastIce");
+                SetAnimationState(7); // Cast Ice Shard
+                isCasting = true;
             }
             else
             {
@@ -79,7 +84,8 @@ public class shoot : MonoBehaviour
                 statScript.currentMana -= 3;
                 Instantiate(fireballPrefab, transform.position, transform.rotation);
                 PlaySound(fire_sound);
-                TriggerAnimation("CastFire");
+                SetAnimationState(6); // Cast Fireball
+                isCasting = true;
             }
             else
             {
@@ -94,15 +100,37 @@ public class shoot : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && (Time.time - lastMeleeTime) >= meleeCooldownTime)
         {
             Instantiate(meleePrefab, transform.position, transform.rotation);
+            SetAnimationState(5); // Attack Animation (you can set your melee anim state here)
+            isCasting = true;
             lastMeleeTime = Time.time;
         }
     }
 
-    private void TriggerAnimation(string triggerName)
+    private void UpdateAnimationState()
+    {
+        if (statScript != null && statScript.IsDead())
+        {
+            SetAnimationState(4); // Dead
+            return;
+        }
+
+        if (isCasting)
+        {
+            // Casting animations already set, reset after short time if needed
+            isCasting = false;
+        }
+        else
+        {
+            // Set Idle or Walk based on player movement
+            SetAnimationState(0); // Idle
+        }
+    }
+
+    private void SetAnimationState(int state)
     {
         if (animator != null)
         {
-            animator.SetTrigger(triggerName);
+            animator.SetInteger("State", state);
         }
     }
 
