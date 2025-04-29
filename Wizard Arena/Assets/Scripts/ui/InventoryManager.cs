@@ -7,7 +7,6 @@ public class InventoryManager : MonoBehaviour
     private bool menuActivated;
     public itemSlot[] itemSlot;
     public TextMeshProUGUI winText;
-    public itemSlot equipSlot;
     public GameObject player;
 
     void Start()
@@ -53,17 +52,6 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-
-        if (!menuActivated && equipSlot.itemName == "Lantern")
-        {
-            var lantern = GameObject.Find("LanternObject");
-            if (lantern != null)
-            {
-                lantern.SetActive(true);
-                lantern.transform.SetParent(player.transform);
-                lantern.transform.localPosition = new Vector3(0.5f, 0.5f, 0);
-            }
-        }
     }
 
     public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, GameObject usableItemObject)
@@ -105,12 +93,7 @@ public class InventoryManager : MonoBehaviour
             }
 
             // Add functional scripts
-            if (itemName == "Lantern")
-            {
-                if (!emptySlot.GetComponent<ItemEquipper>())
-                    emptySlot.gameObject.AddComponent<ItemEquipper>();
-            }
-            else if (itemName.Contains("Crystal") || itemName.Contains("Potion"))
+            if (itemName.Contains("Crystal") || itemName.Contains("Potion"))
             {
                 if (!emptySlot.GetComponent<ItemConsumer>())
                     emptySlot.gameObject.AddComponent<ItemConsumer>();
@@ -128,52 +111,6 @@ public class InventoryManager : MonoBehaviour
         {
             slot.selectedShader.SetActive(false);
             slot.thisItemSelected = false;
-        }
-
-        equipSlot.selectedShader.SetActive(false);
-        equipSlot.thisItemSelected = false;
-    }
-
-    public void EquipItem(itemSlot fromSlot)
-    {
-        if (equipSlot.isFull)
-        {
-            UnequipItem();
-        }
-
-        equipSlot.AddItem(fromSlot.itemName, fromSlot.quantity, fromSlot.itemSprite, fromSlot.itemDescription);
-
-        if (fromSlot.TryGetComponent<IUsableItem>(out var usable))
-        {
-            var usableType = usable.GetType();
-            if (!equipSlot.gameObject.GetComponent(usableType))
-            {
-                equipSlot.gameObject.AddComponent(usableType);
-            }
-        }
-
-        fromSlot.ClearSlot();
-    }
-
-    public void UnequipItem()
-    {
-        if (equipSlot.isFull)
-        {
-            AddItem(
-                equipSlot.itemName,
-                equipSlot.quantity,
-                equipSlot.itemSprite,
-                equipSlot.itemDescription,
-                equipSlot.gameObject
-            );
-
-            equipSlot.ClearSlot();
-
-            var lantern = GameObject.Find("LanternObject");
-            if (lantern != null)
-            {
-                lantern.SetActive(false);
-            }
         }
     }
 }

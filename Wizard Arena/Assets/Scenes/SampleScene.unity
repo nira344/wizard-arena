@@ -32349,7 +32349,6 @@ MonoBehaviour:
   - {fileID: 1353578762}
   - {fileID: 1491157476}
   winText: {fileID: 391969548}
-  equipSlot: {fileID: 0}
   player: {fileID: 4834298303938560702}
 --- !u!114 &1448204052
 MonoBehaviour:
