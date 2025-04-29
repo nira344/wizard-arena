@@ -11,6 +11,8 @@ public class door : MonoBehaviour
     private cameraController cam;
     private bool playerTouching;
 
+    public AudioSource sqweek;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +33,7 @@ public class door : MonoBehaviour
             else
                 cam.locked = false;
             player.transform.position = new Vector3(exitDoor.transform.position.x, exitDoor.transform.position.y, player.transform.position.z);
+            sqweek.Play();
         }
     }
 
