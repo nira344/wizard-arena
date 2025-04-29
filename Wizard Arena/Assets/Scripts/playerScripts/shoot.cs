@@ -26,9 +26,15 @@ public class shoot : MonoBehaviour
 
     void Start()
     {
+        // Get own components
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         statScript = GetComponent<HealthAndMana>();
+
+        // Turn off cooldowns
+        lastIceTime = (iceshardCooldownTime * -1);
+        lastFireTime = (fireballCooldownTime * -1);
+        lastMeleeTime = (meleeCooldownTime * -1);
 
         if (statScript == null)
         {
@@ -85,7 +91,7 @@ public class shoot : MonoBehaviour
 
     private void HandleMelee()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time - lastMeleeTime >= meleeCooldownTime)
+        if (Input.GetButtonDown("Fire1") && (Time.time - lastMeleeTime) >= meleeCooldownTime)
         {
             Instantiate(meleePrefab, transform.position, transform.rotation);
             lastMeleeTime = Time.time;

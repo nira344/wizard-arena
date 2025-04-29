@@ -6,7 +6,7 @@ public class cameraController : MonoBehaviour
 	// Config
 	public bool locked = false;
 	public float followTightness;
-	
+
 	// Publicly accesible camera lock position
 	public Vector2 lockPosition;
 
@@ -21,7 +21,7 @@ public class cameraController : MonoBehaviour
 		// If camera is locked, instantly move the camera to that spot
 		if (locked && (lockPosition != null))
 		{
-			desiredPos = new Vector3(lockPosition.x, lockPosition.y, transform.position.z);
+			transform.position = new Vector3(lockPosition.x, lockPosition.y, transform.position.z);
 		}
 		// If the camera is not locked, lerp to the player's approximate position
 		else
