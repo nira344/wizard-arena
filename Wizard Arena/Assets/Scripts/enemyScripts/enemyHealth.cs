@@ -4,6 +4,7 @@ public class enemyHealth : MonoBehaviour
 {
     public float health = 15f;  // Enemy health
     public int soulReward = 1;
+    public bool invincible = false;
 
     void Start()
     {
@@ -18,6 +19,11 @@ public class enemyHealth : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        // Don't take damage when invincible
+        if (invincible)
+        { return; }
+
+        // Reduce health
         health -= amount;
         Debug.Log($"{gameObject.name} took {amount} damage. Health now: {health}");
 
@@ -30,6 +36,8 @@ public class enemyHealth : MonoBehaviour
     void Die()
     {
         Debug.Log($"{gameObject.name} died. Granting {soulReward} souls.");
+        
+        // Add souls
         if (SoulManager.Instance != null)
         {
             SoulManager.Instance.AddSouls(soulReward);
@@ -39,6 +47,7 @@ public class enemyHealth : MonoBehaviour
             Debug.LogWarning("SoulManager.Instance is null! Souls not added.");
         }
 
+        // Remove enemy
         Destroy(gameObject);
     }
 }
