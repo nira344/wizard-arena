@@ -3108,7 +3108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3e744dc4b2bae4720b1a0ecf92d1c7d9, type: 2}
-  m_Color: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3570,8 +3570,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290756607
-  m_fontColor: {r: 1, g: 0.75, b: 0.75, a: 1}
+    rgba: 4290625023
+  m_fontColor: {r: 1, g: 0.740566, b: 0.740566, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8026,8 +8026,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290756607
-  m_fontColor: {r: 1, g: 0.75, b: 0.75, a: 1}
+    rgba: 4292204031
+  m_fontColor: {r: 1, g: 0.8349056, b: 0.8349056, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9245,8 +9245,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294824633
-  m_fontColor: {r: 0.7242346, g: 0.82459134, b: 0.990566, a: 1}
+    rgba: 4294956221
+  m_fontColor: {r: 0.740566, g: 0.83112323, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -22571,7 +22571,7 @@ Canvas:
   m_GameObject: {fileID: 794880958}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -27965,7 +27965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3e744dc4b2bae4720b1a0ecf92d1c7d9, type: 2}
-  m_Color: {r: 0, g: 0.15686275, b: 0.47058824, a: 1}
+  m_Color: {r: 0, g: 0.2901961, b: 0.83137256, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -30063,7 +30063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3e744dc4b2bae4720b1a0ecf92d1c7d9, type: 2}
-  m_Color: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -37808,7 +37808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3e744dc4b2bae4720b1a0ecf92d1c7d9, type: 2}
-  m_Color: {r: 0.47058824, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.8301887, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -38163,7 +38163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3e744dc4b2bae4720b1a0ecf92d1c7d9, type: 2}
-  m_Color: {r: 0.47058824, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.8679245, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
