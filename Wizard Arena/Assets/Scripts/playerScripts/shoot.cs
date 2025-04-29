@@ -24,19 +24,11 @@ public class shoot : MonoBehaviour
     private float lastFireTime = 0f;
     private float lastMeleeTime = 0f;
 
-    private bool isCasting = false;
-
     void Start()
     {
-        // Get own components
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         statScript = GetComponent<HealthAndMana>();
-
-        // Turn off cooldowns
-        lastIceTime = (iceshardCooldownTime * -1);
-        lastFireTime = (fireballCooldownTime * -1);
-        lastMeleeTime = (meleeCooldownTime * -1);
 
         if (statScript == null)
         {
@@ -51,8 +43,6 @@ public class shoot : MonoBehaviour
         HandleIceShard();
         HandleFireball();
         HandleMelee();
-
-        UpdateAnimationState();
     }
 
     private void HandleIceShard()
@@ -64,8 +54,7 @@ public class shoot : MonoBehaviour
                 statScript.currentMana -= 1;
                 Instantiate(iceshardPrefab, transform.position, transform.rotation);
                 PlaySound(ice_sound);
-                SetAnimationState(7); // Cast Ice Shard
-                isCasting = true;
+                TriggerAnimation("CastIce");
             }
             else
             {
@@ -84,8 +73,7 @@ public class shoot : MonoBehaviour
                 statScript.currentMana -= 3;
                 Instantiate(fireballPrefab, transform.position, transform.rotation);
                 PlaySound(fire_sound);
-                SetAnimationState(6); // Cast Fireball
-                isCasting = true;
+                TriggerAnimation("CastFire");
             }
             else
             {
@@ -97,40 +85,19 @@ public class shoot : MonoBehaviour
 
     private void HandleMelee()
     {
-        if (Input.GetButtonDown("Fire1") && (Time.time - lastMeleeTime) >= meleeCooldownTime)
+        if (Input.GetButtonDown("Fire1") && Time.time - lastMeleeTime >= meleeCooldownTime)
         {
             Instantiate(meleePrefab, transform.position, transform.rotation);
-            SetAnimationState(5); // Attack Animation (you can set your melee anim state here)
-            isCasting = true;
+            TriggerAnimation("Melee");
             lastMeleeTime = Time.time;
         }
     }
 
-    private void UpdateAnimationState()
-    {
-        if (statScript != null && statScript.IsDead())
-        {
-            SetAnimationState(4); // Dead
-            return;
-        }
-
-        if (isCasting)
-        {
-            // Casting animations already set, reset after short time if needed
-            isCasting = false;
-        }
-        else
-        {
-            // Set Idle or Walk based on player movement
-            SetAnimationState(0); // Idle
-        }
-    }
-
-    private void SetAnimationState(int state)
+    private void TriggerAnimation(string triggerName)
     {
         if (animator != null)
         {
-            animator.SetInteger("State", state);
+            animator.SetTrigger(triggerName);
         }
     }
 

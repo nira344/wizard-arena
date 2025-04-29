@@ -33,13 +33,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastIce
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 7
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3434690193944942820}
@@ -188,13 +183,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastFire
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1485333446645368559}
@@ -359,13 +349,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastFire
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1485333446645368559}
@@ -414,15 +399,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastIce
     m_EventTreshold: 0
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
-    m_EventTreshold: 7
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3434690193944942820}
   m_Solo: 0
@@ -520,13 +499,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastIce
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 7
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3434690193944942820}
@@ -550,15 +524,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastIce
     m_EventTreshold: 0
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
-    m_EventTreshold: 7
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3434690193944942820}
   m_Solo: 0
@@ -964,7 +932,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-<<<<<<< HEAD
   - m_Name: CastIce
     m_Type: 9
     m_DefaultFloat: 0
@@ -977,8 +944,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-=======
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1136,25 +1101,25 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2301700901668437685}
-    m_Position: {x: 120, y: -270, z: 0}
+    m_Position: {x: -100, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1540868623398308663}
-    m_Position: {x: -220, y: -20, z: 0}
+    m_Position: {x: -360, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1485333446645368559}
-    m_Position: {x: 290, y: -410, z: 0}
+    m_Position: {x: 120, y: -280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3434690193944942820}
-    m_Position: {x: -360, y: 50, z: 0}
+    m_Position: {x: 70, y: -230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6686345204115234815}
-    m_Position: {x: 30, y: -190, z: 0}
+    m_Position: {x: -180, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8090843984687510111}
-    m_Position: {x: -90, y: -110, z: 0}
+    m_Position: {x: -260, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6050612726617947718}
-    m_Position: {x: 210, y: -340, z: 0}
+    m_Position: {x: -30, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7824581223209256144}
     m_Position: {x: -500, y: 110, z: 0}
@@ -1164,7 +1129,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 720, y: 230, z: 0}
-  m_EntryPosition: {x: -1040, y: 140, z: 0}
+  m_EntryPosition: {x: -760, y: 120, z: 0}
   m_ExitPosition: {x: 930, y: 200, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -7824581223209256144}
@@ -1176,13 +1141,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastIce
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 7
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3434690193944942820}
@@ -1364,13 +1324,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastFire
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1485333446645368559}
@@ -1477,13 +1432,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastFire
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1485333446645368559}
@@ -1607,13 +1557,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastFire
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1485333446645368559}
@@ -1637,13 +1582,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastIce
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 7
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3434690193944942820}
@@ -1750,13 +1690,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
     m_ConditionEvent: CastFire
-=======
-  - m_ConditionMode: 6
-    m_ConditionEvent: State
->>>>>>> parent of 5381c09 (Merge branch 'mana-hp-and-spells' of https://github.com/nira344/wizard-arena into mana-hp-and-spells)
     m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1485333446645368559}
