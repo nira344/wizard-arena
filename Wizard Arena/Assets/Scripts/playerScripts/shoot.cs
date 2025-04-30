@@ -38,7 +38,7 @@ public class shoot : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale <= 0) return;
+        if (Time.timeScale <= 0 || statScript.currentHealth == 0) return;
 
         HandleIceShard();
         HandleFireball();

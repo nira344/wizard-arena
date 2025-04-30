@@ -4,7 +4,7 @@ using TMPro;
 public class wizardBoss : MonoBehaviour
 {
 
-    // Configuration
+    [Header("Configuration")]
     public float speed;
     public float spellCooldown;
     private float cooldownTimer;
@@ -17,7 +17,7 @@ public class wizardBoss : MonoBehaviour
     // AI status
     private bool activated;
 
-    // HUD elements
+    [Header("HUD Elements")]
     public HealthBar healthBar;
     public bossBar bossHealthBar;
     public TextMeshProUGUI winText;
