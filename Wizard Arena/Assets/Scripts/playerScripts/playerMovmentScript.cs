@@ -13,7 +13,7 @@ public class PlayerMovmentScript : MonoBehaviour
 
     [Header("Wall Jumping")]
     public float wallSlideSpeed = 2f;
-    public bool isWallJumping;
+    [HideInInspector] public bool isWallJumping;
     public float wallJumpingDirection;
     public float wallJumpingTime = 0.2f;
     public float wallJumpingCounter;
@@ -21,6 +21,10 @@ public class PlayerMovmentScript : MonoBehaviour
     public Vector2 wallJumpingPower = new Vector2(8f, 16f);
     private float wallSlideLockTimer = 0f;
     public float wallSlideLockDuration = 0.2f;
+    private bool isWallSliding = false;
+    private bool isTouchingLeftWall = false;
+    private bool isTouchingRightWall = false;
+    private bool isTouchingWall = false;
 
     [Header("Dodge")]
     public float dodgeCooldownTime = 1.0f;
@@ -32,27 +36,22 @@ public class PlayerMovmentScript : MonoBehaviour
     private float dodgeTimeCounter = 0f;
     private float invincibilityTimeCounter = 0f;
 
-    // Other variables
-    private float lastAttackTime = 0f;
-    public float direction = 0f;
-    private bool isWallSliding = false;
-    private bool isTouchingLeftWall = false;
-    private bool isTouchingRightWall = false;
-    private bool isTouchingWall = false;
-
-    private Rigidbody2D rb;
-    private BoxCollider2D coll;
-    private SpriteRenderer spriteRenderer;
-    public HealthAndMana playerHealthAndMana;
-
     [Header("Footstep Sounds")]
-    private AudioSource footstep;
     public AudioClip footstep1;
     public AudioClip footstep2;
     public AudioClip footstep3;
     public AudioClip footstep4;
     public AudioClip footstep5;
+    private AudioSource footstep;
     private Animator animator;
+
+    // Other variables
+    private float lastAttackTime = 0f;
+    [HideInInspector] public float direction = 0f;
+    private Rigidbody2D rb;
+    private BoxCollider2D coll;
+    private SpriteRenderer spriteRenderer;
+    [HideInInspector] public HealthAndMana playerHealthAndMana;
     
     // Step SFX Spacing
     public float stepCooldown = 0.2f;

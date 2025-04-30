@@ -3,13 +3,13 @@ using System.Collections;
 
 public class cameraController : MonoBehaviour
 {
-	// Configuration
+	[Header("Configuration")]
 	public bool teleport = false;
 	public float followTightness;
 
 	// Publicly accesible camera locking variables
-	public Vector2 lockPosition;
-	public bool locked = false;
+	[HideInInspector] public Vector2 lockPosition;
+	[HideInInspector] public bool locked = false;
 
 	// Player object
 	private GameObject player;
