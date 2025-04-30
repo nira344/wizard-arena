@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Chest : MonoBehaviour
 {
-    private int storedSouls;
+    [SerializeField] private int storedSouls;
 
     [SerializeField] private List<GameObject> itemDrops = new List<GameObject>();
 
@@ -18,8 +18,19 @@ public class Chest : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("Manual chest open test");
+            OpenChest();
+        }
+    }
+
     public void OpenChest()
     {
+        Debug.Log("Opening chest: Dropping " + itemDrops.Count + " items, Souls: " + storedSouls);
+
         SoulManager.Instance.AddSouls(storedSouls);
 
         foreach (var item in itemDrops)
@@ -27,13 +38,15 @@ public class Chest : MonoBehaviour
             if (item != null)
             {
                 Vector3 dropOffset = Random.insideUnitSphere * 0.5f;
-                dropOffset.y = Mathf.Abs(dropOffset.y); // ensure spawn above ground
-                Instantiate(item, transform.position + dropOffset, Quaternion.identity);
+                dropOffset.y = Mathf.Abs(dropOffset.y);
+                var drop = Instantiate(item, transform.position + dropOffset, Quaternion.identity);
+                Debug.Log("Dropped item: " + drop.name);
             }
         }
 
-        Destroy(gameObject, 0.5f); // optional delay for animations or sound
+        Destroy(gameObject, 0.5f);
     }
+
 
     public void OnMeleeHit()
     {
