@@ -7,7 +7,7 @@ public class wizardBoss : MonoBehaviour
     // Configuration
     public float speed;
     public float spellCooldown;
-    public float cooldownTimer;
+    private float cooldownTimer;
     public GameObject spell;
 
     // Components
@@ -25,16 +25,16 @@ public class wizardBoss : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Get own health script and turn invincible
+        hp = GetComponent<enemyHealth>();
+        hp.invincible = true;
+
         // Disable boss HUD elements
         winText.gameObject.SetActive(false);
         healthBar.SetMaxHealth(hp.health);
 
         // Find player
         player = GameObject.FindGameObjectWithTag("Player");
-
-        // Get own health script and turn invincible
-        hp = gameObject.GetComponent<enemyHealth>();
-        hp.invincible = true;
 
         // Reset spell cooldown
         cooldownTimer = 0;
