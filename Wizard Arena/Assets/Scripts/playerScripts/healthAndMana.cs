@@ -3,6 +3,7 @@ using TMPro;
 
 public class HealthAndMana : MonoBehaviour
 {
+    [Header("Values")]
     public int maxHealth = 10;
     public int maxMana = 20;
     public int currentHealth;
@@ -10,6 +11,7 @@ public class HealthAndMana : MonoBehaviour
 
     private bool isDead = false;
 
+    [Header("HUD Elements")]
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI manaText;
     public TextMeshProUGUI deathText;
@@ -17,6 +19,7 @@ public class HealthAndMana : MonoBehaviour
     public HealthBar healthBar;
     public HealthBar manaBar;
 
+    [Header("Debug")]
     public bool debugEnabled;
 
     void Start()

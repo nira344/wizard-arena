@@ -2,22 +2,18 @@ using UnityEngine;
 
 public class PlayerMovmentScript : MonoBehaviour
 {
-    // Gravity parameters
+    [Header("Gravity")]
     public float fallGravityMult = 2.0f;
     public float maxFallSpeed = -10.0f;
     public float gravityScale = 1.0f;
 
-    // Speed parameters
+    [Header("Speed")]
     public float speed = 5f;
-
-    // Jump parameters
     public float jumpSpeed = 10f;
 
-    // Wall sliding parameters
+    [Header("Wall Jumping")]
     public float wallSlideSpeed = 2f;
-
-    // Wall jumping parameters
-    public bool isWallJumping;
+    [HideInInspector] public bool isWallJumping;
     public float wallJumpingDirection;
     public float wallJumpingTime = 0.2f;
     public float wallJumpingCounter;
@@ -25,8 +21,12 @@ public class PlayerMovmentScript : MonoBehaviour
     public Vector2 wallJumpingPower = new Vector2(8f, 16f);
     private float wallSlideLockTimer = 0f;
     public float wallSlideLockDuration = 0.2f;
+    private bool isWallSliding = false;
+    private bool isTouchingLeftWall = false;
+    private bool isTouchingRightWall = false;
+    private bool isTouchingWall = false;
 
-    // Dodge parameters
+    [Header("Dodge")]
     public float dodgeCooldownTime = 1.0f;
     public float dodgeSpeed = 15f;
     public float dodgeDuration = 0.2f;
@@ -36,26 +36,22 @@ public class PlayerMovmentScript : MonoBehaviour
     private float dodgeTimeCounter = 0f;
     private float invincibilityTimeCounter = 0f;
 
-    // Other variables
-    private float lastAttackTime = 0f;
-    public float direction = 0f;
-    private bool isWallSliding = false;
-    private bool isTouchingLeftWall = false;
-    private bool isTouchingRightWall = false;
-    private bool isTouchingWall = false;
-
-    private Rigidbody2D rb;
-    private BoxCollider2D coll;
-    private SpriteRenderer spriteRenderer;
-    public HealthAndMana playerHealthAndMana;
-
-    private AudioSource footstep;
+    [Header("Footstep Sounds")]
     public AudioClip footstep1;
     public AudioClip footstep2;
     public AudioClip footstep3;
     public AudioClip footstep4;
     public AudioClip footstep5;
+    private AudioSource footstep;
     private Animator animator;
+
+    // Other variables
+    private float lastAttackTime = 0f;
+    [HideInInspector] public float direction = 0f;
+    private Rigidbody2D rb;
+    private BoxCollider2D coll;
+    private SpriteRenderer spriteRenderer;
+    [HideInInspector] public HealthAndMana playerHealthAndMana;
     
     // Step SFX Spacing
     public float stepCooldown = 0.2f;
