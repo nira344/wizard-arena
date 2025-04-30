@@ -69,4 +69,9 @@ public class EnemyAttack : MonoBehaviour
             touchingPlayer = false;
         }
     }
+
+    public bool IsTouchingPlayer()
+    {
+        return touchingPlayer;
+    }
 }

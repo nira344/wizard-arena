@@ -88,7 +88,7 @@ public class enemyGround : MonoBehaviour
         }
     }
 
-    bool playerInRange()
+    public bool playerInRange()
     {
         // subtract source and target positions to get vector between
         Vector2 distanceVector = player.transform.position - transform.position;
