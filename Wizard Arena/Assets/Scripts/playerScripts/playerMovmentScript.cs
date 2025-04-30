@@ -2,21 +2,17 @@ using UnityEngine;
 
 public class PlayerMovmentScript : MonoBehaviour
 {
-    // Gravity parameters
+    [Header("Gravity")]
     public float fallGravityMult = 2.0f;
     public float maxFallSpeed = -10.0f;
     public float gravityScale = 1.0f;
 
-    // Speed parameters
+    [Header("Speed")]
     public float speed = 5f;
-
-    // Jump parameters
     public float jumpSpeed = 10f;
 
-    // Wall sliding parameters
+    [Header("Wall Jumping")]
     public float wallSlideSpeed = 2f;
-
-    // Wall jumping parameters
     public bool isWallJumping;
     public float wallJumpingDirection;
     public float wallJumpingTime = 0.2f;
@@ -26,7 +22,7 @@ public class PlayerMovmentScript : MonoBehaviour
     private float wallSlideLockTimer = 0f;
     public float wallSlideLockDuration = 0.2f;
 
-    // Dodge parameters
+    [Header("Dodge")]
     public float dodgeCooldownTime = 1.0f;
     public float dodgeSpeed = 15f;
     public float dodgeDuration = 0.2f;
@@ -49,6 +45,7 @@ public class PlayerMovmentScript : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public HealthAndMana playerHealthAndMana;
 
+    [Header("Footstep Sounds")]
     private AudioSource footstep;
     public AudioClip footstep1;
     public AudioClip footstep2;
