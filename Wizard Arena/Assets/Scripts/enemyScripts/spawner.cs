@@ -43,7 +43,7 @@ public class spawner : MonoBehaviour
         {
             if (spawnedEnemyObjects.Count < maxEnemies)
             {
-                Vector3 spawnLocation = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1);
+                Vector3 spawnLocation = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -3);
                 GameObject goober = Instantiate(prefabs[0], spawnLocation, Quaternion.identity);
                 timer = spawnCooldown;
                 spawnedEnemyObjects.Insert(0, goober);
