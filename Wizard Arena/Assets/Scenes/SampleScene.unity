@@ -36497,7 +36497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueLines:
-  - press F to continue dialouge
+  - press F to continue dialouge press C to skip
   - "Awaken, thou hollowed shell\u2026"
   - Doth thine eyes open at last, Aye?
   - "Thou art yet breathin\u2019, but soul-less still."
