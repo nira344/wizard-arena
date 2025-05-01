@@ -3369,6 +3369,7 @@ GameObject:
   - component: {fileID: 170772707}
   - component: {fileID: 170772703}
   - component: {fileID: 170772702}
+  - component: {fileID: 170772708}
   m_Layer: 8
   m_Name: GILBERT
   m_TagString: Enemy
@@ -3552,6 +3553,103 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!82 &170772708
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170772701}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &182690217
 GameObject:
   m_ObjectHideFlags: 0
@@ -3957,6 +4055,74 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 35.039673, y: 75.53557}
   m_EdgeRadius: 0
+<<<<<<< Updated upstream
+=======
+--- !u!1001 &204567482
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1217029439}
+    m_Modifications:
+    - target: {fileID: 1806710101723485970, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 1556246580650779015, guid: af3e9f80bfeaf42b8b96de105e259f58, type: 3}
+    - target: {fileID: 4063083037052381269, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_Name
+      value: HealingPotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063083037052381269, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_TagString
+      value: item
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -164.956
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -22.194
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.878754
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395294876645018087, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76664e3855e784d87b0fda87f2d005ea, type: 3}
+>>>>>>> Stashed changes
 --- !u!1 &206281720
 GameObject:
   m_ObjectHideFlags: 0
@@ -44770,10 +44936,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4834298303938560702}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 7e145255024904eb5b8e44c4155f984e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDestroyedSound: {fileID: 8300000, guid: 0552719beffde4b96aa534b0bee5dacc, type: 3}
+=======
+  m_Script: {fileID: 11500000, guid: f68dadad4f0f9427f91dc5a2d13118e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroySound: {fileID: 8300000, guid: 0552719beffde4b96aa534b0bee5dacc, type: 3}
+>>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
