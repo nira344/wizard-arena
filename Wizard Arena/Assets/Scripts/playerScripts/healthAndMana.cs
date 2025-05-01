@@ -120,4 +120,11 @@ public class HealthAndMana : MonoBehaviour
         manaBar.SetMaxHealth(maxMana);
         PlayerPrefs.SetInt("MaxMana", maxMana);
     }
+
+    public void DrainMana(float amount)
+    {
+        currentMana -= Mathf.FloorToInt(amount);
+        currentMana = Mathf.Max(currentMana, 0);
+        Debug.Log("Mana drained: " + amount + ", Current Mana: " + currentMana);
+    }
 }
