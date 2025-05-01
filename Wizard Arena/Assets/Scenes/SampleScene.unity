@@ -26623,6 +26623,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &970445581
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7271953346806986975, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_Name
+      value: Jimbo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.634224
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.097889
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330987332522740408, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4cba39d28e2e647fab1c49d84e8686a0, type: 3}
 --- !u!1 &983934766
 GameObject:
   m_ObjectHideFlags: 0
@@ -44327,6 +44384,7 @@ GameObject:
   - component: {fileID: 8907761031978245164}
   - component: {fileID: 8907761031978245166}
   - component: {fileID: 8907761031978245167}
+  - component: {fileID: 8907761031978245168}
   m_Layer: 3
   m_Name: Sorcerer
   m_TagString: Player
@@ -44703,6 +44761,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8907761031978245168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4834298303938560702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e145255024904eb5b8e44c4155f984e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDestroyedSound: {fileID: 8300000, guid: 0552719beffde4b96aa534b0bee5dacc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -44716,3 +44787,4 @@ SceneRoots:
   - {fileID: 1951948062}
   - {fileID: 1288917931}
   - {fileID: 680283180}
+  - {fileID: 970445581}

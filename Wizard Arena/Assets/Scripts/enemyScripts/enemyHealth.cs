@@ -5,10 +5,12 @@ public class enemyHealth : MonoBehaviour
     public float health = 15f;  // Enemy health
     public int soulReward = 1;
     public bool invincible = false;
+    private deathsound Deathsound;
 
     void Start()
     {
         Debug.Log($"{gameObject.name} spawned with {health} health.");
+        Deathsound = FindFirstObjectByType<deathsound>();
     }
 
     void Update()
@@ -45,6 +47,12 @@ public class enemyHealth : MonoBehaviour
         else
         {
             Debug.LogWarning("SoulManager.Instance is null! Souls not added.");
+        }
+
+        // Play the destruction sound via the SoundManager
+        if (Deathsound != null)
+        {
+            Deathsound.PlayEnemyDestroyedSound();
         }
 
         // Remove enemy

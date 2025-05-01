@@ -6,12 +6,9 @@ public class areaMusic : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.LogError("something just happened");
         if (collision.CompareTag("Player"))
         {
-            Debug.LogError("playing music");
             music.Play();
-            Debug.LogError("music started");
         }
     }
 
