@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections;
 
 public class ItemConsumer : MonoBehaviour
 {
     private itemSlot slot;
     private InventoryManager inventoryManager;
     private GameObject player;
+    private bool isConsuming = false;
 
     void Start()
     {
@@ -32,7 +34,10 @@ public class ItemConsumer : MonoBehaviour
     {
         if (slot == null || inventoryManager == null || player == null) return;
 
-        if (slot.thisItemSelected && Input.GetKeyDown(KeyCode.F) && slot.isFull)
+        // Only let the SELECTED slot consume
+        if (!slot.thisItemSelected || !slot.isFull) return;
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
             TryConsume();
         }
@@ -40,6 +45,10 @@ public class ItemConsumer : MonoBehaviour
 
     public void TryConsume()
     {
+        if (isConsuming) return;
+
+        isConsuming = true;
+
         var usable = GetComponent<IUsableItem>();
         if (usable != null)
         {
@@ -51,5 +60,13 @@ public class ItemConsumer : MonoBehaviour
             else
                 slot.UpdateQuantityText();
         }
+
+        StartCoroutine(ResetConsumptionCooldown());
+    }
+
+    private IEnumerator ResetConsumptionCooldown()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isConsuming = false;
     }
 }

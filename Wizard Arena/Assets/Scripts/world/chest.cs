@@ -7,6 +7,8 @@ public class Chest : MonoBehaviour
 
     [SerializeField] private List<GameObject> itemDrops = new List<GameObject>();
 
+    private bool isOpened = false;
+
     public void Initialize(int soulAmount, List<GameObject> items = null)
     {
         storedSouls = soulAmount;
@@ -29,7 +31,8 @@ public class Chest : MonoBehaviour
 
     public void OpenChest()
     {
-        Debug.Log("Opening chest: Dropping " + itemDrops.Count + " items, Souls: " + storedSouls);
+        if (isOpened) return; // Prevent double-trigger
+        isOpened = true;
 
         SoulManager.Instance.AddSouls(storedSouls);
 
@@ -39,14 +42,12 @@ public class Chest : MonoBehaviour
             {
                 Vector3 dropOffset = Random.insideUnitSphere * 0.5f;
                 dropOffset.y = Mathf.Abs(dropOffset.y);
-                var drop = Instantiate(item, transform.position + dropOffset, Quaternion.identity);
-                Debug.Log("Dropped item: " + drop.name);
+                Instantiate(item, transform.position + dropOffset, Quaternion.identity);
             }
         }
 
         Destroy(gameObject, 0.5f);
     }
-
 
     public void OnMeleeHit()
     {
