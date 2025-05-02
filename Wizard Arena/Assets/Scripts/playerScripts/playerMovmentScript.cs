@@ -288,7 +288,7 @@ public class PlayerMovmentScript : MonoBehaviour
             LayerMask.GetMask("Ground", "Default", "Enemy")
         );
 
-        return hit.collider != null;
+        return hit.collider != null && !hit.collider.isTrigger;
     }
 
     private void UpdateInvincibilityVisual()
