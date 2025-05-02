@@ -81,15 +81,12 @@ public class InventoryManager : MonoBehaviour
             emptySlot.AddItem(itemName, quantity, itemSprite, itemDescription);
 
             // Add usable item script
-            if (usableItemObject.TryGetComponent<IUsableItem>(out var usableItem))
+            if (usableItemObject.TryGetComponent<IUsableItem>(out var usable))
             {
-                var usableType = usableItem.GetType();
-                if (!emptySlot.GetComponent(usableType))
-                {
-                    emptySlot.gameObject.AddComponent(usableType);
-                }
-
-                emptySlot.ConfigureSlotForItem(usableItem);
+                var usableType = usable.GetType();
+                var newUsable = (IUsableItem)emptySlot.gameObject.AddComponent(usableType); // 👈 Replace with this
+                emptySlot.usableItem = newUsable;
+                emptySlot.ConfigureSlotForItem(newUsable);
             }
 
             // Add functional scripts

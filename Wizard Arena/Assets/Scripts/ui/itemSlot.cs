@@ -21,6 +21,7 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
 
     public GameObject selectedShader;
     public bool thisItemSelected;
+    public IUsableItem usableItem;
 
     private InventoryManager inventoryManager;
     public GameObject player;
@@ -108,7 +109,7 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
 
     public void ActivateSelectedItem()
     {
-        if (TryGetComponent<ItemConsumer>(out var consumer) && consumer.enabled)
+        if (TryGetComponent<ItemConsumer>(out var consumer))
         {
             consumer.TryConsume();
         }
