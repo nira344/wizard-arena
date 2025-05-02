@@ -20,7 +20,7 @@ public class deathsound : MonoBehaviour
     void OnDestroy()
     {
         // When the script or object is destroyed, check for any object with "Enemy" tag
-        if (this.CompareTag("Enemy") && enemyDestroyedSound != null)
+        if (this.CompareTag("Enemy") || this.CompareTag("Player") && enemyDestroyedSound != null)
         {
             PlayEnemyDestroyedSound();
         }
