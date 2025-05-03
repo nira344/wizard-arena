@@ -13,6 +13,13 @@ public class DialogueTrigger : MonoBehaviour
 
     private bool inUse;
     private int currentLine = 0;
+    private GameObject ContinueText;
+
+    void Start()
+    {
+        ContinueText = dialogueText.transform.GetChild(0).gameObject;
+        ContinueText.SetActive(false);
+    }
 
     void Update()
     {

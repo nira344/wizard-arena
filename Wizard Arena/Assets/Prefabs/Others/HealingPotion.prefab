@@ -149,6 +149,7 @@ MonoBehaviour:
   sprite: {fileID: 1556246580650779015, guid: af3e9f80bfeaf42b8b96de105e259f58, type: 3}
   itemDescription: 'A blood red potion you found somewhere that has healing properties.
     [Heal 3 HP]'
+  pickupSound: {fileID: 8300000, guid: eb2857d9d7327411eb85937a0c5f3b88, type: 3}
 --- !u!61 &2967833129733374943
 BoxCollider2D:
   m_ObjectHideFlags: 0

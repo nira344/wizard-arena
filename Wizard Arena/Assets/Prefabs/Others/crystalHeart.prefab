@@ -108,6 +108,7 @@ MonoBehaviour:
   sprite: {fileID: -8092667638713910706, guid: 48dac79119f4649db9b6d00fecf3ee7e, type: 3}
   itemDescription: 'A beating heart made of blood incased in crystal, when crushed
     heals you. [gain 1 max HP]'
+  pickupSound: {fileID: 8300000, guid: eb2857d9d7327411eb85937a0c5f3b88, type: 3}
 --- !u!50 &3094068686459048144
 Rigidbody2D:
   serializedVersion: 5
