@@ -1,7 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 
 public class DialogueTrigger : MonoBehaviour
 {
@@ -11,52 +11,51 @@ public class DialogueTrigger : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public float typingSpeed = 0.05f;
 
-    private bool inUse;
+    private bool isTyping = false;
     private int currentLine = 0;
-    private GameObject ContinueText;
+    private GameObject continueText;
+    private Coroutine typingCoroutine;
 
     void Start()
     {
-        ContinueText = dialogueText.transform.GetChild(0).gameObject;
-        ContinueText.SetActive(false);
+        continueText = dialogueText.transform.GetChild(0).gameObject;
+        continueText.SetActive(false);
+        dialogueText.text = "";
     }
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.F))
+        if (!playerInRange || dialogueLines.Count == 0) return;
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if (inUse)
+            if (isTyping)
             {
-                StopAllCoroutines();
+                // Skip typing and show full line
+                StopCoroutine(typingCoroutine);
                 dialogueText.text = dialogueLines[currentLine];
-                inUse = false;
-                currentLine++;
+                isTyping = false;
+                continueText.SetActive(true);
             }
             else
             {
+                currentLine++;
+
                 if (currentLine >= dialogueLines.Count)
                 {
-                    if (currentLine == 0)
-                    {
-                        Debug.LogError(gameObject.name + " AIN'T GOT NO DIALOGUE IDIOT");
-                    }
-                    else
-                    {
-                        CloseDialogue();
-                    }
+                    CloseDialogue();
                 }
                 else
                 {
-                    StartCoroutine(TypeDialogue(dialogueLines[currentLine]));
+                    continueText.SetActive(false);
+                    typingCoroutine = StartCoroutine(TypeDialogue(dialogueLines[currentLine]));
                 }
             }
         }
-        else if (playerInRange && Input.GetKeyDown(KeyCode.C))
+
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            if (inUse)
-            {
-                CloseDialogue();
-            }
+            CloseDialogue();
         }
     }
 
@@ -65,6 +64,11 @@ public class DialogueTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+
+            if (dialogueLines.Count > 0 && dialogueText.text == "")
+            {
+                typingCoroutine = StartCoroutine(TypeDialogue(dialogueLines[currentLine]));
+            }
         }
     }
 
@@ -79,22 +83,28 @@ public class DialogueTrigger : MonoBehaviour
 
     private void CloseDialogue()
     {
-        StopAllCoroutines();
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
         dialogueText.text = "";
-        inUse = false;
+        continueText.SetActive(false);
+        isTyping = false;
         currentLine = 0;
     }
 
     IEnumerator TypeDialogue(string line)
     {
-        inUse = true;
+        isTyping = true;
         dialogueText.text = "";
+
         foreach (char letter in line.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        inUse = false;
-        currentLine++;
+
+        isTyping = false;
+        continueText.SetActive(true);
     }
 }
