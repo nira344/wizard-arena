@@ -1,100 +1,104 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System.Collections.Generic;
 
-public class SpellMenuManager : MonoBehaviour
+public class RespawnPoint : MonoBehaviour
 {
-    public static SpellMenuManager Instance;
+    public GameObject player;
+    public float respawnDelay = 2f;
 
-    [Header("UI References")]
-    public GameObject spellMenuUI;
-    public GameObject SpellPanel;
-    public SpellSlot[] spellSlots;
-    public EquipSlot[] equipSlots; // 0 and 1 for normal spells
-    public EquipSlot mobilitySlot;
-    public Image descriptionImage;
-    public TMP_Text descriptionText;
-    public TMP_Text descriptionNameText;
+    private HealthAndMana healthAndMana;
+    private Vector3 respawnPosition;
+    private bool hasRespawned = false;
+    private bool isClaimed = false;
+    private bool playerTouching = false;
+    private bool spellMenuOpen = false;
 
-    private List<Spell> unlockedSpells = new List<Spell>();
-
-    void Awake()
+    void Start()
     {
-        if (Instance != null && Instance != this)
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-
-        if (SpellPanel == null || spellMenuUI == null)
-        {
-            Debug.LogError("SpellMenuManager: SpellPanel or spellMenuUI is not assigned!");
+            healthAndMana = player.GetComponent<HealthAndMana>();
+            respawnPosition = player.transform.position;
         }
     }
 
-    public void OpenMenu()
+    void Update()
     {
-        spellMenuUI.SetActive(true);
-        SpellPanel.SetActive(true);
-        UpdateSlots();
+        if (player == null || healthAndMana == null) return;
 
-        foreach (Transform child in SpellPanel.transform)
+        if (playerTouching && Input.GetKeyDown(KeyCode.F))
         {
-            child.gameObject.SetActive(true);
-        }
-    }
-
-    public void CloseMenu()
-    {
-        spellMenuUI.SetActive(false);
-        SpellPanel.SetActive(false);
-    }
-
-    public void UnlockSpell(Spell newSpell)
-    {
-        if (!unlockedSpells.Contains(newSpell))
-        {
-            unlockedSpells.Add(newSpell);
-        }
-    }
-
-    private void UpdateSlots()
-    {
-        for (int i = 0; i < spellSlots.Length; i++)
-        {
-            if (i < unlockedSpells.Count)
+            if (!isClaimed)
             {
-                spellSlots[i].ConfigureSlot(unlockedSpells[i]);
-                spellSlots[i].gameObject.SetActive(true);
+                isClaimed = true;
+                respawnPosition = transform.position;
+                Debug.Log("Checkpoint claimed!");
             }
             else
             {
-                spellSlots[i].gameObject.SetActive(false);
+                if (!spellMenuOpen)
+                {
+                    healthAndMana.currentHealth = healthAndMana.maxHealth;
+                    healthAndMana.currentMana = healthAndMana.maxMana;
+                    SpellMenuManager.Instance.OpenMenu();
+                    Time.timeScale = 0f;
+                    spellMenuOpen = true;
+                    Debug.Log("Healed and spell menu opened.");
+                }
+                else
+                {
+                    SpellMenuManager.Instance.CloseMenu();
+                    Time.timeScale = 1f;
+                    spellMenuOpen = false;
+                    Debug.Log("Spell menu closed.");
+                }
             }
         }
-    }
 
-    public void ShowDescription(Spell spell)
-    {
-        descriptionNameText.text = spell.spellName;
-        descriptionImage.sprite = spell.spellIcon;
-        descriptionText.text = spell.description;
-    }
-
-    public void EquipSpell(Spell spell)
-    {
-        if (spell.isMobilitySpell)
+        if (healthAndMana.IsDead() && !hasRespawned)
         {
-            mobilitySlot.SetSpell(spell);
+            hasRespawned = true;
+            Invoke(nameof(RespawnPlayer), respawnDelay);
         }
-        else
+    }
+
+    void RespawnPlayer()
+    {
+        player.transform.position = new Vector3(respawnPosition.x, respawnPosition.y, player.transform.position.z);
+        healthAndMana.currentHealth = healthAndMana.maxHealth;
+        healthAndMana.currentMana = healthAndMana.maxMana;
+
+        typeof(HealthAndMana)
+            .GetField("isDead", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(healthAndMana, false);
+
+        healthAndMana.deathText.gameObject.SetActive(false);
+        Debug.Log("Player respawned!");
+        hasRespawned = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player"))
         {
-            if (!equipSlots[0].spellImage.enabled)
-                equipSlots[0].SetSpell(spell);
-            else
-                equipSlots[1].SetSpell(spell);
+            playerTouching = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player"))
+        {
+            playerTouching = false;
+
+            // Auto-close menu if still open
+            if (spellMenuOpen)
+            {
+                SpellMenuManager.Instance.CloseMenu();
+                Time.timeScale = 1f;
+                spellMenuOpen = false;
+                Debug.Log("Spell menu auto-closed on exit.");
+            }
         }
     }
 }
