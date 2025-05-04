@@ -7,38 +7,45 @@ public class SpellMenuManager : MonoBehaviour
 {
     public static SpellMenuManager Instance;
 
-    [Header("UI References")]
     public GameObject spellMenuUI;
-    public GameObject SpellPanel;
     public SpellSlot[] spellSlots;
     public EquipSlot[] equipSlots; // 0 and 1 for normal spells
     public EquipSlot mobilitySlot;
+    public GameObject SpellPanel;
+
     public Image descriptionImage;
     public TMP_Text descriptionText;
     public TMP_Text descriptionNameText;
 
     private List<Spell> unlockedSpells = new List<Spell>();
+    private bool isMenuOpen = false;
+    public bool playerInZone = false;
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
         Instance = this;
 
-        if (SpellPanel == null || spellMenuUI == null)
+        if (SpellPanel == null)
+            Debug.LogError("SpellMenuManager: SpellPanel is not assigned in the Inspector!");
+    }
+
+    void Update()
+    {
+        if (playerInZone && Input.GetKeyDown(KeyCode.F))
         {
-            Debug.LogError("SpellMenuManager: SpellPanel or spellMenuUI is not assigned!");
+            if (isMenuOpen)
+                CloseMenu();
+            else
+                OpenMenu();
         }
     }
 
     public void OpenMenu()
     {
+        isMenuOpen = true;
+        Time.timeScale = 0f;
         spellMenuUI.SetActive(true);
         SpellPanel.SetActive(true);
-        UpdateSlots();
 
         foreach (Transform child in SpellPanel.transform)
         {
@@ -48,6 +55,8 @@ public class SpellMenuManager : MonoBehaviour
 
     public void CloseMenu()
     {
+        isMenuOpen = false;
+        Time.timeScale = 1f;
         spellMenuUI.SetActive(false);
         SpellPanel.SetActive(false);
     }
@@ -60,19 +69,14 @@ public class SpellMenuManager : MonoBehaviour
         }
     }
 
-    private void UpdateSlots()
+    void UpdateSlots()
     {
         for (int i = 0; i < spellSlots.Length; i++)
         {
             if (i < unlockedSpells.Count)
-            {
                 spellSlots[i].ConfigureSlot(unlockedSpells[i]);
-                spellSlots[i].gameObject.SetActive(true);
-            }
             else
-            {
                 spellSlots[i].gameObject.SetActive(false);
-            }
         }
     }
 
@@ -95,6 +99,27 @@ public class SpellMenuManager : MonoBehaviour
                 equipSlots[0].SetSpell(spell);
             else
                 equipSlots[1].SetSpell(spell);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SpellMenuManager.Instance.playerInZone = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SpellMenuManager.Instance.playerInZone = false;
+
+            if (Time.timeScale == 0f) // menu open
+            {
+                SpellMenuManager.Instance.CloseMenu();
+            }
         }
     }
 }
