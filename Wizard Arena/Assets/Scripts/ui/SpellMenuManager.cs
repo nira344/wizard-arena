@@ -7,6 +7,10 @@ public class SpellMenuManager : MonoBehaviour
 {
     public static SpellMenuManager Instance;
 
+    public Spell equippedPrimarySpell;
+    public Spell equippedSecondarySpell;
+    public Spell equippedMobilitySpell;
+
     [Header("UI References")]
     public GameObject spellMenuUI;
     public GameObject SpellPanel;
@@ -21,17 +25,8 @@ public class SpellMenuManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-
-        if (SpellPanel == null || spellMenuUI == null)
-        {
-            Debug.LogError("SpellMenuManager: SpellPanel or spellMenuUI is not assigned!");
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     public void OpenMenu()
@@ -52,11 +47,11 @@ public class SpellMenuManager : MonoBehaviour
         SpellPanel.SetActive(false);
     }
 
-    public void UnlockSpell(Spell newSpell)
+    public void UnlockSpell(Spell spell)
     {
-        if (!unlockedSpells.Contains(newSpell))
+        if (!unlockedSpells.Contains(spell))
         {
-            unlockedSpells.Add(newSpell);
+            unlockedSpells.Add(spell);
         }
     }
 
@@ -87,14 +82,31 @@ public class SpellMenuManager : MonoBehaviour
     {
         if (spell.isMobilitySpell)
         {
+            equippedMobilitySpell = spell;
             mobilitySlot.SetSpell(spell);
         }
         else
         {
-            if (!equipSlots[0].spellImage.enabled)
+            if (equippedPrimarySpell == null)
+            {
+                equippedPrimarySpell = spell;
                 equipSlots[0].SetSpell(spell);
+            }
             else
+            {
+                equippedSecondarySpell = spell;
                 equipSlots[1].SetSpell(spell);
+            }
         }
+    }
+
+    public Spell GetSpell(Spell.SpellType type)
+    {
+        if (type == Spell.SpellType.Fireball || type == Spell.SpellType.IceShard)
+            return equippedPrimarySpell;
+        if (type == Spell.SpellType.ShadowDash)
+            return equippedMobilitySpell;
+
+        return null;
     }
 }

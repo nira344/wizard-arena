@@ -109,9 +109,28 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
 
     public void ActivateSelectedItem()
     {
+        Debug.Log($"Trying to activate item: {itemName}");
+
         if (TryGetComponent<ItemConsumer>(out var consumer))
         {
+            Debug.Log("Using ItemConsumer...");
             consumer.TryConsume();
+        }
+        else if (usableItem != null)
+        {
+            Debug.Log("Using IUsableItem directly...");
+            usableItem.Use(player);
+
+            // Optional: consume the item
+            quantity--;
+            if (quantity <= 0)
+                ClearSlot();
+            else
+                UpdateQuantityText();
+        }
+        else
+        {
+            Debug.LogWarning("No usable component found on item slot.");
         }
     }
 }

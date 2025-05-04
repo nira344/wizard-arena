@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class InventoryManager : MonoBehaviour
     public itemSlot[] itemSlot;
     public TextMeshProUGUI winText;
     public GameObject player;
+
+    public List<Spell> availableSpells = new List<Spell>();
+    public List<SpellSlot> spellSlots;
 
     void Start()
     {
@@ -83,10 +87,16 @@ public class InventoryManager : MonoBehaviour
             // Add usable item script
             if (usableItemObject.TryGetComponent<IUsableItem>(out var usable))
             {
+                Debug.Log($"Usable item script found: {usable.GetType().Name}");
+                
                 var usableType = usable.GetType();
-                var newUsable = (IUsableItem)emptySlot.gameObject.AddComponent(usableType); // 👈 Replace with this
+                var newUsable = (IUsableItem)emptySlot.gameObject.AddComponent(usableType);
                 emptySlot.usableItem = newUsable;
                 emptySlot.ConfigureSlotForItem(newUsable);
+            }
+            else
+            {
+                Debug.LogWarning("No IUsableItem component found on provided prefab.");
             }
 
             // Add functional scripts
@@ -108,6 +118,36 @@ public class InventoryManager : MonoBehaviour
         {
             slot.selectedShader.SetActive(false);
             slot.thisItemSelected = false;
+        }
+    }
+
+    public void UnlockSpell(Spell newSpell)
+    {
+        if (!availableSpells.Contains(newSpell))
+        {
+            availableSpells.Add(newSpell);
+            RefreshSpellUI();
+        }
+    }
+
+    public void RefreshSpellUI()
+    {
+        SpellMenuManager spellMenu = SpellMenuManager.Instance;
+        if (spellMenu == null)
+        {
+            spellMenu = FindObjectOfType<SpellMenuManager>();
+        }
+
+        for (int i = 0; i < spellSlots.Count; i++)
+        {
+            if (i < availableSpells.Count)
+            {
+                spellSlots[i].ConfigureSlot(availableSpells[i]);
+            }
+            else
+            {
+                spellSlots[i].ConfigureSlot(null);
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ public class SpellSlot : MonoBehaviour
     public GameObject selectedPanel;
 
     private Spell storedSpell;
+    private bool isSelected = false;
 
     public void ConfigureSlot(Spell spell)
     {
@@ -17,12 +18,14 @@ public class SpellSlot : MonoBehaviour
 
     public void SelectSlot()
     {
+        isSelected = true;
         selectedPanel.SetActive(true);
         SpellMenuManager.Instance.ShowDescription(storedSpell);
     }
 
     public void DeselectSlot()
     {
+        isSelected = false;
         selectedPanel.SetActive(false);
     }
 
@@ -35,4 +38,12 @@ public class SpellSlot : MonoBehaviour
     }
 
     public Spell GetStoredSpell() => storedSpell;
+
+    void Update()
+    {
+        if (isSelected && Input.GetKeyDown(KeyCode.F))
+        {
+            Equip();
+        }
+    }
 }
