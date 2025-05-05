@@ -33734,8 +33734,6 @@ MonoBehaviour:
   - {fileID: 586593758}
   winText: {fileID: 391969548}
   player: {fileID: 4834298303938560702}
-  availableSpells: []
-  spellSlots: []
 --- !u!114 &1448204052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44751,10 +44749,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020945cd4256d4ac2979994720b16dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 8242415882551670338, guid: 5166f9cfd2b0445ba8fa4f73e8648849, type: 3}
+  iceshardPrefab: {fileID: 8258303840590375760, guid: 5e86fc4469d2a41e380c189e7375cf62, type: 3}
   meleePrefab: {fileID: 3057016599928121658, guid: df4028011fe8041b7aaaff7431420d5f, type: 3}
+  fireballCooldownTime: 1
+  iceshardCooldownTime: 0.5
   meleeCooldownTime: 0.3
   ice_sound: {fileID: 8300000, guid: 0bc01bb36b69d4546a1226bb44f3ed8f, type: 3}
-  fire_sound: {fileID: 0}
+  fire_sound: {fileID: 8300000, guid: c9faab1f9b2bc401f966ccc4a540799c, type: 3}
 --- !u!1 &4834298303938560702
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,13 +13,23 @@ public class melee : MonoBehaviour
     private static float lastManaGainTime = -999f;
 
     private HealthAndMana playerHealthAndMana;
+    private Transform playerTransform;
 
     private bool active = true;
 
     void Start()
     {
         playerHealthAndMana = Object.FindFirstObjectByType<HealthAndMana>();
-        playerCollider = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Collider2D>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            playerCollider = player.GetComponent<Collider2D>();
+            playerTransform = player.transform;
+
+            // Set as child so it moves with player
+            transform.SetParent(playerTransform);
+        }
 
         if (playerCollider != null)
         {
@@ -33,6 +43,9 @@ public class melee : MonoBehaviour
 
     void Update()
     {
+        // Always follow player
+        PositionAndRotateMeleeObject();
+
         if (Time.time - timeSinceCreation >= destroyDelay)
         {
             Destroy(gameObject);
@@ -41,10 +54,13 @@ public class melee : MonoBehaviour
 
     private void PositionAndRotateMeleeObject()
     {
+        if (playerTransform == null) return;
+
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPosition.z = 0;
-        attackDirection = (mouseWorldPosition - transform.position).normalized;
-        transform.position = (Vector2)transform.position + attackDirection * attackRange;
+        attackDirection = (mouseWorldPosition - playerTransform.position).normalized;
+
+        transform.position = (Vector2)playerTransform.position + attackDirection * attackRange;
 
         float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
@@ -62,7 +78,7 @@ public class melee : MonoBehaviour
         }
         else if (other.CompareTag("Grave"))
         {
-            HandleGraveHit(other);  // Ensure interaction with the grave
+            HandleGraveHit(other);
         }
     }
 
@@ -76,10 +92,6 @@ public class melee : MonoBehaviour
                 Debug.Log("Melee hit an enemy. Mana gained! Current Mana: " + playerHealthAndMana.currentMana);
                 lastManaGainTime = Time.time;
             }
-            else
-            {
-                Debug.Log("Mana gain on cooldown.");
-            }
         }
 
         var healthComponent = other.GetComponent<enemyHealth>();
@@ -88,7 +100,8 @@ public class melee : MonoBehaviour
             healthComponent.TakeDamage(damage);
         }
 
-        Destroy(gameObject); // Destroy melee object after collision
+        // Optional: comment out to let it stay for full duration
+        // Destroy(gameObject);
     }
 
     private void HandleChestHit(Collider2D other)
@@ -96,11 +109,11 @@ public class melee : MonoBehaviour
         Chest chest = other.GetComponent<Chest>();
         if (chest != null)
         {
-            chest.OnMeleeHit(); // This calls OnMeleeHit from the Chest script
-            ChestManager.Instance.ClearChest(); // Clear chest manager
+            chest.OnMeleeHit();
+            ChestManager.Instance.ClearChest();
         }
 
-        Destroy(gameObject); // Destroy melee object after hitting chest
+        Destroy(gameObject);
     }
 
     private void HandleGraveHit(Collider2D other)
@@ -108,11 +121,11 @@ public class melee : MonoBehaviour
         Grave grave = other.GetComponent<Grave>();
         if (grave != null)
         {
-            grave.OnMeleeHit(); // This calls OnMeleeHit from the Grave script
-            GraveManager.Instance.ClearGrave(); // Clear grave manager
+            grave.OnMeleeHit();
+            GraveManager.Instance.ClearGrave();
         }
 
-        Destroy(gameObject); // Destroy melee object after hitting grave
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -139,10 +152,6 @@ public class melee : MonoBehaviour
                         playerHealthAndMana.currentMana += 1;
                         Debug.Log("Melee (collision) hit enemy. Mana gained.");
                         lastManaGainTime = Time.time;
-                    }
-                    else
-                    {
-                        Debug.Log("Mana gain on cooldown (collision).");
                     }
                 }
             }
