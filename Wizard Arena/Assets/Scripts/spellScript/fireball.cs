@@ -3,44 +3,71 @@ using UnityEngine;
 public class fireball : MonoBehaviour
 {
     public int projectileSpeed = 15;
-    public int damage = 5;  // Make damage configurable from the Inspector
-    private Rigidbody2D rb;  // Declare the Rigidbody2D
+    public int damage = 5;
+    public float recoilForce = 5f;  // Recoil force to push the player back
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Rigidbody2D rb;
+    private Animator animator;
+    private PlayerMovmentScript playerMovement;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();  // Get the Rigidbody2D component
-        rb.linearVelocity = transform.right * projectileSpeed;  // Use velocity to move the fireball
-    }
+        rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = transform.right * projectileSpeed;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            animator = player.GetComponent<Animator>();
+            playerMovement = player.GetComponent<PlayerMovmentScript>();
+
+            if (playerMovement != null)
+            {
+                playerMovement.isCasting = true;
+                if (animator != null)
+                    animator.SetTrigger("CastFire");
+
+                Invoke(nameof(EndCast), 0.5f); // Match this to your animation duration
+
+                Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+                if (playerRb != null)
+                {
+                    Vector2 recoilDirection = -transform.right;
+                    playerRb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        // Check if the collision is with an object tagged "Enemy"
-        if (collision.gameObject.tag.Equals("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Fireball hit enemy " + collision.gameObject);
             var healthComponent = collision.gameObject.GetComponent<enemyHealth>();
-
             if (healthComponent != null)
             {
-                healthComponent.TakeDamage(damage);  // Use the damage variable
-                Destroy(gameObject);  // Destroy the fireball object
-                GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
+                healthComponent.TakeDamage(damage);
             }
         }
-        else
+
+        Destroy(gameObject);
+
+        if (playerMovement == null)
         {
-            Debug.Log("Fireball hit non-enemy " + collision.gameObject);
-            Destroy(gameObject);  // Destroy the fireball object
-            GetComponent<PolygonCollider2D>().enabled = false;  // Disable the collider
+            playerMovement = FindAnyObjectByType<PlayerMovmentScript>();
         }
-        
+
+        if (playerMovement != null)
+        {
+            playerMovement.isCasting = false;
+        }
+    }
+
+    void EndCast()
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.isCasting = false;
+        }
     }
 }

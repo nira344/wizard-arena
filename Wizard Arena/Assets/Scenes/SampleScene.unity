@@ -45140,13 +45140,13 @@ MonoBehaviour:
   speed: 10
   jumpSpeed: 10
   wallSlideSpeed: 6
+  wallSlideLockDuration: 0.2
   isWallJumping: 0
   wallJumpingDirection: 0
   wallJumpingTime: 0.2
   wallJumpingCounter: 0
   wallJumpingDuration: 0.4
   wallJumpingPower: {x: 8, y: 12}
-  wallSlideLockDuration: 0.2
   dodgeCooldownTime: 0.7
   dodgeSpeed: 15
   dodgeDuration: 0.5
@@ -45157,9 +45157,10 @@ MonoBehaviour:
   footstep3: {fileID: 8300000, guid: 66ef14be0602f4c55b003e590c0963c2, type: 3}
   footstep4: {fileID: 8300000, guid: 7441f4f6a9c8742398bdb891e5a5732d, type: 3}
   footstep5: {fileID: 8300000, guid: 74e05e50dde2b4a03b1f9f543d5aa66d, type: 3}
+  stepCooldown: 0.2
   direction: 0
   playerHealthAndMana: {fileID: 5179767963300924614}
-  stepCooldown: 0.2
+  isCasting: 0
 --- !u!82 &8907761031978245164
 AudioSource:
   m_ObjectHideFlags: 0
@@ -45181,7 +45182,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.7859268
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

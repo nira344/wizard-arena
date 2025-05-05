@@ -13,6 +13,7 @@ public class PlayerMovmentScript : MonoBehaviour
 
     [Header("Wall Jumping")]
     public float wallSlideSpeed = 2f;
+    public float wallSlideLockDuration = 0.2f;  // <-- Added
     [HideInInspector] public bool isWallJumping;
     public float wallJumpingDirection;
     public float wallJumpingTime = 0.2f;
@@ -20,7 +21,6 @@ public class PlayerMovmentScript : MonoBehaviour
     public float wallJumpingDuration = 0.4f;
     public Vector2 wallJumpingPower = new Vector2(8f, 16f);
     private float wallSlideLockTimer = 0f;
-    public float wallSlideLockDuration = 0.2f;
     private bool isWallSliding = false;
     private bool isTouchingLeftWall = false;
     private bool isTouchingRightWall = false;
@@ -45,17 +45,22 @@ public class PlayerMovmentScript : MonoBehaviour
     private AudioSource footstep;
     private Animator animator;
 
-    // Other variables
-    private float lastAttackTime = 0f;
-    [HideInInspector] public float direction = 0f;
-    private Rigidbody2D rb;
-    private BoxCollider2D coll;
-    private SpriteRenderer spriteRenderer;
-    [HideInInspector] public HealthAndMana playerHealthAndMana;
-    
     // Step SFX Spacing
     public float stepCooldown = 0.2f;
     private float stepTimer;
+
+    // Movement
+    private Rigidbody2D rb;
+    private BoxCollider2D coll;
+    private SpriteRenderer spriteRenderer;
+    [HideInInspector] public float direction = 0f;
+    [HideInInspector] public HealthAndMana playerHealthAndMana;
+
+    // Casting flag
+    [HideInInspector] public bool isCasting = false;
+
+    // Added combat and movement variables
+    private float lastAttackTime = 0f;  // <-- Added
 
     void Start()
     {
@@ -77,8 +82,9 @@ public class PlayerMovmentScript : MonoBehaviour
             return;
         }
 
-        if (stepTimer > 0)
-        { stepTimer -= Time.deltaTime; }
+        if (stepTimer > 0) stepTimer -= Time.deltaTime;
+
+        if (isCasting) return; // Prevent movement during casting
 
         CheckWallContacts();
         wallSlideLockTimer -= Time.deltaTime;
