@@ -7,30 +7,13 @@ public class enemyGround : MonoBehaviour
     public float speed;
     GameObject player;
     Rigidbody2D rb;
-    
-    public AudioSource audiosource;
-    public AudioClip idle;
 
+    public AudioSource running;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = gameObject.GetComponent<Rigidbody2D>();
-
-         if (audiosource == null)
-        {
-            audiosource = GetComponent<AudioSource>();
-        }
-
-        // Start the Coroutine to play the idle sound at random intervals
-        if (audiosource != null && idle != null)
-        {
-            StartCoroutine(PlayIdleSound());
-        }
-        else
-        {
-            Debug.LogWarning("AudioSource or IdleSoundClip is missing.");
-        }
     }
 
     // Update is called once per frame
@@ -71,20 +54,12 @@ public class enemyGround : MonoBehaviour
 
             // move in the direction we have calculated
             transform.Translate(direction);
-        }
-    }
 
-    // Coroutine to play the idle sound at random intervals
-    private System.Collections.IEnumerator PlayIdleSound()
-    {
-        while (true)
-        {
-            // Wait for a random time between 7 and 10 seconds
-            float waitTime = Random.Range(7f, 10f);
-            yield return new WaitForSeconds(waitTime);
+            if (!running.isPlaying)
+            {
+                running.Play();
+            }
 
-            // Play the idle sound
-            audiosource.PlayOneShot(idle);
         }
     }
 
@@ -106,4 +81,6 @@ public class enemyGround : MonoBehaviour
             return false;
         }
     }
+
+
 }

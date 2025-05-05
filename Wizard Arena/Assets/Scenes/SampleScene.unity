@@ -7958,7 +7958,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: f583c09be83ab45e9ab34c50e8fb20a4, type: 3}
   m_Resource: {fileID: 8300000, guid: f583c09be83ab45e9ab34c50e8fb20a4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -26504,7 +26504,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 7f0ab0029a03547dabbfcc2c8bb5e179, type: 3}
   m_Resource: {fileID: 8300000, guid: 7f0ab0029a03547dabbfcc2c8bb5e179, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -37557,8 +37557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 20
   speed: 5
-  audiosource: {fileID: 0}
-  idle: {fileID: 0}
+  running: {fileID: 0}
 --- !u!61 &1596418772
 BoxCollider2D:
   m_ObjectHideFlags: 0
