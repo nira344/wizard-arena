@@ -10,9 +10,6 @@ public class InventoryManager : MonoBehaviour
     public TextMeshProUGUI winText;
     public GameObject player;
 
-    public List<Spell> availableSpells = new List<Spell>();
-    public List<SpellSlot> spellSlots;
-
     void Start()
     {
         winText.gameObject.SetActive(false);
@@ -118,36 +115,6 @@ public class InventoryManager : MonoBehaviour
         {
             slot.selectedShader.SetActive(false);
             slot.thisItemSelected = false;
-        }
-    }
-
-    public void UnlockSpell(Spell newSpell)
-    {
-        if (!availableSpells.Contains(newSpell))
-        {
-            availableSpells.Add(newSpell);
-            RefreshSpellUI();
-        }
-    }
-
-    public void RefreshSpellUI()
-    {
-        SpellMenuManager spellMenu = SpellMenuManager.Instance;
-        if (spellMenu == null)
-        {
-            spellMenu = FindObjectOfType<SpellMenuManager>();
-        }
-
-        for (int i = 0; i < spellSlots.Count; i++)
-        {
-            if (i < availableSpells.Count)
-            {
-                spellSlots[i].ConfigureSlot(availableSpells[i]);
-            }
-            else
-            {
-                spellSlots[i].ConfigureSlot(null);
-            }
         }
     }
 }

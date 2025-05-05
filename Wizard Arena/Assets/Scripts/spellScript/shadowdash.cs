@@ -20,55 +20,48 @@ public class ShadowDodge : MonoBehaviour
 
     void Update()
     {
-        if (SpellMenuManager.Instance.equippedMobilitySpell == null ||
-            SpellMenuManager.Instance.equippedMobilitySpell.spellType != Spell.SpellType.ShadowDash)
-            return;
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !playerMovement.isWallJumping && playerMovement.direction != 0)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !playerMovement.isWallJumping && playerMovement.direction != 0)
+            // Check if the cooldown has passed
+            if (Time.time - lastAttackTime >= sDashCooldownTime)
             {
-                // Check if the cooldown has passed
-                if (Time.time - lastAttackTime >= sDashCooldownTime)
+                HealthAndMana statScript = GetComponent<HealthAndMana>();
+
+                if (statScript.currentMana + statScript.currentHealth > 13)
                 {
-                    HealthAndMana statScript = GetComponent<HealthAndMana>();
+                    isShadowDashing = true;
+                    shadowDashTimeCounter = shadowDashDuration;
 
-                    if (statScript.currentMana + statScript.currentHealth > 13)
-                    {
-                        isShadowDashing = true;
-                        shadowDashTimeCounter = shadowDashDuration;
-
-                        rb.linearVelocity = new Vector2(playerMovement.direction * shadowDashSpeed, rb.linearVelocity.y);
-                        Debug.Log("shadow dashing with direction: " + playerMovement.direction);
-                        statScript.currentMana -= 13;
-                        // Now we update the time only when dodge is triggered
-                        lastAttackTime = Time.time;
-                    }
-                    else
-                    {
-                        Debug.Log("Not enough mana for shadowdash");
-                    }
-                
+                    rb.linearVelocity = new Vector2(playerMovement.direction * shadowDashSpeed, rb.linearVelocity.y);
+                    Debug.Log("shadow dashing with direction: " + playerMovement.direction);
+                    statScript.currentMana -= 13;
+                    // Now we update the time only when dodge is triggered
+                    lastAttackTime = Time.time;
                 }
                 else
                 {
-                    Debug.Log("shadow dash is on cooldown.");
+                    Debug.Log("Not enough mana for shadowdash");
                 }
+            
             }
-
-
-            if (isShadowDashing)
+            else
             {
-                shadowDashTimeCounter -= Time.deltaTime;
+                Debug.Log("shadow dash is on cooldown.");
+            }
+        }
 
-                // Keep the player moving fast in the direction during the dash
-                rb.linearVelocity = new Vector2(playerMovement.direction * shadowDashSpeed, 0f);
 
-                if (shadowDashTimeCounter <= 0f)
-                {
-                    isShadowDashing = false;
-                    Debug.Log("Shadow dash ended");
-                }
+        if (isShadowDashing)
+        {
+            shadowDashTimeCounter -= Time.deltaTime;
+
+            // Keep the player moving fast in the direction during the dash
+            rb.linearVelocity = new Vector2(playerMovement.direction * shadowDashSpeed, 0f);
+
+            if (shadowDashTimeCounter <= 0f)
+            {
+                isShadowDashing = false;
+                Debug.Log("Shadow dash ended");
             }
         }
     }

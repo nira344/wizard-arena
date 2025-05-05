@@ -1,11 +1,13 @@
-using UnityEngine;
-
 public class shoot : MonoBehaviour
 {
     [Header("Prefabs")]
+    public GameObject fireballPrefab;
+    public GameObject iceshardPrefab;
     public GameObject meleePrefab;
 
     [Header("Cooldown Times")]
+    public float fireballCooldownTime = 1.0f;
+    public float iceshardCooldownTime = 0.5f;
     public float meleeCooldownTime = 0.1f;
 
     [Header("Audio Clips")]
@@ -36,47 +38,52 @@ public class shoot : MonoBehaviour
     {
         if (Time.timeScale <= 0 || statScript.currentHealth == 0) return;
 
-        // First spell (E key)
-        if (Input.GetKeyDown(KeyCode.E) && Time.time - lastFireTime >= GetCooldown(SpellMenuManager.Instance.equippedPrimarySpell))
-        {
-            TryCastSpell(SpellMenuManager.Instance.equippedPrimarySpell, ref lastFireTime);
-        }
-
-        // Second spell (R key)
-        if (Input.GetKeyDown(KeyCode.R) && Time.time - lastIceTime >= GetCooldown(SpellMenuManager.Instance.equippedSecondarySpell))
-        {
-            TryCastSpell(SpellMenuManager.Instance.equippedSecondarySpell, ref lastIceTime);
-        }
-
+        HandleIceShard();
+        HandleFireball();
         HandleMelee();
     }
 
-    private float GetCooldown(Spell spell)
+    private void HandleIceShard()
     {
-        return spell != null ? spell.cooldown : 1f;
+        if (Input.GetButtonDown("Fire2") && Time.time - lastIceTime >= iceshardCooldownTime)
+        {
+            if (statScript != null && statScript.currentMana >= 1)
+            {
+                statScript.currentMana -= 1;
+                Instantiate(iceshardPrefab, transform.position, transform.rotation);
+                PlaySound(ice_sound);
+                TriggerAnimation("CastIce");
+            }
+            else
+            {
+                Debug.Log("Not enough mana for Ice Shard");
+            }
+            lastIceTime = Time.time;
+        }
     }
 
-    private void TryCastSpell(Spell spell, ref float lastTime)
+    private void HandleFireball()
     {
-        if (spell == null || spell.prefab == null) return;
-
-        if (statScript.currentMana >= spell.manaCost)
+        if (Input.GetButtonDown("Fire3") && Time.time - lastFireTime >= fireballCooldownTime)
         {
-            statScript.currentMana -= Mathf.RoundToInt(spell.manaCost);
-            Instantiate(spell.prefab, transform.position, transform.rotation);
-            TriggerAnimation("Cast" + spell.spellType.ToString());
-            lastTime = Time.time;
-            PlaySound(spell.spellType);
-        }
-        else
-        {
-            Debug.Log("Not enough mana for " + spell.spellName);
+            if (statScript != null && statScript.currentMana >= 3)
+            {
+                statScript.currentMana -= 3;
+                Instantiate(fireballPrefab, transform.position, transform.rotation);
+                PlaySound(fire_sound);
+                TriggerAnimation("CastFire");
+            }
+            else
+            {
+                Debug.Log("Not enough mana for Fireball");
+            }
+            lastFireTime = Time.time;
         }
     }
 
     private void HandleMelee()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time - lastMeleeTime >= meleeCooldownTime)
+        if (Input.GetButtonDown("Fire1") && Time.time - lastMeleeTime >= meleeCooldownTime)
         {
             Instantiate(meleePrefab, transform.position, transform.rotation);
             TriggerAnimation("Melee");
@@ -92,18 +99,12 @@ public class shoot : MonoBehaviour
         }
     }
 
-    private void PlaySound(Spell.SpellType type)
+    private void PlaySound(AudioClip clip)
     {
-        if (audioSource == null) return;
-
-        switch (type)
+        if (audioSource != null && clip != null)
         {
-            case Spell.SpellType.Fireball:
-                audioSource.PlayOneShot(fire_sound);
-                break;
-            case Spell.SpellType.IceShard:
-                audioSource.PlayOneShot(ice_sound);
-                break;
+            audioSource.clip = clip;
+            audioSource.Play();
         }
     }
 }
