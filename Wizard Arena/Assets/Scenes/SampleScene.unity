@@ -4310,7 +4310,7 @@ Transform:
   m_GameObject: {fileID: 186191138}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -49.421333, y: -18.724262, z: 1.121246}
+  m_LocalPosition: {x: -66.35, y: -18.724262, z: 1.121246}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5769,17 +5769,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263654634}
-  m_LocalRotation: {x: -0, y: -0, z: -0.2877489, w: 0.95770586}
-  m_LocalPosition: {x: 0, y: 0, z: 89.8497}
+  m_LocalRotation: {x: -0, y: -0, z: -0.080602355, w: 0.99674636}
+  m_LocalPosition: {x: 0, y: 0, z: 89.84967}
   m_LocalScale: {x: 0.8521863, y: 0.7969486, z: 0.026735635}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1353025124}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -33.447}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.246}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 215, y: 24}
-  m_SizeDelta: {x: 193.86, y: 91.51}
+  m_AnchoredPosition: {x: 243.7, y: 35.3}
+  m_SizeDelta: {x: 193.86, y: 143.6022}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &263654636
 MonoBehaviour:
@@ -5870,7 +5870,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6288199948623287535, guid: 248c9089f6ecb47bf92b3a4f87c05d16, type: 3}
+  m_Sprite: {fileID: -5118127082959668007, guid: e61974d46ef8943d6a88b509e8c6f833, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -23493,9 +23493,9 @@ GameObject:
   m_Component:
   - component: {fileID: 748460967}
   - component: {fileID: 748460966}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: InvisWall1
-  m_TagString: Solid
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25789,7 +25789,7 @@ GameObject:
   - component: {fileID: 890922653}
   - component: {fileID: 890922652}
   m_Layer: 2
-  m_Name: Platform-Photoroom_0
+  m_Name: Platform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25859,7 +25859,7 @@ Transform:
   m_GameObject: {fileID: 890922651}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.12133, y: -22.506031, z: 1.121246}
+  m_LocalPosition: {x: -26.73, y: -22.506031, z: 1.121246}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29284,9 +29284,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1101344944}
   - component: {fileID: 1101344943}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: InvisWall2
-  m_TagString: Solid
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29325,7 +29325,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -13.461884, y: 22.143223}
+  m_Offset: {x: -8.745382, y: 22.143223}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -29335,7 +29335,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.6923828, y: 76.2537}
+  m_Size: {x: 2.1683526, y: 76.2537}
   m_EdgeRadius: 0
 --- !u!4 &1101344944
 Transform:
@@ -30023,7 +30023,7 @@ Transform:
   m_GameObject: {fileID: 1127239295}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -57.09133, y: -21.154263, z: 1.121246}
+  m_LocalPosition: {x: -74.24, y: -21.154263, z: 1.121246}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39389,7 +39389,7 @@ Transform:
   m_GameObject: {fileID: 1655405244}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.380005, y: -19.034262, z: 5}
+  m_LocalPosition: {x: -18.908669, y: -19.034262, z: 5}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41499,7 +41499,7 @@ Transform:
   m_GameObject: {fileID: 1826683786}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -7.3249664, y: -0.8712, z: 0.10027623}
+  m_LocalPosition: {x: -4.02, y: -0.87, z: 0.10027623}
   m_LocalScale: {x: 4.066115, y: 1.0144831, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42864,7 +42864,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 7.138708, y: 22.126514}
+  m_Offset: {x: 9.758987, y: 10.281912}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -42874,7 +42874,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 38.748764, y: 75.53557}
+  m_Size: {x: 43.727283, y: 51.846363}
   m_EdgeRadius: 0
 --- !u!4 &1894916931
 Transform:
@@ -45596,7 +45596,7 @@ GameObject:
   - component: {fileID: 2119865503}
   - component: {fileID: 2119865502}
   m_Layer: 2
-  m_Name: Platform-Photoroom_0 (1)
+  m_Name: Platform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45666,7 +45666,7 @@ Transform:
   m_GameObject: {fileID: 2119865501}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.271332, y: -22.544262, z: 1.121246}
+  m_LocalPosition: {x: -11.799995, y: -22.544262, z: 1.121246}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

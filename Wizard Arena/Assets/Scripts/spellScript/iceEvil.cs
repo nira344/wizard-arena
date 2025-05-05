@@ -4,7 +4,7 @@ public class IceShardEvil : MonoBehaviour
 {
     public int projectileSpeed = 15;
     public int damage = 2;  // Damage that can be adjusted in the Inspector
-    public float homingSpeed = 5f;  // How fast the projectile homes towards the target
+    public float homingSpeed = 0.5f;  // How fast the projectile homes towards the target
     public GameObject explosion;
     private Rigidbody2D rb;
     private Transform target;  // Target for homing (player)
@@ -35,7 +35,6 @@ public class IceShardEvil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     // Find the nearest target (enemy) in the scene

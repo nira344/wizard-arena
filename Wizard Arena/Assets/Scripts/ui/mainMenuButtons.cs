@@ -10,6 +10,7 @@ public class mainMenuButtons : MonoBehaviour
 
     void Start()
     {
+        Camera.main.gameObject.SetActive(true);
         myButton = GetComponent<Button>();
         if (myButton != null)
         {
@@ -25,7 +26,10 @@ public class mainMenuButtons : MonoBehaviour
     {
         switch (buttonType)
         {
-            case "Start": SceneManager.LoadScene("SampleScene"); break;
+            case "Start":
+                Camera.main.gameObject.SetActive(false);
+                SceneManager.LoadScene("SampleScene");
+                break;
             case "Info":
                 if (!infoMenu) {break;}
                 infoMenu.SetActive(true);

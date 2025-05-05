@@ -31,7 +31,6 @@ public class statueBoss : MonoBehaviour
 
         // Disable boss HUD elements
         winText.gameObject.SetActive(false);
-        healthBar.SetMaxHealth(hp.health);
 
         // Find player
         player = GameObject.FindGameObjectWithTag("Player");
@@ -71,6 +70,7 @@ public class statueBoss : MonoBehaviour
         // Enable AI + remove invincibility
         hp.invincible = false;
         activated = true;
+        healthBar.SetMaxHealth(hp.health);
         bossHealthBar.Show();
         bossText.text = "WEEPING ANGEL";
     }

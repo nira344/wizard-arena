@@ -5060,6 +5060,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpeed: 12
-  damage: 3
+  damage: 2
   homingSpeed: 5
   explosion: {fileID: 6442821772542911070, guid: f7890582e790946569dbafbc1e9165c6, type: 3}

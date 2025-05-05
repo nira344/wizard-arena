@@ -32,7 +32,6 @@ public class wizardBoss : MonoBehaviour
 
         // Disable boss HUD elements
         winText.gameObject.SetActive(false);
-        healthBar.SetMaxHealth(hp.health);
 
         // Find player
         player = GameObject.FindGameObjectWithTag("Player");
@@ -76,6 +75,7 @@ public class wizardBoss : MonoBehaviour
         // Enable AI + remove invincibility
         hp.invincible = false;
         activated = true;
+        healthBar.SetMaxHealth(hp.health);
         bossHealthBar.Show();
         bossText.text = "GILBERT THE GREAT";
     }
