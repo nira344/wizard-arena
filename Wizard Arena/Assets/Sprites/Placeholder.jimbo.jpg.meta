@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Placeholder.jimbo_0: 7386805492918559703
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

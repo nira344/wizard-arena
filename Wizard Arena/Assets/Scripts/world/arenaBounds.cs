@@ -32,8 +32,12 @@ public class arenaBounds : MonoBehaviour
                 Debug.Log(bound.name + " enabled");
             }
 
-            // UNLEASH GILBERT
-            boss.GetComponent<wizardBoss>().Activate();
+            // Unleash Boss
+            if (boss.GetComponent<wizardBoss>())
+                boss.GetComponent<wizardBoss>().Activate();
+                
+            else if (boss.GetComponent<statueBoss>())
+                boss.GetComponent<statueBoss>().Activate();
         }
     }
 
@@ -51,8 +55,12 @@ public class arenaBounds : MonoBehaviour
                 Debug.Log(bound.name + " disabled");
             }
 
-            // Silence Gilbert
-            boss.GetComponent<wizardBoss>().Deactivate();
+            // Silence Boss
+            if (boss.GetComponent<wizardBoss>())
+                boss.GetComponent<wizardBoss>().Deactivate();
+
+            else if (boss.GetComponent<statueBoss>())
+                boss.GetComponent<statueBoss>().Deactivate();
         }
     }
 }

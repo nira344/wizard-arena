@@ -1,11 +1,10 @@
 using UnityEngine;
 using TMPro;
 
-public class wizardBoss : MonoBehaviour
+public class statueBoss : MonoBehaviour
 {
 
     [Header("Configuration")]
-    public float speed;
     public float spellCooldown;
     private float cooldownTimer;
     public GameObject spell;
@@ -52,7 +51,10 @@ public class wizardBoss : MonoBehaviour
             // Fire icicles if cooldown is at zero
             if (cooldownTimer <= 0)
             {
-                Instantiate(spell, transform.position, Quaternion.identity);
+                Vector3 spawnPos1 = new Vector3 (transform.position.x - 2f, transform.position.y + 1.1f, transform.position.z - 3f);
+                Instantiate(spell, spawnPos1, Quaternion.identity);
+                Vector3 spawnPos2 = new Vector3 (transform.position.x + 2f, transform.position.y + 1.1f, transform.position.z - 3f);
+                Instantiate(spell, spawnPos2, Quaternion.identity);
                 cooldownTimer = spellCooldown;
             }
 
@@ -61,13 +63,6 @@ public class wizardBoss : MonoBehaviour
             {
                 cooldownTimer -= Time.deltaTime;
             }
-
-            // Move Towards Player
-            Vector2 direction = transform.position - player.transform.position;
-            direction.Normalize();
-            direction.y = 0;
-            direction = direction * speed * Time.deltaTime;
-            transform.Translate(direction);
         }
     }
 
@@ -77,7 +72,7 @@ public class wizardBoss : MonoBehaviour
         hp.invincible = false;
         activated = true;
         bossHealthBar.Show();
-        bossText.text = "GILBERT THE GREAT";
+        bossText.text = "WEEPING ANGEL";
     }
 
     public void Deactivate()
@@ -96,9 +91,14 @@ public class wizardBoss : MonoBehaviour
             healthBar.SetHealth(hp.health);
             bossHealthBar.Hide();
             winText.gameObject.SetActive(true);
-            winText.text = "GILBERT DEFEATED";
-            Debug.Log("Player has win!");
-            Time.timeScale = 0;
+            winText.text = "ANGEL DEFEATED";
+            Debug.Log("Player has defeated the Weeping Angel!");
         }
+    }
+
+    private System.Collections.IEnumerator RemoveText()
+    {
+        yield return new WaitForSeconds(2);
+        winText.text = "";
     }
 }
