@@ -4,7 +4,6 @@ public class HomingProjectile : MonoBehaviour
 {
     public int projectileSpeed = 15;
     public int damage = 2;
-    public float homingSpeed = 5f;
     public float range = 30f;
     public GameObject explosion;
 
@@ -18,7 +17,7 @@ public class HomingProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovmentScript>();
         animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
-        target = GameObject.FindGameObjectWithTag("Enemy")?.transform;
+        target = FindClosestEnemy();
 
         if (playerMovement != null)
         {
@@ -52,5 +51,24 @@ public class HomingProjectile : MonoBehaviour
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+    }
+
+    Transform FindClosestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Transform closest = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distance < minDistance && distance <= range)
+            {
+                minDistance = distance;
+                closest = enemy.transform;
+            }
+        }
+
+        return closest;
     }
 }

@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 3057016599928121658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: -21.3034, y: 9.3128, z: -5}
-  m_LocalScale: {x: 0.32007062, y: 0.53110975, z: 1}
+  m_LocalPosition: {x: -20.7869, y: 9.4107, z: -5}
+  m_LocalScale: {x: 0.23707631, y: 0.32780096, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  attackRange: 1.5
+  attackRange: 2.5
 --- !u!60 &6432462028986115707
 PolygonCollider2D:
   m_ObjectHideFlags: 0

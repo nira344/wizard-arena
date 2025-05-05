@@ -52,20 +52,6 @@ public class melee : MonoBehaviour
         }
     }
 
-    private void PositionAndRotateMeleeObject()
-    {
-        if (playerTransform == null) return;
-
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPosition.z = 0;
-        attackDirection = (mouseWorldPosition - playerTransform.position).normalized;
-
-        transform.position = (Vector2)playerTransform.position + attackDirection * attackRange;
-
-        float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -158,5 +144,21 @@ public class melee : MonoBehaviour
 
             GetComponent<PolygonCollider2D>().enabled = false;
         }
+    }
+
+    private void PositionAndRotateMeleeObject()
+    {
+        if (playerTransform == null) return;
+
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition.z = 0;
+        attackDirection = (mouseWorldPosition - playerTransform.position).normalized;
+
+        // Position the melee hitbox farther away based on attackRange
+        transform.position = (Vector2)playerTransform.position + attackDirection * attackRange;
+
+        // Rotate to face the direction of the attack
+        float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
 }
