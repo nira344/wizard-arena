@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -34.72, y: -47.979996}
+  m_AnchoredPosition: {x: -34.71997, y: -47.97998}
   m_SizeDelta: {x: 171.88, y: 193.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8585593
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 59504752}
   - component: {fileID: 59504751}
   - component: {fileID: 59504750}
-  - component: {fileID: 59504748}
+  - component: {fileID: 59504753}
   m_Layer: 5
   m_Name: InfoButton
   m_TagString: Untagged
@@ -261,20 +261,6 @@ RectTransform:
   m_AnchoredPosition: {x: -644, y: -156}
   m_SizeDelta: {x: 193.86, y: 91.51}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &59504748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 59504746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 985deadae74534532ba0f21bd287b991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InfoMenu: {fileID: 8585591}
-  buttonType: Info
 --- !u!114 &59504750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +355,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59504746}
   m_CullTransparentMesh: 1
+--- !u!114 &59504753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59504746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2362305d52ca43b4a9531fb08a2496f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: Info
+  infoMenu: {fileID: 8585591}
 --- !u!1 &80241604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,8 +1020,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab2011f6e8254c299c8e8a2f79ed8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minFontSize: 120
-  maxFontSize: 140
+  minFontSize: 126
+  maxFontSize: 134
   speed: 1
 --- !u!1 &1051810075
 GameObject:
@@ -1709,6 +1709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: Start
+  infoMenu: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
