@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class shoot : MonoBehaviour
 {
     [Header("Prefabs")]

@@ -36,22 +36,8 @@ public class RespawnPoint : MonoBehaviour
             }
             else
             {
-                if (!spellMenuOpen)
-                {
-                    healthAndMana.currentHealth = healthAndMana.maxHealth;
-                    healthAndMana.currentMana = healthAndMana.maxMana;
-                    SpellMenuManager.Instance.OpenMenu();
-                    Time.timeScale = 0f;
-                    spellMenuOpen = true;
-                    Debug.Log("Healed and spell menu opened.");
-                }
-                else
-                {
-                    SpellMenuManager.Instance.CloseMenu();
-                    Time.timeScale = 1f;
-                    spellMenuOpen = false;
-                    Debug.Log("Spell menu closed.");
-                }
+                healthAndMana.currentHealth = healthAndMana.maxHealth;
+                healthAndMana.currentMana = healthAndMana.maxMana;
             }
         }
 
@@ -90,15 +76,6 @@ public class RespawnPoint : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             playerTouching = false;
-
-            // Auto-close menu if still open
-            if (spellMenuOpen)
-            {
-                SpellMenuManager.Instance.CloseMenu();
-                Time.timeScale = 1f;
-                spellMenuOpen = false;
-                Debug.Log("Spell menu auto-closed on exit.");
-            }
         }
     }
 }
