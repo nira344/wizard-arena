@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class mainMenuButtons : MonoBehaviour
 {
     public string buttonType = "";
-
-    Button myButton; // Drag the Button from the hierarchy into this field in the Inspector
+    public GameObject infoMenu;
+    Button myButton;
 
     void Start()
     {
@@ -25,7 +25,11 @@ public class mainMenuButtons : MonoBehaviour
     {
         switch (buttonType)
         {
-            case "Start": SceneManager.LoadScene("SampleScene"); return;
+            case "Start": SceneManager.LoadScene("SampleScene"); break;
+            case "Info":
+                if (!infoMenu) {break;}
+                infoMenu.SetActive(true);
+                break;
         }
     }
 
