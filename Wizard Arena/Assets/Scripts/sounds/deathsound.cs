@@ -5,16 +5,15 @@ public class deathsound : MonoBehaviour
     public AudioClip enemyDestroyedSound;  // The sound to play when an enemy is destroyed
     private AudioSource audioSource;
 
-    void Start()
+    void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+
+        // If no AudioSource attached, add one
         if (audioSource == null)
         {
-            // If no AudioSource is attached, add one
             audioSource = gameObject.AddComponent<AudioSource>();
         }
-        
-        // Ensure that there's an AudioSource on the same GameObject
-        audioSource = GetComponent<AudioSource>();
     }
 
     void OnDestroy()

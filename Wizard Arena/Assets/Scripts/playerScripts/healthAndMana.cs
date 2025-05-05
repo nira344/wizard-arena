@@ -30,9 +30,14 @@ public class HealthAndMana : MonoBehaviour
         currentHealth = maxHealth;
         currentMana = maxMana;
 
-        deathText.gameObject.SetActive(false);
-        healthBar.SetMaxHealth(maxHealth);
-        manaBar.SetMaxHealth(maxMana);
+        if (deathText != null)
+            deathText.gameObject.SetActive(false);
+
+        if (healthBar != null)
+            healthBar.SetMaxHealth(maxHealth);
+
+        if (manaBar != null)
+            manaBar.SetMaxHealth(maxMana);
     }
 
     void Update()
@@ -51,12 +56,17 @@ public class HealthAndMana : MonoBehaviour
             TakeDamage(currentHealth);
         }
 
-        healthText.text = "HP: " + currentHealth + "/" + maxHealth;
-        healthBar.SetHealth(currentHealth);
-        manaText.text = "MP: " + currentMana + "/" + maxMana;
-        manaBar.SetHealth(currentMana);
+        if (healthText != null)
+            healthText.text = $"HP: {currentHealth}/{maxHealth}";
+        if (healthBar != null)
+            healthBar.SetHealth(currentHealth);
 
-        if (isDead)
+        if (manaText != null)
+            manaText.text = $"MP: {currentMana}/{maxMana}";
+        if (manaBar != null)
+            manaBar.SetHealth(currentMana);
+
+        if (isDead && deathText != null)
         {
             deathText.gameObject.SetActive(true);
             return;
@@ -67,7 +77,8 @@ public class HealthAndMana : MonoBehaviour
     {
         if (isDead) return;
 
-        if (GetComponent<PlayerMovmentScript>().isInvincible) return;
+        var movement = GetComponent<PlayerMovmentScript>();
+        if (movement != null && movement.isInvincible) return;
 
         currentHealth -= Mathf.FloorToInt(amount);
 
@@ -75,14 +86,22 @@ public class HealthAndMana : MonoBehaviour
         {
             currentHealth = 0;
             isDead = true;
-            deathText.text = "YOU DIED";
+
+            if (deathText != null)
+                deathText.text = "YOU DIED";
             Debug.Log("Player is dead!");
 
-            int lostSouls = SoulManager.Instance.soulEssence;
-            SoulManager.Instance.soulEssence = 0;
-            SoulManager.Instance.UpdateSoulText();
+            if (SoulManager.Instance != null)
+            {
+                int lostSouls = SoulManager.Instance.soulEssence;
+                SoulManager.Instance.soulEssence = 0;
+                SoulManager.Instance.UpdateSoulText();
 
-            GraveManager.Instance.CreateGrave(transform.position, lostSouls);
+                if (GraveManager.Instance != null)
+                {
+                    GraveManager.Instance.CreateGrave(transform.position, lostSouls);
+                }
+            }
         }
     }
 
@@ -100,7 +119,6 @@ public class HealthAndMana : MonoBehaviour
     public void Heal(int amount)
     {
         if (isDead) return;
-
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         Debug.Log("Healed for " + amount + " HP. Current HP: " + currentHealth);
     }
@@ -109,7 +127,10 @@ public class HealthAndMana : MonoBehaviour
     {
         maxHealth += amount;
         currentHealth += amount;
-        healthBar.SetMaxHealth(maxHealth);
+
+        if (healthBar != null)
+            healthBar.SetMaxHealth(maxHealth);
+
         PlayerPrefs.SetInt("MaxHealth", maxHealth);
     }
 
@@ -117,7 +138,10 @@ public class HealthAndMana : MonoBehaviour
     {
         maxMana += amount;
         currentMana += amount;
-        manaBar.SetMaxHealth(maxMana);
+
+        if (manaBar != null)
+            manaBar.SetMaxHealth(maxMana);
+
         PlayerPrefs.SetInt("MaxMana", maxMana);
     }
 
