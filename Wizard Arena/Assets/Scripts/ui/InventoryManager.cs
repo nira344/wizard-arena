@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -36,7 +35,9 @@ public class InventoryManager : MonoBehaviour
 
                         itemSlot[0].ItemDescriptionNameText.text = itemSlot[0].itemName;
                         itemSlot[0].ItemDescriptionText.text = itemSlot[0].itemDescription;
-                        itemSlot[0].itemDescriptionImage.sprite = itemSlot[0].itemSprite != null ? itemSlot[0].itemSprite : itemSlot[0].emptySprite;
+                        itemSlot[0].itemDescriptionImage.sprite = itemSlot[0].itemSprite != null
+                            ? itemSlot[0].itemSprite
+                            : itemSlot[0].emptySprite;
                     }
                 }
             }
@@ -81,22 +82,14 @@ public class InventoryManager : MonoBehaviour
         {
             emptySlot.AddItem(itemName, quantity, itemSprite, itemDescription);
 
-            // Add usable item script
             if (usableItemObject.TryGetComponent<IUsableItem>(out var usable))
             {
-                Debug.Log($"Usable item script found: {usable.GetType().Name}");
-                
                 var usableType = usable.GetType();
                 var newUsable = (IUsableItem)emptySlot.gameObject.AddComponent(usableType);
                 emptySlot.usableItem = newUsable;
                 emptySlot.ConfigureSlotForItem(newUsable);
             }
-            else
-            {
-                Debug.LogWarning("No IUsableItem component found on provided prefab.");
-            }
 
-            // Add functional scripts
             if (itemName.Contains("Crystal") || itemName.Contains("Potion"))
             {
                 if (!emptySlot.GetComponent<ItemConsumer>())

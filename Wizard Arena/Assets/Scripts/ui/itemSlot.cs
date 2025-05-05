@@ -50,6 +50,7 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
 
         isFull = true;
         itemImage.sprite = itemSprite;
+        itemImage.color = Color.white; // Ensure full visibility
         UpdateQuantityText();
         quantityText.enabled = true;
         itemImage.enabled = true;
@@ -63,13 +64,20 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
         itemDescription = "";
 
         itemImage.sprite = emptySprite;
+        itemImage.color = new Color(1, 1, 1, 0.3f); // Optional faded look
         quantityText.text = "";
-        itemImage.enabled = false;
+        itemImage.enabled = true; // Keep it enabled with faded appearance
         quantityText.enabled = false;
 
         isFull = false;
         thisItemSelected = false;
         selectedShader.SetActive(false);
+
+        usableItem = null;
+
+        // Remove any lingering consumer
+        var consumer = GetComponent<ItemConsumer>();
+        if (consumer) Destroy(consumer);
     }
 
     public void UpdateQuantityText()
@@ -121,7 +129,6 @@ public class itemSlot : MonoBehaviour, IPointerClickHandler
             Debug.Log("Using IUsableItem directly...");
             usableItem.Use(player);
 
-            // Optional: consume the item
             quantity--;
             if (quantity <= 0)
                 ClearSlot();
