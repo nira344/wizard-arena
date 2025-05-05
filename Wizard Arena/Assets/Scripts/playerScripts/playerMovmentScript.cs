@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerMovmentScript : MonoBehaviour
 {
+    public bool canMove = true;
+
     [Header("Gravity")]
     public float fallGravityMult = 2.0f;
     public float maxFallSpeed = -10.0f;
@@ -13,7 +15,7 @@ public class PlayerMovmentScript : MonoBehaviour
 
     [Header("Wall Jumping")]
     public float wallSlideSpeed = 2f;
-    public float wallSlideLockDuration = 0.2f;  // <-- Added
+    public float wallSlideLockDuration = 0.2f;
     [HideInInspector] public bool isWallJumping;
     public float wallJumpingDirection;
     public float wallJumpingTime = 0.2f;
@@ -45,22 +47,18 @@ public class PlayerMovmentScript : MonoBehaviour
     private AudioSource footstep;
     private Animator animator;
 
-    // Step SFX Spacing
     public float stepCooldown = 0.2f;
     private float stepTimer;
 
-    // Movement
     private Rigidbody2D rb;
     private BoxCollider2D coll;
     private SpriteRenderer spriteRenderer;
     [HideInInspector] public float direction = 0f;
     [HideInInspector] public HealthAndMana playerHealthAndMana;
 
-    // Casting flag
     [HideInInspector] public bool isCasting = false;
 
-    // Added combat and movement variables
-    private float lastAttackTime = 0f;  // <-- Added
+    private float lastAttackTime = 0f;
 
     void Start()
     {
@@ -75,6 +73,14 @@ public class PlayerMovmentScript : MonoBehaviour
 
     void Update()
     {
+        if (isCasting)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        if (!canMove) return;
+
         if (playerHealthAndMana.IsDead())
         {
             rb.linearVelocity = Vector2.zero;
@@ -83,8 +89,6 @@ public class PlayerMovmentScript : MonoBehaviour
         }
 
         if (stepTimer > 0) stepTimer -= Time.deltaTime;
-
-        if (isCasting) return; // Prevent movement during casting
 
         CheckWallContacts();
         wallSlideLockTimer -= Time.deltaTime;
@@ -142,9 +146,7 @@ public class PlayerMovmentScript : MonoBehaviour
     {
         if (isWallSliding)
         {
-            if (isTouchingLeftWall) wallJumpingDirection = 1f;
-            if (isTouchingRightWall) wallJumpingDirection = -1f;
-
+            wallJumpingDirection = isTouchingLeftWall ? 1f : -1f;
             wallJumpingCounter = wallJumpingTime;
             CancelInvoke(nameof(StopWallJumping));
         }
@@ -163,7 +165,6 @@ public class PlayerMovmentScript : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, targetRotation, 0f);
 
             wallSlideLockTimer = wallSlideLockDuration;
-
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
         }
     }
@@ -206,34 +207,20 @@ public class PlayerMovmentScript : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
+
         if (Input.GetAxis("Horizontal") != 0 && stepTimer <= 0 && IsGrounded())
         {
-            int num = (int)Random.Range(1, 5);
-            if (num == 1)
+            int num = Random.Range(1, 6);
+            footstep.clip = num switch
             {
-                footstep.clip = footstep1;
-                footstep.Play();
-            }
-            if (num == 2)
-            {
-                footstep.clip = footstep2;
-                footstep.Play();
-            }
-            if (num == 3)
-            {
-                footstep.clip = footstep3;
-                footstep.Play();
-            }
-            if (num == 4)
-            {
-                footstep.clip = footstep4;
-                footstep.Play();
-            }
-            if (num == 5)
-            {
-                footstep.clip = footstep5;
-                footstep.Play();
-            }
+                1 => footstep1,
+                2 => footstep2,
+                3 => footstep3,
+                4 => footstep4,
+                5 => footstep5,
+                _ => footstep.clip
+            };
+            footstep.Play();
             stepTimer = stepCooldown;
         }
     }
@@ -266,19 +253,13 @@ public class PlayerMovmentScript : MonoBehaviour
         if (isDodging)
         {
             dodgeTimeCounter -= Time.deltaTime;
-            if (dodgeTimeCounter <= 0f)
-            {
-                isDodging = false;
-            }
+            if (dodgeTimeCounter <= 0f) isDodging = false;
         }
 
         if (isInvincible)
         {
             invincibilityTimeCounter -= Time.deltaTime;
-            if (invincibilityTimeCounter <= 0f)
-            {
-                isInvincible = false;
-            }
+            if (invincibilityTimeCounter <= 0f) isInvincible = false;
         }
     }
 
@@ -301,41 +282,34 @@ public class PlayerMovmentScript : MonoBehaviour
     {
         if (spriteRenderer == null) return;
 
-        if (isInvincible)
-        {
-            spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f); // transparent
-        }
-        else
-        {
-            spriteRenderer.color = Color.white; // normal
-        }
+        spriteRenderer.color = isInvincible ? new Color(1f, 1f, 1f, 0.5f) : Color.white;
     }
 
     private void UpdateAnimationState()
     {
         if (playerHealthAndMana.IsDead())
         {
-            animator.SetInteger("State", 4); // Dead
+            SetAnimationState(4); // Dead
         }
         else if (isDodging)
         {
-            animator.SetInteger("State", 3); // Dash
+            SetAnimationState(3); // Dash
         }
         else if (!IsGrounded() && rb.linearVelocity.y > 0.1f)
         {
-            animator.SetInteger("State", 2); // Jumping
+            SetAnimationState(2); // Jumping
         }
         else if (!IsGrounded() && rb.linearVelocity.y < -0.1f)
         {
-            animator.SetInteger("State", 5); // Falling
+            SetAnimationState(5); // Falling
         }
         else if (Mathf.Abs(direction) > 0.1f)
         {
-            animator.SetInteger("State", 1); // Walking
+            SetAnimationState(1); // Walking
         }
         else
         {
-            animator.SetInteger("State", 0); // Idle
+            SetAnimationState(0); // Idle
         }
     }
 

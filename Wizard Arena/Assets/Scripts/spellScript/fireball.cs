@@ -4,11 +4,14 @@ public class fireball : MonoBehaviour
 {
     public int projectileSpeed = 15;
     public int damage = 5;
-    public float recoilForce = 5f;  // Recoil force to push the player back
+    public float recoilForce = 5f;
+    public float castDuration = 0.5f;
 
     private Rigidbody2D rb;
     private Animator animator;
     private PlayerMovmentScript playerMovement;
+    private Rigidbody2D playerRb;
+    private float originalGravity;
 
     void Start()
     {
@@ -20,22 +23,35 @@ public class fireball : MonoBehaviour
         {
             animator = player.GetComponent<Animator>();
             playerMovement = player.GetComponent<PlayerMovmentScript>();
+            playerRb = player.GetComponent<Rigidbody2D>();
 
-            if (playerMovement != null)
+            if (playerMovement != null && playerRb != null)
             {
                 playerMovement.isCasting = true;
+                playerMovement.canMove = false;
+
+                originalGravity = playerRb.gravityScale;
+                playerRb.gravityScale = 0;
+                playerRb.linearVelocity = Vector2.zero; // <- Set movement speed to zero
+
                 if (animator != null)
                     animator.SetTrigger("CastFire");
 
-                Invoke(nameof(EndCast), 0.5f); // Match this to your animation duration
+                Vector2 recoilDirection = -transform.right;
+                playerRb.linearVelocity = recoilDirection * recoilForce;
 
-                Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
-                if (playerRb != null)
-                {
-                    Vector2 recoilDirection = -transform.right;
-                    playerRb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
-                }
+                Invoke(nameof(EndCast), castDuration);
             }
+        }
+    }
+    
+    void EndCast()
+    {
+        if (playerMovement != null && playerRb != null)
+        {
+            playerMovement.isCasting = false;
+            playerMovement.canMove = true;
+            playerRb.gravityScale = originalGravity;
         }
     }
 
@@ -51,23 +67,6 @@ public class fireball : MonoBehaviour
         }
 
         Destroy(gameObject);
-
-        if (playerMovement == null)
-        {
-            playerMovement = FindAnyObjectByType<PlayerMovmentScript>();
-        }
-
-        if (playerMovement != null)
-        {
-            playerMovement.isCasting = false;
-        }
-    }
-
-    void EndCast()
-    {
-        if (playerMovement != null)
-        {
-            playerMovement.isCasting = false;
-        }
+        EndCast();
     }
 }
