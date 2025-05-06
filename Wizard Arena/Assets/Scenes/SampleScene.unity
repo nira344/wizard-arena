@@ -28198,8 +28198,8 @@ Transform:
   m_GameObject: {fileID: 910643872}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -205.4547, y: -18.59, z: 3}
-  m_LocalScale: {x: 56.487633, y: 21.511036, z: 1}
+  m_LocalPosition: {x: -215.0456, y: -18.59, z: 3}
+  m_LocalScale: {x: 75.67083, y: 21.511036, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 570964333}
@@ -28251,7 +28251,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -51447,9 +51447,5 @@ SceneRoots:
   - {fileID: 1217029439}
   - {fileID: 1951948062}
   - {fileID: 1646557884}
-  - {fileID: 2811903197672987679}
-  - {fileID: 2135960457}
-  - {fileID: 1883500377}
-  - {fileID: 1690760425}
   - {fileID: 1141380893}
   - {fileID: 2096776692}
