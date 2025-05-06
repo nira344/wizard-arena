@@ -16391,8 +16391,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 672736de8a32e40fa9c2557aa912999e, type: 3}
-  m_Resource: {fileID: 8300000, guid: 672736de8a32e40fa9c2557aa912999e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 95cd66ad7023340d589aaa8410a1c197, type: 3}
+  m_Resource: {fileID: 8300000, guid: 95cd66ad7023340d589aaa8410a1c197, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -42366,8 +42366,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0e3dc8b8a085946608d0215f6961acde, type: 3}
-  m_Resource: {fileID: 8300000, guid: 0e3dc8b8a085946608d0215f6961acde, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e07b3151c247e4519bf221f0a71fbf6f, type: 3}
+  m_Resource: {fileID: 8300000, guid: e07b3151c247e4519bf221f0a71fbf6f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -50465,7 +50465,6 @@ MonoBehaviour:
   stepCooldown: 0.2
   direction: 0
   playerHealthAndMana: {fileID: 5179767963300924614}
-  isCasting: 0
 --- !u!82 &8907761031978245164
 AudioSource:
   m_ObjectHideFlags: 0
