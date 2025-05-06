@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40c0276d9d8a4597b6acd03b4e42a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Healing Potion
+  itemName: Health Potion
   quantity: 2
   sprite: {fileID: 1556246580650779015, guid: af3e9f80bfeaf42b8b96de105e259f58, type: 3}
   itemDescription: 'A blood red potion you found somewhere that has healing properties.
