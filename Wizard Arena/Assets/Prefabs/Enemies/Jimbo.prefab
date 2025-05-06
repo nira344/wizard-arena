@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8330987332522740408}
   - component: {fileID: 6540033840681773031}
   - component: {fileID: 4303933290347520131}
-  - component: {fileID: 4335730203574092860}
   - component: {fileID: 8726017875670950087}
+  - component: {fileID: 4335730203574092860}
   - component: {fileID: 5591699036653942253}
   - component: {fileID: 9080981991395392354}
   - component: {fileID: 1219307001440849708}
@@ -120,7 +120,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &4335730203574092860
+--- !u!61 &8726017875670950087
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,7 +154,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.67408955, y: -1.0488651}
+  m_Offset: {x: 0.6635677, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -164,9 +164,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.551821, y: 1.95227}
+  m_Size: {x: 2.5728645, y: 4.05}
   m_EdgeRadius: 0
---- !u!61 &8726017875670950087
+--- !u!61 &4335730203574092860
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,7 +200,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.6635677, y: 0}
+  m_Offset: {x: -0.67408955, y: -1.0488651}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -210,7 +210,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.5728645, y: 4.05}
+  m_Size: {x: 2.551821, y: 1.95227}
   m_EdgeRadius: 0
 --- !u!114 &5591699036653942253
 MonoBehaviour:
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 15
-  soulReward: 1
+  soulReward: 2
   invincible: 0
 --- !u!114 &1219307001440849708
 MonoBehaviour:
