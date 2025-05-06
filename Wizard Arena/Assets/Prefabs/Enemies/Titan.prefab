@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 250
-  soulReward: 1
+  soulReward: 20
   invincible: 0
 --- !u!114 &4813494050716393124
 MonoBehaviour:
@@ -245,6 +245,8 @@ MonoBehaviour:
   damage: 10
   manaDamageMultiplier: 1
   attackCooldown: 1.5
+  useTrigger: 1
+  useCollider: 0
 --- !u!114 &6575963666043311139
 MonoBehaviour:
   m_ObjectHideFlags: 0
