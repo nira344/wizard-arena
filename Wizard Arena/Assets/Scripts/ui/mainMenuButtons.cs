@@ -10,7 +10,6 @@ public class mainMenuButtons : MonoBehaviour
 
     void Start()
     {
-        Camera.main.gameObject.SetActive(true);
         myButton = GetComponent<Button>();
         if (myButton != null)
         {
