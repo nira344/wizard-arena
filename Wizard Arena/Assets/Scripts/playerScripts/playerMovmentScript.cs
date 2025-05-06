@@ -13,6 +13,11 @@ public class PlayerMovmentScript : MonoBehaviour
     public float speed = 5f;
     public float jumpSpeed = 10f;
 
+    [Header("Ladder Climbing")]
+    public float climbSpeed = 5f;
+    private bool isClimbing = false;
+    private bool isOnLadder = false;
+
     [Header("Wall Jumping")]
     public float wallSlideSpeed = 2f;
     public float wallSlideLockDuration = 0.2f;
@@ -95,6 +100,27 @@ public class PlayerMovmentScript : MonoBehaviour
         HandleJump();
         UpdateInvincibilityVisual();
         UpdateAnimationState();
+        HandleClimbing();
+    }
+
+    private void HandleClimbing()
+    {
+        if (isOnLadder && Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
+        {
+            isClimbing = true;
+        }
+
+        if (isClimbing)
+        {
+            float verticalInput = Input.GetAxis("Vertical");
+            rb.gravityScale = 0f;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, verticalInput * climbSpeed);
+            SetAnimationState(6); // Climbing
+        }
+        else
+        {
+            rb.gravityScale = gravityScale;
+        }
     }
 
     private void FixedUpdate()
@@ -306,6 +332,24 @@ public class PlayerMovmentScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            isOnLadder = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            isOnLadder = false;
+            isClimbing = false;
+            rb.gravityScale = gravityScale;
+        }
+    }
+
     private void SetAnimationState(int state)
     {
         if (animator != null)
@@ -313,4 +357,6 @@ public class PlayerMovmentScript : MonoBehaviour
             animator.SetInteger("State", state);
         }
     }
+
+    
 }

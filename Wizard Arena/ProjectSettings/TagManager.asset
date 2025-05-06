@@ -11,7 +11,7 @@ TagManager:
   - Chest
   - item
   - Undefined
-  - SmallEnemy
+  - Ladder
   layers:
   - Default
   - TransparentFX

@@ -50568,6 +50568,7 @@ MonoBehaviour:
   gravityScale: 1
   speed: 10
   jumpSpeed: 10
+  climbSpeed: 5
   wallSlideSpeed: 6
   wallSlideLockDuration: 0.2
   isWallJumping: 0
