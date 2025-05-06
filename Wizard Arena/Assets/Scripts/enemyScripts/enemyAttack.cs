@@ -5,6 +5,8 @@ public class EnemyAttack : MonoBehaviour
     public float damage = 5f;  // Amount of damage the enemy does
     public float manaDamageMultiplier = 1.5f;  // Mana damage multiplier
     public float attackCooldown = 1f;  // Time between each attack
+    public bool useTrigger = true;
+    public bool useCollider = false;
     private float lastAttackTime = 0f;
     private bool touchingPlayer = false;
     private GameObject player;
@@ -37,7 +39,7 @@ public class EnemyAttack : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the collision is with an object tagged "Player"
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && useCollider)
         {
             touchingPlayer = true;
         }
@@ -46,7 +48,7 @@ public class EnemyAttack : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         // Check if the collision is with an object tagged "Player"
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && useCollider)
         {
             touchingPlayer = false;
         }
@@ -55,7 +57,7 @@ public class EnemyAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the collision is with an object tagged "Player"
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && useTrigger)
         {
             touchingPlayer = true;
         }
@@ -64,7 +66,7 @@ public class EnemyAttack : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         // Check if the collision is with an object tagged "Player"
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && useTrigger)
         {
             touchingPlayer = false;
         }
