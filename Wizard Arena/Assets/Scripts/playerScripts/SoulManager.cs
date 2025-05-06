@@ -15,7 +15,7 @@ public class SoulManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Keeps it between scenes
+            //DontDestroyOnLoad(gameObject); // Keeps it between scenes (breaks the main menu)
         }
         else
         {
