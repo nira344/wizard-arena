@@ -56,8 +56,6 @@ public class PlayerMovmentScript : MonoBehaviour
     [HideInInspector] public float direction = 0f;
     [HideInInspector] public HealthAndMana playerHealthAndMana;
 
-    [HideInInspector] public bool isCasting = false;
-
     private float lastAttackTime = 0f;
 
     void Start()
@@ -73,12 +71,6 @@ public class PlayerMovmentScript : MonoBehaviour
 
     void Update()
     {
-        if (isCasting)
-        {
-            rb.linearVelocity = Vector2.zero;
-            return;
-        }
-
         if (!canMove) return;
 
         if (playerHealthAndMana.IsDead())

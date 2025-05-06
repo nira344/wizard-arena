@@ -23,20 +23,12 @@ public class fireball : MonoBehaviour
 
             if (playerMovement != null)
             {
-                playerMovement.isCasting = true;
 
                 if (animator != null)
-                    animator.SetTrigger("CastFire");
+                animator.SetTrigger("CastFire");
 
-                Invoke(nameof(EndCast), castDuration);
             }
         }
-    }
-
-    void EndCast()
-    {
-        if (playerMovement != null)
-            playerMovement.isCasting = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -51,6 +43,5 @@ public class fireball : MonoBehaviour
         }
 
         Destroy(gameObject);
-        EndCast();
     }
 }
