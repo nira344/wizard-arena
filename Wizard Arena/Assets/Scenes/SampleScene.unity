@@ -45545,6 +45545,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae3f550d26c94064860ec795731634b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1883500377
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1949976902088753180, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: itemName
+      value: Crystal Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949976902088753180, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: soulCost
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949976902088753180, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: itemSprite
+      value: 
+      objectReference: {fileID: -8092667638713910706, guid: 48dac79119f4649db9b6d00fecf3ee7e, type: 3}
+    - target: {fileID: 1949976902088753180, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: itemDescription
+      value: 'A blood red potion you found somewhere that has healing properties.
+        [Heal 3 HP]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949976902088753180, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: usableItemPrefab
+      value: 
+      objectReference: {fileID: 2504866454523326954, guid: 0a77c1b9dcb7a436abd7515a0b424fea, type: 3}
+    - target: {fileID: 2453900035182242373, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_Name
+      value: ShopItem (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 197.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -135.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408864529050369128, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552389847064140496, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552389847064140496, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5916165944777421156, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5916165944777421156, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 984806756634025263, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
 --- !u!1 &1888376251
 GameObject:
   m_ObjectHideFlags: 0
@@ -49578,7 +49675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1949976902088753180, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
       propertyPath: soulCost
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1949976902088753180, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
       propertyPath: itemSprite
@@ -49873,6 +49970,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1949976902088753180, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
+      propertyPath: soulCost
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1949976902088753180, guid: 66f8b893032a74f64a2e5625de338354, type: 3}
       propertyPath: itemDescription
       value: 'A blood red potion you found somewhere that has healing properties.
@@ -50596,4 +50697,5 @@ SceneRoots:
   - {fileID: 1646557884}
   - {fileID: 2811903197672987679}
   - {fileID: 2135960457}
+  - {fileID: 1883500377}
   - {fileID: 1690760425}
