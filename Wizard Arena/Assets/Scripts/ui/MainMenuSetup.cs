@@ -1,14 +1,33 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuSetup : MonoBehaviour
 {
-    void Start()
+    private Scene thisScene;
+
+    void Awake()
     {
-        var persistentCam = GameObject.Find("MainSceneCamera");
-        if (persistentCam != null)
+        // Store the scene this GameObject belongs to
+        thisScene = gameObject.scene;
+        Camera.main.gameObject.SetActive(true);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene loadedScene, LoadSceneMode mode)
+    {
+        // Log only if the scene that loaded is the one this GameObject is in
+        if (loadedScene == thisScene)
         {
-            Destroy(persistentCam);
-            Debug.Log("Destroyed persistent camera from previous scene.");
+            Camera.main.gameObject.SetActive(true);
         }
     }
 }

@@ -69,6 +69,7 @@ public class PlayerMovmentScript : MonoBehaviour
         animator = GetComponent<Animator>();
         footstep = GetComponent<AudioSource>();
         stepTimer = stepCooldown;
+        Time.timeScale = 1f;
     }
 
     void Update()
