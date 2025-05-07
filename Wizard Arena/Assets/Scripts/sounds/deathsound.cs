@@ -28,7 +28,8 @@ public class deathsound : MonoBehaviour
     // Method to play the sound
     public void PlayEnemyDestroyedSound()
     {
-        audioSource.PlayOneShot(enemyDestroyedSound);
+        if (enemyDestroyedSound && audioSource.gameObject.activeInHierarchy)
+            audioSource.PlayOneShot(enemyDestroyedSound);
     }
 }
 
