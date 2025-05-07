@@ -8,6 +8,7 @@ public class enemyGround : MonoBehaviour
     GameObject player;
     Rigidbody2D rb;
     public AudioSource running;
+    public AudioSource attack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -62,7 +63,6 @@ public class enemyGround : MonoBehaviour
                     running.Play();
                 }
             }
-
         }
     }
 
@@ -85,5 +85,12 @@ public class enemyGround : MonoBehaviour
         }
     }
 
+     private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            attack.Play();
+        }
+    }
 
 }
