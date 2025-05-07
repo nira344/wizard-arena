@@ -285,16 +285,22 @@ public class PlayerMovmentScript : MonoBehaviour
     private bool IsGrounded()
     {
         float extraHeight = 0.1f;
-        RaycastHit2D hit = Physics2D.BoxCast(
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(LayerMask.GetMask("Ground", "Default", "Enemy"));
+        filter.useTriggers = false; // This makes it ignore triggers
+
+        RaycastHit2D[] hits = new RaycastHit2D[1];
+        int hitCount = Physics2D.BoxCast(
             coll.bounds.center,
             coll.bounds.size,
             0f,
             Vector2.down,
-            extraHeight,
-            LayerMask.GetMask("Ground", "Default", "Enemy")
-        );
+            filter,
+            hits,
+            extraHeight
+    );
 
-        return hit.collider != null && !hit.collider.isTrigger;
+    return hitCount > 0;
     }
 
     private void UpdateInvincibilityVisual()
