@@ -233,6 +233,7 @@ public class PlayerMovmentScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
+                Physics.IgnoreLayerCollision(gameObject.layer, 10, true);
                 isDodging = true;
                 dodgeTimeCounter = dodgeDuration;
                 isInvincible = true;
@@ -252,7 +253,11 @@ public class PlayerMovmentScript : MonoBehaviour
         if (isInvincible)
         {
             invincibilityTimeCounter -= Time.deltaTime;
-            if (invincibilityTimeCounter <= 0f) isInvincible = false;
+            if (invincibilityTimeCounter <= 0f)
+            {
+                Physics.IgnoreLayerCollision(gameObject.layer, 10, false);
+                isInvincible = false;
+            }
         }
     }
 
@@ -272,9 +277,9 @@ public class PlayerMovmentScript : MonoBehaviour
             filter,
             hits,
             extraHeight
-    );
+        );
 
-    return hitCount > 0;
+        return hitCount > 0;
     }
 
     private void UpdateInvincibilityVisual()
@@ -286,6 +291,7 @@ public class PlayerMovmentScript : MonoBehaviour
 
     private void UpdateAnimationState()
     {
+        Debug.Log("isGrounded(): " + IsGrounded());
         if (playerHealthAndMana.IsDead())
         {
             SetAnimationState(4); // Dead
@@ -294,15 +300,15 @@ public class PlayerMovmentScript : MonoBehaviour
         {
             SetAnimationState(3); // Dash
         }
-        else if (!IsGrounded() && rb.linearVelocity.y > 0.1f)
+        else if (!IsGrounded() && rb.linearVelocity.y > 0.01f)
         {
             SetAnimationState(2); // Jumping
         }
-        else if (!IsGrounded() && rb.linearVelocity.y < -0.1f)
+        else if (!IsGrounded() && rb.linearVelocity.y < 0f)
         {
             SetAnimationState(5); // Falling
         }
-        else if (Mathf.Abs(direction) > 0.1f)
+        else if (IsGrounded() && Mathf.Abs(direction) > 0.01)
         {
             SetAnimationState(1); // Walking
         }

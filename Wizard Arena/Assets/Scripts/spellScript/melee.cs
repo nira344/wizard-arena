@@ -157,6 +157,9 @@ public class melee : MonoBehaviour
         // Position the melee hitbox farther away based on attackRange
         transform.position = (Vector2)playerTransform.position + attackDirection * attackRange;
 
+        // Put the melee in the correct Z layer
+        transform.position = new Vector3 (transform.position.x, transform.position.y, -3.9f);
+
         // Rotate to face the direction of the attack
         float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
