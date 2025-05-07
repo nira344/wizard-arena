@@ -8,7 +8,6 @@ public class enemyAir : MonoBehaviour
     GameObject player;
     Rigidbody2D rb;
     public AudioSource flying;
-    public AudioSource attack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,7 +40,18 @@ public class enemyAir : MonoBehaviour
                 rb.AddForceY(rb.linearVelocityY / -(1 + (Time.deltaTime * 2)));
             }
 
+            // turn towards player
+            if (direction.x > 0)
+            {
+                transform.localRotation = Quaternion.Euler(transform.rotation.x, 180, transform.rotation.z);
+            }
+            else
+            {
+                transform.localRotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
+            }
+
             // move in the direction we have calculated
+            direction.x = Mathf.Abs(direction.x) * -1f;
             transform.Translate(direction);
 
             if (flying)
@@ -70,14 +80,6 @@ public class enemyAir : MonoBehaviour
         else
         {
             return false;
-        }
-    }
-    
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            attack.Play();
         }
     }
 }

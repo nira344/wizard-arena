@@ -10,6 +10,7 @@ public class EnemyAttack : MonoBehaviour
     private float lastAttackTime = 0f;
     private bool touchingPlayer = false;
     private GameObject player;
+    public AudioSource attack;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class EnemyAttack : MonoBehaviour
                     // Apply damage to the player's health and mana
                     playerHealthMana.TakeDamage(damage);
                     lastAttackTime = Time.time;  // Update the last attack time
+                    attack.Play(); // Play the attack sound
                 }
             }
         }

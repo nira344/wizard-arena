@@ -230,6 +230,7 @@ MonoBehaviour:
   attackCooldown: 1
   useTrigger: 1
   useCollider: 0
+  attack: {fileID: -7304482284675054142}
 --- !u!114 &9080981991395392354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +261,6 @@ MonoBehaviour:
   range: 25
   speed: 6
   flying: {fileID: 0}
-  attack: {fileID: -7304482284675054142}
 --- !u!82 &-7304482284675054142
 AudioSource:
   m_ObjectHideFlags: 0

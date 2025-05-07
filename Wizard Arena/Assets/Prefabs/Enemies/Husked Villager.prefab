@@ -245,6 +245,7 @@ MonoBehaviour:
   attackCooldown: 0.5
   useTrigger: 1
   useCollider: 0
+  attack: {fileID: 9054277753878295615}
 --- !u!114 &7472196445193738440
 MonoBehaviour:
   m_ObjectHideFlags: 0
