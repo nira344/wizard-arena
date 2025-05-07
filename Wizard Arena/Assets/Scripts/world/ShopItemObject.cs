@@ -16,7 +16,7 @@ public class ShopItemObject : MonoBehaviour
 
     void Start()
     {
-        inventoryManager = FindObjectOfType<InventoryManager>();
+        inventoryManager = FindFirstObjectByType<InventoryManager>();
 
         // Set the cost text (from child TextMeshPro)
         if (costText == null)
@@ -43,7 +43,7 @@ public class ShopItemObject : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.F))
+        if (playerInRange && Input.GetKeyDown(KeyCode.F) && Time.timeScale > 0)
         {
             Debug.Log("F key pressed near shop item.");
 

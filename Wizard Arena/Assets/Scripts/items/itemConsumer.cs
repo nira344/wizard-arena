@@ -6,7 +6,7 @@ public class ItemConsumer : MonoBehaviour
     private InventoryManager inventoryManager;
     private GameObject player;
 
-    private static bool isConsumingThisFrame = false;
+    //private static bool isConsumingThisFrame = false;  Never used
 
     void Start()
     {
@@ -14,8 +14,6 @@ public class ItemConsumer : MonoBehaviour
         inventoryManager = GameObject.Find("InventoryCanvas")?.GetComponent<InventoryManager>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
-
-    private int lastFrameUsed = -1;
 
     public void TryConsume()
     {

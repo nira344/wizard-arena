@@ -10,7 +10,7 @@ public class RespawnPoint : MonoBehaviour
     private bool hasRespawned = false;
     private bool isClaimed = false;
     private bool playerTouching = false;
-    private bool spellMenuOpen = false;
+    //private bool spellMenuOpen = false;  Never used
 
     void Start()
     {

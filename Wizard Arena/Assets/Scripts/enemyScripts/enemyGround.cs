@@ -7,8 +7,8 @@ public class enemyGround : MonoBehaviour
     public float speed;
     GameObject player;
     Rigidbody2D rb;
-
     public AudioSource running;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,9 +55,12 @@ public class enemyGround : MonoBehaviour
             // move in the direction we have calculated
             transform.Translate(direction);
 
-            if (!running.isPlaying)
+            if (running)
             {
-                running.Play();
+                if (!running.isPlaying)
+                {
+                    running.Play();
+                }
             }
 
         }
