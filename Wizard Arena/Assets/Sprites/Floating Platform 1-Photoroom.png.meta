@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Floating Platform 1-Photoroom_0: -1877371009376712161
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
