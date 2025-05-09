@@ -11,11 +11,15 @@ public class ShadowDodge : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerMovmentScript playerMovement;
+    private GameObject shadowDashParticles;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovmentScript>();
+        shadowDashParticles = transform.Find("Shadow Dash").gameObject;
+        shadowDashParticles.SetActive(false);
+        lastAttackTime = -3f;
     }
 
     void Update()
@@ -30,6 +34,7 @@ public class ShadowDodge : MonoBehaviour
                 if (statScript.currentMana + statScript.currentHealth > 13)
                 {
                     isShadowDashing = true;
+                    shadowDashParticles.SetActive(true);
                     shadowDashTimeCounter = shadowDashDuration;
 
                     rb.linearVelocity = new Vector2(playerMovement.direction * shadowDashSpeed, rb.linearVelocity.y);
@@ -61,6 +66,7 @@ public class ShadowDodge : MonoBehaviour
             if (shadowDashTimeCounter <= 0f)
             {
                 isShadowDashing = false;
+                shadowDashParticles.SetActive(false);
                 Debug.Log("Shadow dash ended");
             }
         }
