@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 9cead0e16598c4b89bca3a01c629f8a6
+guid: 14091985f990b4d989ff77d4d33dec68
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -326453425769730474
-    second: Floating Island-Photoroom_0
+      213: -4256995696025975148
+    second: Gilbert The Great_ Projectile Spores-Photoroom_0
+  - first:
+      213: -5434558204721922621
+    second: Gilbert The Great_ Projectile Spores-Photoroom_1
+  - first:
+      213: 1515167017555500154
+    second: Gilbert The Great_ Projectile Spores-Photoroom_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Floating Island-Photoroom_0
+      name: Gilbert The Great_ Projectile Spores-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 198
-        y: 338
-        width: 530
-        height: 381
+        x: 500
+        y: 511
+        width: 11
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 65e2941c654387bf0800000000000000
-      internalID: -326453425769730474
+      spriteID: 496410018fc1ce4c0800000000000000
+      internalID: -4256995696025975148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gilbert The Great_ Projectile Spores-Photoroom_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 327
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cd7d583b129494b0800000000000000
+      internalID: -5434558204721922621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gilbert The Great_ Projectile Spores-Photoroom_2
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 164
+        width: 302
+        height: 251
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7c98c0ff54f60510800000000000000
+      internalID: 1515167017555500154
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Floating Island-Photoroom_0: -326453425769730474
+      Gilbert The Great_ Projectile Spores-Photoroom_0: -4256995696025975148
+      Gilbert The Great_ Projectile Spores-Photoroom_1: -5434558204721922621
+      Gilbert The Great_ Projectile Spores-Photoroom_2: 1515167017555500154
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

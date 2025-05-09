@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9cead0e16598c4b89bca3a01c629f8a6
+guid: 72c3df8cf5b9047ae95a056d3f6afb0c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -326453425769730474
-    second: Floating Island-Photoroom_0
+      213: -9103994042684182381
+    second: Gilbert The Great_ Walking 2-Photoroom_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Floating Island-Photoroom_0
+      name: Gilbert The Great_ Walking 2-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 198
-        y: 338
-        width: 530
-        height: 381
+        x: 218
+        y: 264
+        width: 451
+        height: 540
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 65e2941c654387bf0800000000000000
-      internalID: -326453425769730474
+      spriteID: 390798837ad18a180800000000000000
+      internalID: -9103994042684182381
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Floating Island-Photoroom_0: -326453425769730474
+      Gilbert The Great_ Walking 2-Photoroom_0: -9103994042684182381
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
