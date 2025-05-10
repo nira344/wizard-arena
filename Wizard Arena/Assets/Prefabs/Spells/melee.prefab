@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  attackRange: 3.5
+  attackRange: 3
 --- !u!60 &6432462028986115707
 PolygonCollider2D:
   m_ObjectHideFlags: 0
