@@ -6,6 +6,10 @@ public class SporelingAnimationScript : MonoBehaviour
     private Animator animator;
     private enemyGround groundAI;
     private EnemyAttack attackScript;
+    private Rigidbody2D rb;
+
+    [Header("Attack Jump Settings")]
+    public float attackJumpForce = 5f; // You can tweak this in the Inspector
 
     private bool isAttacking = false;
 
@@ -14,6 +18,7 @@ public class SporelingAnimationScript : MonoBehaviour
         animator = GetComponent<Animator>();
         groundAI = GetComponent<enemyGround>();
         attackScript = GetComponent<EnemyAttack>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -36,7 +41,18 @@ public class SporelingAnimationScript : MonoBehaviour
         if (attackScript != null && animator != null && attackScript.IsTouchingPlayer() && !isAttacking)
         {
             animator.SetTrigger("Attack");
+            PerformAttackJump();
             StartCoroutine(AttackCooldown());
+        }
+    }
+
+    void PerformAttackJump()
+    {
+        if (rb != null)
+        {
+            // Optional: reset vertical velocity before applying force
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            rb.AddForce(Vector2.up * attackJumpForce, ForceMode2D.Impulse);
         }
     }
 
