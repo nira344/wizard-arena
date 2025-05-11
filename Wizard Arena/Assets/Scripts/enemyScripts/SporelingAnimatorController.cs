@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class SporelingAnimationScript : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class SporelingAnimationScript : MonoBehaviour
 
     void HandleMovementAnimation()
     {
-        if (groundAI != null)
+        if (groundAI != null && animator != null)
         {
             bool shouldWalk = groundAI.range > 0 && groundAI.playerInRange();
             animator.SetBool("isWalking", shouldWalk);
@@ -32,14 +33,14 @@ public class SporelingAnimationScript : MonoBehaviour
 
     void HandleAttackAnimation()
     {
-        if (attackScript != null && attackScript.IsTouchingPlayer() && !isAttacking)
+        if (attackScript != null && animator != null && attackScript.IsTouchingPlayer() && !isAttacking)
         {
             animator.SetTrigger("Attack");
             StartCoroutine(AttackCooldown());
         }
     }
 
-    System.Collections.IEnumerator AttackCooldown()
+    IEnumerator AttackCooldown()
     {
         isAttacking = true;
         yield return new WaitForSeconds(attackScript.attackCooldown);

@@ -214,9 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8591fdf121c444932b0631125cd389f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 1
   manaDamageMultiplier: 1.5
-  attackCooldown: 0.4
+  attackCooldown: 0.3
   useTrigger: 1
   useCollider: 0
   attack: {fileID: 0}
