@@ -25,15 +25,19 @@ public class door : MonoBehaviour
     {
         if (Input.GetKeyDown("f") && !locked && playerTouching && (Time.timeScale > 0))
         {
-            if (cameraLockPos.x != 0)
+            cam.teleport = true;
+            if (cameraLockPos.x != 0 || cameraLockPos.y != 0)
             {
                 cam.lockPosition = cameraLockPos;
-                cam.locked = true;
+                if (cameraLockPos.x != 0)
+                    cam.xLocked = true;
+                if (cameraLockPos.y != 0)
+                    cam.yLocked = true;
             }
-            else
+            if (cameraLockPos.x == 0 && cameraLockPos.y == 0)
             {
-                cam.teleport = true;
-                cam.locked = false;
+                cam.xLocked = false;
+                cam.yLocked = false;
             }
             player.transform.position = new Vector3(exitDoor.transform.position.x, exitDoor.transform.position.y, player.transform.position.z);
             sqweek.Play();
