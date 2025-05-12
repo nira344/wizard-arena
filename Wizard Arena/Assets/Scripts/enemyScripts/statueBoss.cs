@@ -12,6 +12,7 @@ public class statueBoss : MonoBehaviour
     // Components
     private GameObject player;
     private enemyHealth hp;
+    private float maxHp;
     
     // AI status
     private bool activated;
@@ -28,6 +29,7 @@ public class statueBoss : MonoBehaviour
         // Get own health script and turn invincible
         hp = GetComponent<enemyHealth>();
         hp.invincible = true;
+        maxHp = hp.health;
 
         // Disable boss HUD elements
         winText.gameObject.SetActive(false);
@@ -70,7 +72,7 @@ public class statueBoss : MonoBehaviour
         // Enable AI + remove invincibility
         hp.invincible = false;
         activated = true;
-        healthBar.SetMaxHealth(hp.health);
+        healthBar.SetMaxHealth(maxHp);
         bossHealthBar.Show();
         bossText.text = "WEEPING ANGEL";
     }
@@ -91,14 +93,8 @@ public class statueBoss : MonoBehaviour
             healthBar.SetHealth(hp.health);
             bossHealthBar.Hide();
             winText.gameObject.SetActive(true);
-            winText.text = "ANGEL DEFEATED";
+            winText.GetComponent<textUtilities>().TitleAppear("ANGEL DEFEATED", 0.3f, 2f, 0.5f);
             Debug.Log("Player has defeated the Weeping Angel!");
         }
-    }
-
-    private System.Collections.IEnumerator RemoveText()
-    {
-        yield return new WaitForSeconds(2);
-        winText.text = "";
     }
 }

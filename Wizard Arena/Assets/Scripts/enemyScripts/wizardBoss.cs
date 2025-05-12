@@ -13,6 +13,7 @@ public class wizardBoss : MonoBehaviour
     // Components
     private GameObject player;
     private enemyHealth hp;
+    private float maxHp;
     
     // AI status
     private bool activated;
@@ -29,6 +30,7 @@ public class wizardBoss : MonoBehaviour
         // Get own health script and turn invincible
         hp = GetComponent<enemyHealth>();
         hp.invincible = true;
+        maxHp = hp.health;
 
         // Disable boss HUD elements
         winText.gameObject.SetActive(false);
@@ -75,7 +77,7 @@ public class wizardBoss : MonoBehaviour
         // Enable AI + remove invincibility
         hp.invincible = false;
         activated = true;
-        healthBar.SetMaxHealth(hp.health);
+        healthBar.SetMaxHealth(maxHp);
         bossHealthBar.Show();
         bossText.text = "GILBERT THE GREAT";
     }
