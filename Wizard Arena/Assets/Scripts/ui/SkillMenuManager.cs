@@ -71,10 +71,26 @@ public class SkillMenuManager : MonoBehaviour
 
     private void TryUnlockSkill()
     {
-        if (SkillManager.Instance.SpendSkillPoint() && selectedButton != null && !selectedButton.isUnlocked)
+        if (selectedButton == null)
+        {
+            Debug.LogWarning("No selected button when trying to unlock.");
+            return;
+        }
+
+        if (selectedButton.isUnlocked)
+        {
+            Debug.Log("Skill already unlocked.");
+            return;
+        }
+
+        if (SkillManager.Instance.SpendSkillPoint())
         {
             selectedButton.UnlockSkill();
             Debug.Log("Unlocked: " + selectedButton.abilityName);
+        }
+        else
+        {
+            Debug.LogWarning("Not enough skill points to unlock skill.");
         }
     }
 
