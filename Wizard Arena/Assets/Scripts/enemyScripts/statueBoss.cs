@@ -73,8 +73,8 @@ public class statueBoss : MonoBehaviour
         hp.invincible = false;
         activated = true;
         healthBar.SetMaxHealth(maxHp);
-        bossHealthBar.Show();
         bossText.text = "WEEPING ANGEL";
+        bossHealthBar.Show();
     }
 
     public void Deactivate()

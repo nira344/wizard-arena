@@ -78,8 +78,8 @@ public class wizardBoss : MonoBehaviour
         hp.invincible = false;
         activated = true;
         healthBar.SetMaxHealth(maxHp);
-        bossHealthBar.Show();
         bossText.text = "GILBERT THE GREAT";
+        bossHealthBar.Show();
     }
 
     public void Deactivate()
