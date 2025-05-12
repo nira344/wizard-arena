@@ -7,8 +7,8 @@ public class spawner : MonoBehaviour
     public float spawnCooldown;
     public int maxEnemies;
 
-    public List<GameObject> spawnedEnemyObjects;
-    public float timer;
+    private List<GameObject> spawnedEnemyObjects;
+    private float timer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
