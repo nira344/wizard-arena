@@ -291,7 +291,6 @@ public class PlayerMovmentScript : MonoBehaviour
 
     private void UpdateAnimationState()
     {
-        Debug.Log("isGrounded(): " + IsGrounded());
         if (playerHealthAndMana.IsDead())
         {
             SetAnimationState(4); // Dead

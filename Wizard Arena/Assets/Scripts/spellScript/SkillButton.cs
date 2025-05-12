@@ -15,7 +15,7 @@ public class SkillButton : MonoBehaviour
 
     void Start()
     {
-        menuManager = FindObjectOfType<SkillMenuManager>();
+        menuManager = FindFirstObjectByType<SkillMenuManager>();
         iconImage.sprite = skill.icon;
         UpdateVisual();
     }
