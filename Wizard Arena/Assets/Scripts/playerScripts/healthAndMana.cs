@@ -42,13 +42,6 @@ public class HealthAndMana : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            PlayerPrefs.DeleteKey("MaxHealth");
-            PlayerPrefs.DeleteKey("MaxMana");
-            Debug.Log("PlayerPrefs reset.");
-        }
-
         BalanceHealthAndMana();
 
         if (debugEnabled && Input.GetKeyDown("o"))

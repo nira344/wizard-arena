@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   skillName: Fireball
+  description: FIREBALLL
   icon: {fileID: 2870353797686425628, guid: 6f9dba25f0d1146798014f1b3cdda1ef, type: 3}
+  isMobility: 0
   isUnlocked: 0

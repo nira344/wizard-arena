@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 014793e1817bb42db9cfcd95705f179a, type: 3}
-  m_Name: Shadow Dash
+  m_Name: ShadowDash
   m_EditorClassIdentifier: 
   skillName: Shadow Dash
+  description: Dash
   icon: {fileID: 6062421562926011367, guid: e3616bf36120a4b75b8ce08d5089d17d, type: 3}
+  isMobility: 1
   isUnlocked: 0

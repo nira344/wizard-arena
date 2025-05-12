@@ -2,79 +2,58 @@ using UnityEngine;
 
 public class ShadowDodge : MonoBehaviour
 {
-    public float shadowDashSpeed = 35f;           // Super fast dash speed
-    public float shadowDashDuration = .3f;      // Longer dash duration
+    public float shadowDashSpeed = 35f;
+    public float shadowDashDuration = 0.3f;
+    public float sDashCooldownTime = 3f;
+
     private float shadowDashTimeCounter;
     private bool isShadowDashing = false;
-    public float sDashCooldownTime = 3f;  // Cooldown time for iceshard
-    private float lastAttackTime = 0f;
+    private float lastDashTime = -999f;
 
     private Rigidbody2D rb;
     private PlayerMovmentScript playerMovement;
     private GameObject shadowDashParticles;
+    private HealthAndMana statScript;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovmentScript>();
-        shadowDashParticles = transform.Find("Shadow Dash").gameObject;
-        shadowDashParticles.SetActive(false);
-        lastAttackTime = -3f;
+        statScript = GetComponent<HealthAndMana>();
+        shadowDashParticles = transform.Find("Shadow Dash")?.gameObject;
+        if (shadowDashParticles != null) shadowDashParticles.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !playerMovement.isWallJumping && playerMovement.direction != 0)
-        {
-            // Check if the cooldown has passed
-            if (Time.time - lastAttackTime >= sDashCooldownTime)
-            {
-                HealthAndMana statScript = GetComponent<HealthAndMana>();
-
-                if (statScript.currentMana + statScript.currentHealth > 13)
-                {
-                    isShadowDashing = true;
-                    shadowDashParticles.SetActive(true);
-                    shadowDashTimeCounter = shadowDashDuration;
-
-                    rb.linearVelocity = new Vector2(playerMovement.direction * shadowDashSpeed, rb.linearVelocity.y);
-                    Debug.Log("shadow dashing with direction: " + playerMovement.direction);
-                    statScript.currentMana -= 13;
-                    // Now we update the time only when dodge is triggered
-                    lastAttackTime = Time.time;
-                }
-                else
-                {
-                    Debug.Log("Not enough mana for shadowdash");
-                }
-            
-            }
-            else
-            {
-                Debug.Log("shadow dash is on cooldown.");
-            }
-        }
-
-
         if (isShadowDashing)
         {
             shadowDashTimeCounter -= Time.deltaTime;
-
-            // Keep the player moving fast in the direction during the dash
             rb.linearVelocity = new Vector2(playerMovement.direction * shadowDashSpeed, 0f);
 
             if (shadowDashTimeCounter <= 0f)
             {
                 isShadowDashing = false;
-                shadowDashParticles.SetActive(false);
-                Debug.Log("Shadow dash ended");
+                if (shadowDashParticles != null) shadowDashParticles.SetActive(false);
             }
         }
     }
 
-    /// <summary>
-    /// Triggers the shadow dodge manually. Call this from the movement script or input handler.
-    /// </summary>
+    public bool TryTriggerShadowDash()
+    {
+        if (isShadowDashing || Time.time - lastDashTime < sDashCooldownTime) return false;
+        if (playerMovement.isWallJumping || playerMovement.direction == 0) return false;
+        if (statScript == null || statScript.currentMana < 13) return false;
+
+        statScript.currentMana -= 13;
+        isShadowDashing = true;
+        shadowDashTimeCounter = shadowDashDuration;
+        lastDashTime = Time.time;
+
+        if (shadowDashParticles != null) shadowDashParticles.SetActive(true);
+        rb.linearVelocity = new Vector2(playerMovement.direction * shadowDashSpeed, 0f);
+        return true;
+    }
 
     public bool IsShadowDashing()
     {
