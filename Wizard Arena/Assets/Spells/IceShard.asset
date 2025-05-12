@@ -16,4 +16,4 @@ MonoBehaviour:
   description: Homing
   icon: {fileID: 2049740433184511156, guid: 72638377da719407d9d9e540fd7a656d, type: 3}
   isMobility: 0
-  isUnlocked: 0
+  isUnlocked: 1
