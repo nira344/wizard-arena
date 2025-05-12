@@ -50,7 +50,9 @@ public class RespawnPoint : MonoBehaviour
 
     void RespawnPlayer()
     {
-        Camera.main.GetComponent<cameraController>().locked = false; // most cursed line of code ever
+        cameraController cam = Camera.main.GetComponent<cameraController>();
+        cam.xLocked = false;
+        cam.yLocked = false;
         player.transform.position = new Vector3(respawnPosition.x, respawnPosition.y, player.transform.position.z);
         healthAndMana.currentHealth = healthAndMana.maxHealth;
         healthAndMana.currentMana = healthAndMana.maxMana;
