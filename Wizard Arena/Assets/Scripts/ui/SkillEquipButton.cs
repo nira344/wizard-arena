@@ -11,7 +11,7 @@ public class SkillEquipButton : MonoBehaviour
 
     void Start()
     {
-        menuManager = FindObjectOfType<SkillMenuManager>();
+        menuManager = FindFirstObjectByType<SkillMenuManager>();
         UnequipSkill();
     }
 
