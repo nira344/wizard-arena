@@ -265,7 +265,7 @@ public class PlayerMovmentScript : MonoBehaviour
     {
         float extraHeight = 0.1f;
         ContactFilter2D filter = new ContactFilter2D();
-        filter.SetLayerMask(LayerMask.GetMask("Ground", "Default", "Enemy"));
+        filter.SetLayerMask(LayerMask.GetMask("Ground", "Default", "Enemy", "Wall"));
         filter.useTriggers = false; // This makes it ignore triggers
 
         RaycastHit2D[] hits = new RaycastHit2D[1];

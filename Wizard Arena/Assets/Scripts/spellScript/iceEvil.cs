@@ -2,67 +2,77 @@ using UnityEngine;
 
 public class IceShardEvil : MonoBehaviour
 {
+    [Header("Projectile Settings")]
     public int projectileSpeed = 15;
-    public int damage = 2;  // Damage that can be adjusted in the Inspector
-    public float homingSpeed = 0.5f;  // How fast the projectile homes towards the target
+    public int damage = 2;
+    public float homingStrength = 5f;
+    public float range = 30f;
     public GameObject explosion;
-    private Rigidbody2D rb;
-    private Transform target;  // Target for homing (player)
-    Vector2 directionToTarget;
 
-    // Start is called once before the first frame update
+    private Rigidbody2D rb;
+    private Transform target;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();  // Get Rigidbody2D component
-        FindTarget();  // Find the nearest enemy to home towards
-        if (target != null)
-        {
-            // Rotate towards the target and move the projectile in that direction
-            directionToTarget = (target.position - transform.position).normalized;
-            rb.linearVelocity = directionToTarget * projectileSpeed;
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
 
-            // Rotate the projectile to face the target
-            float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        }
-        else
-        {
-            // If no target, move in the current direction
-            rb.linearVelocity = transform.right * projectileSpeed;
-        }
+        FindTarget();
+
+        // Initial forward movement
+        rb.linearVelocity = transform.right * projectileSpeed;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (target == null) return;
+
+        Vector2 direction = ((Vector2)target.position - rb.position).normalized;
+
+        // Homing logic
+        Vector2 newVelocity = Vector2.Lerp(rb.linearVelocity, direction * projectileSpeed, Time.fixedDeltaTime * homingStrength);
+        rb.linearVelocity = newVelocity;
+
+        // Rotate to face movement direction
+        float angle = Mathf.Atan2(newVelocity.y, newVelocity.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    // Find the nearest target (enemy) in the scene
     void FindTarget()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            float dist = Vector2.Distance(transform.position, player.transform.position);
+            if (dist <= range)
+            {
+                target = player.transform;
+            }
+        }
     }
 
-    // Handle collision with enemies
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             Debug.Log("EVIL Ice Shard hit " + collision.gameObject);
-            var healthComponent = collision.gameObject.GetComponent<HealthAndMana>();
+            var healthComponent = collision.GetComponent<HealthAndMana>();
 
             if (healthComponent != null)
-            {
-                healthComponent.TakeDamage(damage);  // Apply damage to enemy
-            }
+                healthComponent.TakeDamage(damage);
 
-            //Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(gameObject);  // Destroy the projectile after impact
+            if (explosion != null)
+                Instantiate(explosion, transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
         }
-        else
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.CompareTag("Obstacle"))
         {
             Debug.Log("EVIL Ice Shard hit solid object");
-            Destroy(gameObject);  // Destroy the projectile if it hits a solid object
+            if (explosion != null)
+                Instantiate(explosion, transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
         }
     }
 }
