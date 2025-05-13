@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dock-Photoroom_0: -4319932998497760781
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: 3924779624751137345}
   - component: {fileID: 8500729243694579991}
   m_Layer: 10
-  m_Name: EVIL IceShard
+  m_Name: EVIL Fireball
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4913,8 +4913,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1515167017555500154, guid: 14091985f990b4d989ff77d4d33dec68, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.4117647}
+  m_Sprite: {fileID: 2870353797686425628, guid: 6f9dba25f0d1146798014f1b3cdda1ef, type: 3}
+  m_Color: {r: 0.764151, g: 0.263707, b: 0, a: 0.4117647}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4989,7 +4989,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.02, y: 2.51}
+    oldSize: {x: 5.48, y: 3.68}
     newSize: {x: 3.4, y: 2.02}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

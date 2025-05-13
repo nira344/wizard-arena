@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 30
   speed: 8
-  flying: {fileID: 0}
+  flying: {fileID: -7571796707941296249}
 --- !u!114 &774340152140969216
 MonoBehaviour:
   m_ObjectHideFlags: 0
