@@ -15,7 +15,12 @@ public class spawner : MonoBehaviour
     {
         spawnedEnemyObjects = new List<GameObject>();
         spawnedEnemyObjects.Capacity = maxEnemies;
-        timer = 0;
+
+        // Spawn the max amount of enemies on game start
+        for (int i = maxEnemies; i > 0; i--)
+        {
+            SpawnEnemy();
+        }
     }
 
     // Update is called once per frame
@@ -43,11 +48,17 @@ public class spawner : MonoBehaviour
         {
             if (spawnedEnemyObjects.Count < maxEnemies)
             {
-                Vector3 spawnLocation = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -3);
-                GameObject goober = Instantiate(prefabs[0], spawnLocation, Quaternion.identity);
-                timer = spawnCooldown;
-                spawnedEnemyObjects.Insert(0, goober);
+                SpawnEnemy();
             }
         }
+    }
+
+    // Spawn function
+    void SpawnEnemy()
+    {
+        Vector3 spawnLocation = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -3);
+        GameObject goober = Instantiate(prefabs[0], spawnLocation, Quaternion.identity);
+        timer = spawnCooldown;
+        spawnedEnemyObjects.Insert(0, goober);
     }
 }
