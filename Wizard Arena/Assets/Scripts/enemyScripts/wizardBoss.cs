@@ -3,20 +3,20 @@ using TMPro;
 
 public class wizardBoss : MonoBehaviour
 {
-
     [Header("Configuration")]
-    public float speed;
-    public float spellCooldown;
-    private float cooldownTimer;
-    public GameObject spell;
+    public float spellCooldown = 3f;
+    public GameObject normalSpell;
+    public GameObject explosiveSpell;       // <-- Add explosive spell prefab
+    public float explosiveChance = 0.3f;    // 30% chance to cast explosive spell
 
-    // Components
-    private GameObject player;
-    private enemyHealth hp;
-    private float maxHp;
-    
-    // AI status
-    private bool activated;
+    [Header("Floating Settings")]
+    public float floatHeight = 5f;
+    public float floatSpeed = 2f;
+    public float hoverRange = 3f;
+    public float hoverSpeed = 2f;
+
+    [Header("Movement")]
+    public float movementStartDelay = 1f;
 
     [Header("HUD Elements")]
     public HealthBar healthBar;
@@ -24,59 +24,92 @@ public class wizardBoss : MonoBehaviour
     public TextMeshProUGUI bossText;
     public TextMeshProUGUI winText;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private GameObject player;
+    private enemyHealth hp;
+    private float maxHp;
+    private float cooldownTimer;
+
+    private bool activated;
+    private bool hasReachedHeight;
+    private bool hoverStarted;
+
+    private Vector3 hoverCenterPos;
+    private float hoverTimer;
+
     void Start()
     {
-        // Get own health script and turn invincible
         hp = GetComponent<enemyHealth>();
         hp.invincible = true;
         maxHp = hp.health;
 
-        // Disable boss HUD elements
         winText.gameObject.SetActive(false);
-
-        // Find player
         player = GameObject.FindGameObjectWithTag("Player");
-
-        // Reset spell cooldown
         cooldownTimer = 0;
+
+        hasReachedHeight = false;
+        hoverStarted = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (activated)
+        if (!activated) return;
+
+        healthBar.SetHealth(hp.health);
+
+        if (!hasReachedHeight)
         {
-            // Update boss health bar
-            healthBar.SetHealth(hp.health);
+            Vector3 targetPos = new Vector3(transform.position.x, floatHeight, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, floatSpeed * Time.deltaTime);
 
-            // Fire icicles if cooldown is at zero
-            if (cooldownTimer <= 0)
+            if (Mathf.Abs(transform.position.y - floatHeight) < 0.05f)
             {
-                Instantiate(spell, transform.position, Quaternion.identity);
-                cooldownTimer = spellCooldown;
+                hasReachedHeight = true;
+                hoverCenterPos = transform.position;
+                hoverTimer = -movementStartDelay;
             }
 
-            // Otherwise, reduce the timer
-            else
-            {
-                cooldownTimer -= Time.deltaTime;
-            }
-
-            // Move Towards Player
-            Vector2 direction = transform.position - player.transform.position;
-            direction.Normalize();
-            direction.y = 0;
-            direction = direction * speed * Time.deltaTime;
-            transform.Translate(direction);
+            return;
         }
+
+        if (hasReachedHeight)
+        {
+            hoverTimer += Time.deltaTime * hoverSpeed;
+
+            if (hoverTimer >= 0)
+            {
+                float xOffset = Mathf.Sin(hoverTimer) * hoverRange;
+                Vector3 hoverPos = new Vector3(hoverCenterPos.x + xOffset, floatHeight, hoverCenterPos.z);
+                transform.position = hoverPos;
+            }
+        }
+
+        // Spell casting logic
+        if (cooldownTimer <= 0)
+        {
+            CastSpell();
+            cooldownTimer = spellCooldown;
+        }
+        else
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
+    }
+
+    private void CastSpell()
+    {
+        float roll = Random.value;
+        GameObject selectedSpell = (roll < explosiveChance && explosiveSpell != null) ? explosiveSpell : normalSpell;
+
+        Instantiate(selectedSpell, transform.position, Quaternion.identity);
     }
 
     public void Activate()
     {
-        // Enable AI + remove invincibility
-        hp.invincible = false;
+        if (activated) return;
+
         activated = true;
+        hp.invincible = false;
+
         healthBar.SetMaxHealth(maxHp);
         bossText.text = "GILBERT THE GREAT";
         bossHealthBar.Show();
@@ -84,9 +117,10 @@ public class wizardBoss : MonoBehaviour
 
     public void Deactivate()
     {
-        // Disable AI + become invincible
-        hp.invincible = true;
+        if (!activated) return;
+
         activated = false;
+        hp.invincible = true;
         bossHealthBar.Hide();
     }
 
@@ -94,7 +128,6 @@ public class wizardBoss : MonoBehaviour
     {
         if (activated)
         {
-            // mods, drop a comical anvil on his head
             healthBar.SetHealth(hp.health);
             bossHealthBar.Hide();
             winText.gameObject.SetActive(true);
