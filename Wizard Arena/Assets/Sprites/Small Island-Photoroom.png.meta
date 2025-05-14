@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small Island-Photoroom_0: -6073349144774640010
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
