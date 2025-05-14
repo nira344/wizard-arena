@@ -30,9 +30,7 @@ public class RespawnPoint : MonoBehaviour
         {
             if (!isClaimed)
             {
-                isClaimed = true;
-                respawnPosition = transform.position;
-                Debug.Log("Checkpoint claimed!");
+                Claim();
             }
             else
             {
@@ -80,5 +78,12 @@ public class RespawnPoint : MonoBehaviour
         {
             playerTouching = false;
         }
+    }
+
+    public void Claim()
+    {
+        isClaimed = true;
+        respawnPosition = transform.position;
+        Debug.Log("Checkpoint claimed! New respawn position: " + respawnPosition);
     }
 }

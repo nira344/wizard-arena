@@ -5059,7 +5059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a10a9be47c54a079a864c3a2dfa39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 12
+  projectileSpeed: 8
   damage: 2
   homingStrength: 5
   range: 30

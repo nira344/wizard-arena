@@ -8,6 +8,8 @@ public class statueBoss : MonoBehaviour
     public float spellCooldown;
     private float cooldownTimer;
     public GameObject spell;
+    public GameObject respawnPoint;
+    public GameObject originalRespawnPoint;
 
     // Components
     private GameObject player;
@@ -39,6 +41,9 @@ public class statueBoss : MonoBehaviour
 
         // Reset spell cooldown
         cooldownTimer = 0;
+
+        // Disable the respawn point
+        respawnPoint.SetActive(false);
     }
 
     // Update is called once per frame
@@ -95,6 +100,9 @@ public class statueBoss : MonoBehaviour
             winText.gameObject.SetActive(true);
             winText.GetComponent<textUtilities>().TitleAppear("ANGEL DEFEATED", 0.3f, 2f, 0.5f);
             Debug.Log("Player has defeated the Weeping Angel!");
+            originalRespawnPoint.SetActive(false);
+            respawnPoint.SetActive(true);
+            respawnPoint.GetComponent<RespawnPoint>().Claim();
         }
     }
 }
