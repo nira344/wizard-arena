@@ -22,11 +22,11 @@ public class Chest : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    Debug.Log("Manual chest open test");
-        //    OpenChest();
-        //}
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("Manual chest open test");
+            OpenChest();
+        }
     }
 
     public void OpenChest()
@@ -46,7 +46,7 @@ public class Chest : MonoBehaviour
             }
         }
 
-        Destroy(gameObject, 0f);
+        Destroy(gameObject, 0.5f);
     }
 
     public void OnMeleeHit()

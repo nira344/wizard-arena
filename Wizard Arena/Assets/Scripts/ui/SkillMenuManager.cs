@@ -28,7 +28,7 @@ public class SkillMenuManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
-            //skillPanel.SetActive(!skillPanel.activeSelf);
+            skillPanel.SetActive(!skillPanel.activeSelf);
 
         if (Input.GetKeyDown(KeyCode.F))
         {
