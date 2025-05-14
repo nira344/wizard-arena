@@ -60,7 +60,7 @@ public class shoot : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire3") && Time.time - lastFireTime >= fireballCooldownTime)
         {
-            if (!IsUnlocked("Fireball")) return;
+            //if (!IsUnlocked("Fireball")) return;
 
             if (statScript.currentMana >= 3)
             {
@@ -79,7 +79,7 @@ public class shoot : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire2") && Time.time - lastIceTime >= iceshardCooldownTime)
         {
-            if (!IsUnlocked("Ice Shard")) return;
+            //if (!IsUnlocked("Ice Shard")) return;
 
             if (statScript.currentMana >= 1)
             {
@@ -108,7 +108,7 @@ public class shoot : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (!IsUnlocked("Shadow Dash")) return;
+            //if (!IsUnlocked("Shadow Dash")) return;
 
             if (!shadowDodge.TryTriggerShadowDash())
             {
