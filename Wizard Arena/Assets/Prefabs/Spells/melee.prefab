@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1683778636264200451}
   - component: {fileID: 6432462028986115707}
   - component: {fileID: 40914881833597017}
+  - component: {fileID: -8465146549738381483}
   m_Layer: 9
   m_Name: melee
   m_TagString: Projectile
@@ -216,3 +217,114 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &-8465146549738381483
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057016599928121658}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.36, y: 5.08}
+    newSize: {x: 2.36, y: 5.08}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.47, y: -2.1599998}
+      - {x: 0.42999998, y: -1.88}
+      - {x: 0.41, y: -1.68}
+      - {x: 0.39, y: -1.56}
+      - {x: 0.38, y: -1.3299999}
+      - {x: 0.39, y: -1.3199999}
+      - {x: 0.9, y: -1.3199999}
+      - {x: 1.02, y: -1.31}
+      - {x: 1.12, y: -1.28}
+      - {x: 1.17, y: -1.22}
+      - {x: 1.17, y: -0.79999995}
+      - {x: 1.0699999, y: -0.69}
+      - {x: 0.91999996, y: -0.63}
+      - {x: 0.58, y: -0.62}
+      - {x: 0.62, y: -0.35999998}
+      - {x: 0.65, y: -0.25}
+      - {x: 0.79999995, y: 0.44}
+      - {x: 0.83, y: 0.68}
+      - {x: 0.83, y: 0.82}
+      - {x: 0.81, y: 0.88}
+      - {x: 0.76, y: 1.01}
+      - {x: 0.71999997, y: 1.11}
+      - {x: 0.57, y: 1.4599999}
+      - {x: 0.41, y: 1.81}
+      - {x: 0.35, y: 1.9399999}
+      - {x: 0.22999999, y: 2.19}
+      - {x: 0.14999999, y: 2.34}
+      - {x: 0.049999997, y: 2.5}
+      - {x: 0.01, y: 2.53}
+      - {x: -0.02, y: 2.53}
+      - {x: -0.14, y: 2.37}
+      - {x: -0.26, y: 2.1499999}
+      - {x: -0.47, y: 1.68}
+      - {x: -0.65999997, y: 1.28}
+      - {x: -0.79999995, y: 0.94}
+      - {x: -0.83, y: 0.81}
+      - {x: -0.83, y: 0.69}
+      - {x: -0.81, y: 0.55}
+      - {x: -0.65, y: -0.25}
+      - {x: -0.55, y: -0.62}
+      - {x: -0.84, y: -0.63}
+      - {x: -0.95, y: -0.65}
+      - {x: -1.01, y: -0.65999997}
+      - {x: -1.14, y: -0.75}
+      - {x: -1.17, y: -0.84}
+      - {x: -1.17, y: -1.1899999}
+      - {x: -1.15, y: -1.24}
+      - {x: -1.12, y: -1.28}
+      - {x: -1.02, y: -1.31}
+      - {x: -0.89, y: -1.3199999}
+      - {x: -0.39999998, y: -1.3199999}
+      - {x: -0.38, y: -1.36}
+      - {x: -0.39, y: -1.5699999}
+      - {x: -0.41, y: -1.8}
+      - {x: -0.44, y: -2.04}
+      - {x: -0.52, y: -2.32}
+      - {x: -0.51, y: -2.44}
+      - {x: -0.48, y: -2.49}
+      - {x: -0.41, y: -2.52}
+      - {x: -0.32, y: -2.54}
+      - {x: 0.29999998, y: -2.54}
+      - {x: 0.42, y: -2.53}
+      - {x: 0.52, y: -2.46}
+      - {x: 0.52, y: -2.31}
+  m_UseDelaunayMesh: 0

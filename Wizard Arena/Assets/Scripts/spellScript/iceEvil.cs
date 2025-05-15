@@ -66,6 +66,23 @@ public class IceShardEvil : MonoBehaviour
 
             Destroy(gameObject);
         }
+        else if (collision.CompareTag("Melee"))
+        {
+            Debug.Log("EVIL Ice Shard was destroyed by melee!");
+
+            // Gain mana
+            var playerHealthAndMana = FindObjectOfType<HealthAndMana>();
+            if (playerHealthAndMana != null && playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
+            {
+                playerHealthAndMana.currentMana += 1;
+                Debug.Log("Mana gained from melee deflect! Current Mana: " + playerHealthAndMana.currentMana);
+            }
+
+            if (explosion != null)
+                Instantiate(explosion, transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
+        }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.CompareTag("Obstacle"))
         {
             Debug.Log("EVIL Ice Shard hit solid object");
