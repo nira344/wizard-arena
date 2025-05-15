@@ -26,6 +26,8 @@ public class melee : MonoBehaviour
         {
             playerCollider = player.GetComponent<Collider2D>();
             playerTransform = player.transform;
+
+            // Set as child so it moves with player
             transform.SetParent(playerTransform);
         }
 
@@ -41,6 +43,7 @@ public class melee : MonoBehaviour
 
     void Update()
     {
+        // Always follow player
         PositionAndRotateMeleeObject();
 
         if (Time.time - timeSinceCreation >= destroyDelay)
@@ -49,36 +52,21 @@ public class melee : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.CompareTag("Player"))
+        if (other.CompareTag("Enemy"))
         {
-            Debug.Log("EVIL Ice Shard hit " + collision.gameObject);
-            var healthComponent = collision.GetComponent<HealthAndMana>();
-            if (healthComponent != null)
-                healthComponent.TakeDamage(damage);
-
-            Destroy(gameObject);
+            HandleEnemyHit(other);
         }
-        else if (collision.gameObject.name.ToLower().Contains("melee")) // <- direct GameObject name check
+        else if (other.CompareTag("Chest"))
         {
-            Debug.Log("EVIL Ice Shard was destroyed by melee!");
-            var playerHealthAndMana = FindObjectOfType<HealthAndMana>();
-            if (playerHealthAndMana != null && playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
-            {
-                playerHealthAndMana.currentMana += 1;
-                Debug.Log("Mana gained from melee deflect! Current Mana: " + playerHealthAndMana.currentMana);
-            }
-
-            Destroy(gameObject);
+            HandleChestHit(other);
         }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.CompareTag("Obstacle"))
+        else if (other.CompareTag("Grave"))
         {
-            Debug.Log("EVIL Ice Shard hit solid object");
-            Destroy(gameObject);
+            HandleGraveHit(other);
         }
     }
-
 
     private void HandleEnemyHit(Collider2D other)
     {
@@ -97,6 +85,9 @@ public class melee : MonoBehaviour
         {
             healthComponent.TakeDamage(damage);
         }
+
+        // Optional: comment out to let it stay for full duration
+        // Destroy(gameObject);
     }
 
     private void HandleChestHit(Collider2D other)
@@ -163,9 +154,13 @@ public class melee : MonoBehaviour
         mouseWorldPosition.z = 0;
         attackDirection = (mouseWorldPosition - playerTransform.position).normalized;
 
+        // Position the melee hitbox farther away based on attackRange
         transform.position = (Vector2)playerTransform.position + attackDirection * attackRange;
-        transform.position = new Vector3(transform.position.x, transform.position.y, -3.9f);
 
+        // Put the melee in the correct Z layer
+        transform.position = new Vector3 (transform.position.x, transform.position.y, -3.9f);
+
+        // Rotate to face the direction of the attack
         float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }

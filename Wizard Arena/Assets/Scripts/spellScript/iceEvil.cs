@@ -66,11 +66,10 @@ public class IceShardEvil : MonoBehaviour
 
             Destroy(gameObject);
         }
-        else if (collision.CompareTag("Melee"))
+        else if (collision.GetComponent<melee>() != null) // ← check directly for melee script
         {
             Debug.Log("EVIL Ice Shard was destroyed by melee!");
 
-            // Gain mana
             var playerHealthAndMana = FindObjectOfType<HealthAndMana>();
             if (playerHealthAndMana != null && playerHealthAndMana.currentMana < playerHealthAndMana.maxMana)
             {
@@ -92,4 +91,6 @@ public class IceShardEvil : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
 }
