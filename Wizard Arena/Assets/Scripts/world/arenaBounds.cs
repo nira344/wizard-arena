@@ -13,8 +13,20 @@ public class arenaBounds : MonoBehaviour
         // Disable invisible walls
         foreach (GameObject bound in bounds)
         {
-            bound.GetComponent<BoxCollider2D>().enabled = false;
-            Debug.Log(bound.name + " disabled");
+            bound.SetActive(false);
+        }
+    }
+
+    void Update()
+    {
+        if (boss == null)
+        {
+            // Disable invisible walls
+            foreach (GameObject bound in bounds)
+            {
+                bound.SetActive(false);
+            }
+            gameObject.SetActive(false);
         }
     }
 
@@ -28,8 +40,7 @@ public class arenaBounds : MonoBehaviour
             // Activate invisible walls
             foreach (GameObject bound in bounds)
             {
-                bound.GetComponent<BoxCollider2D>().enabled = true;
-                Debug.Log(bound.name + " enabled");
+                bound.SetActive(true);
             }
 
             // Unleash Boss
@@ -51,8 +62,7 @@ public class arenaBounds : MonoBehaviour
             // Deactivate invisible walls
             foreach (GameObject bound in bounds)
             {
-                bound.GetComponent<BoxCollider2D>().enabled = false;
-                Debug.Log(bound.name + " disabled");
+                bound.SetActive(false);
             }
 
             // Silence Boss

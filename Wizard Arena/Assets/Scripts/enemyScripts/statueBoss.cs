@@ -10,6 +10,7 @@ public class statueBoss : MonoBehaviour
     public GameObject spell;
     public GameObject respawnPoint;
     public GameObject originalRespawnPoint;
+    public cameraController cam;
 
     // Components
     private GameObject player;
@@ -80,6 +81,9 @@ public class statueBoss : MonoBehaviour
         healthBar.SetMaxHealth(maxHp);
         bossText.text = "WEEPING ANGEL";
         bossHealthBar.Show();
+        cam.lockPosition = new Vector3(136.32f, 4.5f, cam.gameObject.transform.position.z);
+        cam.xLocked = true;
+        cam.yLocked = true;
     }
 
     public void Deactivate()
@@ -88,6 +92,8 @@ public class statueBoss : MonoBehaviour
         hp.invincible = true;
         activated = false;
         bossHealthBar.Hide();
+        cam.xLocked = false;
+        cam.yLocked = false;
     }
 
     private void OnDestroy()
@@ -103,6 +109,8 @@ public class statueBoss : MonoBehaviour
             originalRespawnPoint.SetActive(false);
             respawnPoint.SetActive(true);
             respawnPoint.GetComponent<RespawnPoint>().Claim();
+            cam.xLocked = false;
+            cam.yLocked = false;
         }
     }
 }

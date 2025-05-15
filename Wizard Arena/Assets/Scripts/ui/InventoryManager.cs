@@ -17,8 +17,6 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-        if (!winText.IsActive())
-        {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 menuActivated = !menuActivated;
@@ -53,7 +51,6 @@ public class InventoryManager : MonoBehaviour
                     }
                 }
             }
-        }
     }
 
     public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, GameObject usableItemObject)
