@@ -8204,7 +8204,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2058617382276104712, guid: 1800bb53278674099971ab15d533c72f, type: 3}
       propertyPath: soulReward
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232763424227359071, guid: 1800bb53278674099971ab15d533c72f, type: 3}
+      propertyPath: teleportCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232763424227359071, guid: 1800bb53278674099971ab15d533c72f, type: 3}
+      propertyPath: maxTeleportDistance
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232763424227359071, guid: 1800bb53278674099971ab15d533c72f, type: 3}
+      propertyPath: minTeleportDistance
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5545035876714251124, guid: 1800bb53278674099971ab15d533c72f, type: 3}
       propertyPath: m_Name
@@ -8252,11 +8264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8870251166290146334, guid: 1800bb53278674099971ab15d533c72f, type: 3}
       propertyPath: damage
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8870251166290146334, guid: 1800bb53278674099971ab15d533c72f, type: 3}
       propertyPath: damageCooldown
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -69917,7 +69929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7347213058716920895, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: storedSouls
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7347213058716920895, guid: 3a4426ead09f74726a182a2b049599ee, type: 3}
       propertyPath: itemDrops.Array.size
@@ -75540,11 +75552,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 912886304598239943, guid: 9b624306fc3f24cdaae531f22adc1bfa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 563.8
+      value: -24.200012
       objectReference: {fileID: 0}
     - target: {fileID: 912886304598239943, guid: 9b624306fc3f24cdaae531f22adc1bfa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.3
+      value: -0.29999924
       objectReference: {fileID: 0}
     - target: {fileID: 912886304598239943, guid: 9b624306fc3f24cdaae531f22adc1bfa, type: 3}
       propertyPath: m_LocalPosition.z
