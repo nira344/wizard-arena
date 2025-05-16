@@ -10,6 +10,7 @@ public class statueBoss : MonoBehaviour
     public GameObject spell;
     public GameObject respawnPoint;
     public GameObject originalRespawnPoint;
+    public GameObject laHatMan;
     public cameraController cam;
 
     // Components
@@ -45,6 +46,7 @@ public class statueBoss : MonoBehaviour
 
         // Disable the respawn point
         respawnPoint.SetActive(false);
+        laHatMan.SetActive(false);
     }
 
     // Update is called once per frame
@@ -84,6 +86,7 @@ public class statueBoss : MonoBehaviour
         cam.lockPosition = new Vector3(136.32f, 4.5f, cam.gameObject.transform.position.z);
         cam.xLocked = true;
         cam.yLocked = true;
+        laHatMan.SetActive(true);
     }
 
     public void Deactivate()
@@ -94,6 +97,7 @@ public class statueBoss : MonoBehaviour
         bossHealthBar.Hide();
         cam.xLocked = false;
         cam.yLocked = false;
+        laHatMan.SetActive(false);
     }
 
     private void OnDestroy()
@@ -111,6 +115,7 @@ public class statueBoss : MonoBehaviour
             respawnPoint.GetComponent<RespawnPoint>().Claim();
             cam.xLocked = false;
             cam.yLocked = false;
+            laHatMan.SetActive(false);
         }
     }
 }

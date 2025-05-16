@@ -5,6 +5,7 @@ public class fireball : MonoBehaviour
     public int projectileSpeed = 15;
     public int damage = 5;
     public float castDuration = 0.5f;
+    public GameObject explosion;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -41,6 +42,9 @@ public class fireball : MonoBehaviour
                 healthComponent.TakeDamage(damage);
             }
         }
+
+        if (explosion != null)
+                Instantiate(explosion, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }

@@ -4966,7 +4966,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 12
   damage: 5
-  recoilForce: 5
+  castDuration: 0.5
+  explosion: {fileID: 6442821772542911070, guid: f7890582e790946569dbafbc1e9165c6, type: 3}
 --- !u!60 &7409760874042615733
 PolygonCollider2D:
   m_ObjectHideFlags: 0
