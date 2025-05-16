@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee959b08fef5415bb717a0d98376ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 15
+  health: 10
   soulReward: 2
   invincible: 0
 --- !u!114 &8597481047619857969
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spell: {fileID: 8258303840590375760, guid: cde10311fe5b94a5290deb81d15dbbc0, type: 3}
-  spellCooldown: 1
+  spellCooldown: 1.3
   castRange: 10
 --- !u!61 &4506001517521160773
 BoxCollider2D:

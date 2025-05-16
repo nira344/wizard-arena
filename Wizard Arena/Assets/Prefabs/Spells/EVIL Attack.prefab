@@ -5065,7 +5065,7 @@ MonoBehaviour:
   damage: 3
   homingStrength: 5
   range: 30
-  explosion: {fileID: 6442821772542911070, guid: f7890582e790946569dbafbc1e9165c6, type: 3}
+  explosion: {fileID: 6442821772542911070, guid: 9723c43c988e34a25bc12e6314da7eb8, type: 3}
 --- !u!82 &8776423595996710211
 AudioSource:
   m_ObjectHideFlags: 0

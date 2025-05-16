@@ -5059,8 +5059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a10a9be47c54a079a864c3a2dfa39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 20
+  projectileSpeed: 10
   damage: 2
   homingStrength: 5
   range: 30
-  explosion: {fileID: 6442821772542911070, guid: f7890582e790946569dbafbc1e9165c6, type: 3}
+  explosion: {fileID: 6442821772542911070, guid: 2b7899676b40f499fba5e5dd89ba77da, type: 3}

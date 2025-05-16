@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee959b08fef5415bb717a0d98376ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 15
   soulReward: 5
   invincible: 0
 --- !u!114 &8870251166290146334

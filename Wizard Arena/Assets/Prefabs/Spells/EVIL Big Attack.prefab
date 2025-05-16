@@ -5063,7 +5063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 3
   damage: 5
-  explosionEffect: {fileID: 6442821772542911070, guid: f7890582e790946569dbafbc1e9165c6, type: 3}
+  explosionEffect: {fileID: 6442821772542911070, guid: 9723c43c988e34a25bc12e6314da7eb8, type: 3}
   miasmaPrefab: {fileID: 3336944189449430749, guid: cf4c27330fb8246e4952108459aa71ce, type: 3}
 --- !u!82 &-5390211554564181941
 AudioSource:
